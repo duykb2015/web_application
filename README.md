@@ -16,4 +16,4 @@ Các extention phải được bật trong file ini.php (kiểm tra trong thư m
 
 ## Running CodeIgniter Tests
 
-Information on running the CodeIgniter test suite can be found in the [README.md](tests/README.md) file in the tests directory.
+Ở thư mục gốc nhập lệnh `php spark serve` để khởi động server.

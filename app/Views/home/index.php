@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to CodeIgniter 4!</title>
+    <title><?= $title ?></title>
     <meta name="description" content="The small framework with powerful features">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
@@ -238,7 +238,7 @@
 
     <p>If you would like to edit this page you will find it located at:</p>
 
-    <pre><code>app/Views/welcome_message.php</code></pre>
+    <pre><code>app/Views/home/index.php</code></pre>
 
     <p>The corresponding controller for this page can be found at:</p>
 
