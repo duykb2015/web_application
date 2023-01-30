@@ -13,4 +13,10 @@ class Example extends BaseController
         $data['value'] = $exampleModel->text;
         return view('admin/home/index', $data);
     }
+    public function text()
+    {
+        return view('site/example/index');
+
+
+    }
 }

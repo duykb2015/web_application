@@ -38,7 +38,7 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 
 $routes->get('/example', 'Example::index');
-
+$routes->get('/v1/example', 'Example::text');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
