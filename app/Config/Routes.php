@@ -39,6 +39,7 @@ $routes->get('/', 'Home::index');
 
 $routes->get('/example', 'Example::index');
 
+$routes->get('/example', 'Example::index');
 /*
  * --------------------------------------------------------------------
  * Additional Routing
