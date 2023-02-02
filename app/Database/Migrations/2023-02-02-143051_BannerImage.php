@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Admin extends Migration
+class BannerImage extends Migration
 {
     //Run command on cmd: php spark migrate to import table.
     public function up()
@@ -16,42 +16,43 @@ class Admin extends Migration
                 'null' => FALSE,
                 'auto_increment' => TRUE,
             ],
-            'username' => [
+            'banner_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => FALSE,
+            ],
+            'title' => [
                 'type' => 'VARCHAR',
-                'constraint' => 50,
+                'constraint' => 255,
                 'null' => FALSE,
+                'auto_increment' => TRUE,
             ],
-            'password' => [
+            'link' => [
                 'type' => 'VARCHAR',
-                'constraint' => 50,
+                'constraint' => 255,
                 'null' => FALSE,
+                'auto_increment' => TRUE,
             ],
-            'level' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
+            'image' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
                 'null' => FALSE,
-                'default' => 1,
+                'auto_increment' => TRUE,
             ],
-            'status' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
-                'null' => FALSE,
-                'default' => '1'
-            ],
-            'last_login_at DATETIME NOT NULL DEFAULT current_timestamp'
         ]);
         $this->forge->addPrimaryKey('id');
+        $this->forge->addForeignKey('banner_id', 'banner', 'id');
         $attributes = [
             'ENGINE' => 'InnoDB',
             'CHARACTER SET' => 'utf8',
             'COLLATE' => 'utf8_general_ci'
         ];
-        $this->forge->createTable('admin', TRUE, $attributes);
+        $this->forge->createTable('banner_image', TRUE, $attributes);
     }
 
     //Run command on cmd: php spark migrate:rollback to remove table.
     public function down()
     {
-        $this->forge->dropTable('admin', TRUE);
+        $this->forge->dropTable('banner_image', TRUE);
     }
 }

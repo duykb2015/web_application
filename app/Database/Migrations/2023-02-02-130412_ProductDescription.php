@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Admin extends Migration
+class ProductDescription extends Migration
 {
     //Run command on cmd: php spark migrate to import table.
     public function up()
@@ -16,21 +16,18 @@ class Admin extends Migration
                 'null' => FALSE,
                 'auto_increment' => TRUE,
             ],
-            'username' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
+            'product_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
                 'null' => FALSE,
             ],
-            'password' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
+            'information' => [
+                'type' => 'TEXT',
                 'null' => FALSE,
             ],
-            'level' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
+            'description' => [
+                'type' => 'TEXT',
                 'null' => FALSE,
-                'default' => 1,
             ],
             'status' => [
                 'type' => 'TINYINT',
@@ -38,20 +35,20 @@ class Admin extends Migration
                 'null' => FALSE,
                 'default' => '1'
             ],
-            'last_login_at DATETIME NOT NULL DEFAULT current_timestamp'
         ]);
         $this->forge->addPrimaryKey('id');
+        $this->forge->addForeignKey('product_id', 'product', 'id');
         $attributes = [
             'ENGINE' => 'InnoDB',
             'CHARACTER SET' => 'utf8',
             'COLLATE' => 'utf8_general_ci'
         ];
-        $this->forge->createTable('admin', TRUE, $attributes);
+        $this->forge->createTable('product_description', TRUE, $attributes);
     }
 
     //Run command on cmd: php spark migrate:rollback to remove table.
     public function down()
     {
-        $this->forge->dropTable('admin', TRUE);
+        $this->forge->dropTable('product_description', TRUE);
     }
 }
