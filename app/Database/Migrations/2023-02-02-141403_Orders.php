@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Admin extends Migration
+class Orders extends Migration
 {
     //Run command on cmd: php spark migrate to import table.
     public function up()
@@ -16,21 +16,31 @@ class Admin extends Migration
                 'null' => FALSE,
                 'auto_increment' => TRUE,
             ],
-            'username' => [
+            'customer_id' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => FALSE,
+            ],
+            'customer_name' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
                 'null' => FALSE,
             ],
-            'password' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null' => FALSE,
-            ],
-            'level' => [
+            'payment_method' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
                 'null' => FALSE,
-                'default' => 1,
+                'default' => '1'
+            ],
+            'shipping_to' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => FALSE,
+            ],
+            'total' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => FALSE,
             ],
             'status' => [
                 'type' => 'TINYINT',
@@ -38,20 +48,21 @@ class Admin extends Migration
                 'null' => FALSE,
                 'default' => '1'
             ],
-            'last_login_at DATETIME NOT NULL DEFAULT current_timestamp'
+            'created_at DATETIME NOT NULL DEFAULT current_timestamp',
         ]);
         $this->forge->addPrimaryKey('id');
+        $this->forge->addForeignKey('customer_id', 'customer', 'id');
         $attributes = [
             'ENGINE' => 'InnoDB',
             'CHARACTER SET' => 'utf8',
             'COLLATE' => 'utf8_general_ci'
         ];
-        $this->forge->createTable('admin', TRUE, $attributes);
+        $this->forge->createTable('orders', TRUE, $attributes);
     }
 
     //Run command on cmd: php spark migrate:rollback to remove table.
     public function down()
     {
-        $this->forge->dropTable('admin', TRUE);
+        $this->forge->dropTable('orders', TRUE);
     }
 }

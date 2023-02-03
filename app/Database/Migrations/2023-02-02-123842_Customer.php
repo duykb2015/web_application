@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Admin extends Migration
+class Customer extends Migration
 {
     //Run command on cmd: php spark migrate to import table.
     public function up()
@@ -26,11 +26,35 @@ class Admin extends Migration
                 'constraint' => 50,
                 'null' => FALSE,
             ],
-            'level' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
+            'email' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50,
                 'null' => FALSE,
-                'default' => 1,
+            ],
+            'firstname' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50,
+                'null' => FALSE,
+            ],
+            'lastname' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50,
+                'null' => FALSE,
+            ],
+            'telephone' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => FALSE,
+            ],
+            'address1' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => FALSE,
+            ],
+            'address2' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => FALSE,
             ],
             'status' => [
                 'type' => 'TINYINT',
@@ -46,12 +70,12 @@ class Admin extends Migration
             'CHARACTER SET' => 'utf8',
             'COLLATE' => 'utf8_general_ci'
         ];
-        $this->forge->createTable('admin', TRUE, $attributes);
+        $this->forge->createTable('customer', TRUE, $attributes);
     }
 
     //Run command on cmd: php spark migrate:rollback to remove table.
     public function down()
     {
-        $this->forge->dropTable('admin', TRUE);
+        $this->forge->dropTable('customer', TRUE);
     }
 }

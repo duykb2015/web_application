@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Admin extends Migration
+class Attribute extends Migration
 {
     //Run command on cmd: php spark migrate to import table.
     public function up()
@@ -16,21 +16,10 @@ class Admin extends Migration
                 'null' => FALSE,
                 'auto_increment' => TRUE,
             ],
-            'username' => [
+            'name' => [
                 'type' => 'VARCHAR',
-                'constraint' => 50,
+                'constraint' => 255,
                 'null' => FALSE,
-            ],
-            'password' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null' => FALSE,
-            ],
-            'level' => [
-                'type' => 'TINYINT',
-                'constraint' => 1,
-                'null' => FALSE,
-                'default' => 1,
             ],
             'status' => [
                 'type' => 'TINYINT',
@@ -38,7 +27,6 @@ class Admin extends Migration
                 'null' => FALSE,
                 'default' => '1'
             ],
-            'last_login_at DATETIME NOT NULL DEFAULT current_timestamp'
         ]);
         $this->forge->addPrimaryKey('id');
         $attributes = [
@@ -46,12 +34,12 @@ class Admin extends Migration
             'CHARACTER SET' => 'utf8',
             'COLLATE' => 'utf8_general_ci'
         ];
-        $this->forge->createTable('admin', TRUE, $attributes);
+        $this->forge->createTable('attribute', TRUE, $attributes);
     }
 
     //Run command on cmd: php spark migrate:rollback to remove table.
     public function down()
     {
-        $this->forge->dropTable('admin', TRUE);
+        $this->forge->dropTable('attribute', TRUE);
     }
 }
