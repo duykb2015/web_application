@@ -32,7 +32,7 @@
         </div>
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
-                <a href="" class="text-decoration-none">
+                <a href="<?= base_url('') ?>" class="text-decoration-none">
                     <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
                 </a>
             </div>
@@ -53,7 +53,7 @@
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
-                <a href="" class="btn border">
+                <a href="<?= base_url('cart') ?>" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
@@ -109,8 +109,8 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
+                                    <a href="<?= base_url('cart') ?>" class="dropdown-item">Shopping Cart</a>
+                                    <a href="<?= base_url('checkout') ?>" class="dropdown-item">Checkout</a>
                                 </div>
                             </div>
                             <a href="<?= base_url('contact') ?>" class="nav-item nav-link">Contact</a>

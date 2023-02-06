@@ -43,6 +43,7 @@ $routes->get('/shop', 'Shop::index');
 $routes->get('/detail', 'Detail::index');
 $routes->get('/cart', 'Cart::index');
 $routes->get('/checkout', 'Checkout::index');
+$routes->get('/contact', 'Contact::index');
 
 
 
