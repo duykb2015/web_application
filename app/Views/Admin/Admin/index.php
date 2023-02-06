@@ -1,4 +1,4 @@
-<?= $this->extend('layout') ?>
+<?= $this->extend('Admin/layout') ?>
 <?= $this->section('content') ?>
 
 <div class="pcoded-content">
@@ -32,8 +32,6 @@
                                     <tr>
                                         <th>Tài Khoản</th>
                                         <th>Vai trò</th>
-                                        <th>Ngày tạo</th>
-                                        <th>Ngày chỉnh sửa</th>
                                         <th>Đăng nhập lần cuối</th>
                                         <th width="10%">Trạng thái</th>
                                         <th width="10%">Hành động</th>
@@ -46,8 +44,6 @@
                                             <tr id="menu-<?= $account['id'] ?>">
                                                 <td class="font-weight-bold"><?= $account['username'] ?></td>
                                                 <td><?= LEVEL_TYPE[$account['level']] ?></td>
-                                                <td><?= $account['created_at'] ?></td>
-                                                <td><?= $account['updated_at'] ?></td>
                                                 <td><?= $account['last_login_at'] ?></td>
                                                 <td>
                                                     <?= ACCOUNT_STATUS[$account['status']] ?>
