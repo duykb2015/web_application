@@ -92,3 +92,60 @@ define('EVENT_PRIORITY_NORMAL', 100);
  * @deprecated Use \CodeIgniter\Events\Events::PRIORITY_HIGH instead.
  */
 define('EVENT_PRIORITY_HIGH', 10);
+
+/**
+ * ------------------------
+ * Status Types
+ * ------------------------
+ * 
+ * Defines the status types.
+ */
+define('HIDDEN', 0);
+define('DISPLAY', 1);
+define('STATUS', [
+    HIDDEN => 'Ẩn',
+    DISPLAY => 'Hiển thị',
+]);
+
+/**
+ * -----------------------
+ * Menu Types
+ * -----------------------
+ * 
+ */
+define('MAIN', 0);
+define('SUB', 1);
+define('MENU_TYPE', [
+    MAIN => 'Menu cha',
+    SUB => 'Menu con',
+]);
+
+/**
+ * -----------------------
+ * Level Types
+ * -----------------------
+ * 
+ */
+define('AD', 0);
+define('MOD', 1);
+define('LEVEL_TYPE', [
+    AD => 'Administrator',
+    MOD => 'Morderator',
+]);
+
+/**
+ * ------------------------
+ * Level Types
+ * ------------------------
+ * 
+ * This defines the level types that are available.
+ */
+define('BANNED', 0);
+define('NORMAL', 1);
+define('ACCOUNT_STATUS', [
+    BANNED => 'Bị cấm',
+    NORMAL => 'Bình thường',
+]);
+
+define('WRONG_LOGIN_INFO_MESSAGE', "Tài khoản hoặc mật khẩu sai, vui lòng kiểm tra lại!");
+define('UNEXPECTED_ERROR_MESSAGE', "Có lỗi đã xảy ra, vui lòng thử lại sau!");

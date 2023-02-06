@@ -91,13 +91,13 @@
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
 
-            <?= $this->include("header") ?>
+            <?= $this->include("Admin/header") ?>
 
             <!-- Sidebar inner chat end-->
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
 
-                    <?= $this->include("navbar") ?>
+                    <?= $this->include("Admin/navbar") ?>
 
                     <?= $this->renderSection('content') ?>
 

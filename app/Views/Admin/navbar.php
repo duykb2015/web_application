@@ -1,21 +1,21 @@
 <?php
 $menu = [
     [
-        'url' => base_url('/'),
-        'active' => '/',
+        'url' => base_url('dashboard'),
+        'active' => 'dashboard',
         'level' => 1,
-        'name' => 'Dashboard',
+        'name' => 'Admin',
         'icon' => '<i class="feather icon-home"></i>',
     ],
     [
         'url' => '',
-        'active' => 'admin',
-        'level' => 3,
+        'active' => 'dashboard/admin',
+        'level' => 0,
         'name' => 'Quản lý Tài khoản',
         'icon' => '<i class="feather icon-user"></i>',
         'sub_menu' => [
             [
-                'url' => base_url('admin'),
+                'url' => base_url('dashboard/admin'),
                 'name' => 'Danh sách',
             ],
             [
@@ -120,10 +120,10 @@ $menu = [
     <div class="pcoded-inner-navbar main-menu">
         <div class="pcoded-navigatio-lavel">Bảng điều khiển</div>
         <ul class="pcoded-item pcoded-left-item">
-            <?php $level = session()->get('level') ?>
+            <?php //$level = session()->get('level') ?>
             <?php foreach ($menu as $row) : ?>
                 <?php $class_active = url_is($row['active'] . '*') ? ' pcoded-trigger' : '' ?>
-                <?php if ($level >= $row['level']) : ?>
+                <?php //if ($level >= $row['level']) : ?>
                     <li class="<?= !empty($row['url']) ? '' : 'pcoded-hasmenu' ?> <?= $class_active ?>">
                         <a href="<?= !empty($row['url']) ? $row['url'] : 'javascript:void(0)' ?>">
                             <span class="pcoded-micon"><?= $row['icon'] ?></span>
@@ -161,7 +161,7 @@ $menu = [
                             </ul>
                         <?php endif ?>
                     </li>
-                <?php endif ?>
+                <?php //endif ?>
             <?php endforeach ?>
         </ul>
     </div>

@@ -1,5 +1,6 @@
 
-<?= $this->extend('layout') ?>
+<?= $this->extend('Admin/layout') ?>
+
 <?= $this->section('content') ?>
 <div class="pcoded-content">
     <div class="pcoded-inner-content">

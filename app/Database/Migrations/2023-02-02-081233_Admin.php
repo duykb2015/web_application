@@ -8,7 +8,7 @@ class Admin extends Migration
 {
     //Run command on cmd: php spark migrate to import table.
     public function up()
-    {
+    {        
         $this->forge->addField([
             'id' => [
                 'type' => 'INT',
