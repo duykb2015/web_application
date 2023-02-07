@@ -3,8 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\CategoryModel;
 use CodeIgniter\API\ResponseTrait;
-use App\Models\MenuModel;
+use CodeIgniter\HTTP\Response;
 
 class Menu extends BaseController
 {
@@ -17,7 +18,7 @@ class Menu extends BaseController
      */
     public function index()
     {
-        $menu_m = new MenuModel();
+        $menu_m = new CategoryModel();
         //The method is not deprecated, the optional [$upper] parameter is deprecated.
         if ($this->request->getMethod() == 'get') {
             $menu_name   = $this->request->getGet('menu_name');
@@ -46,7 +47,7 @@ class Menu extends BaseController
     public function detail()
     {
         $menu_id = $this->request->getUri()->getSegment(3);
-        $menu_m = new MenuModel();
+        $menu_m = new CategoryModel();
         $data['parent_menu'] = $menu_m->where(['parent_id' => 0, 'status' => 1])->findAll();
 
         if (!$menu_id) {
@@ -87,7 +88,7 @@ class Menu extends BaseController
             'status'    => $menu_status
         ];
 
-        $menu_m = new MenuModel();
+        $menu_m = new CategoryModel();
         $menu = $menu_m->where(['slug' => $menu_slug])->find();
         if ($menu) {
             if ($menu['id'] != $menu_id) {
@@ -113,17 +114,17 @@ class Menu extends BaseController
         //get menu id from post data
         $id = $this->request->getPost('id');
         if (!$id) {
-            return $this->respond(response_failed(), HTTP_OK);
+            return $this->respond(response_failed(), Response::HTTP_OK);
         }
 
         $data['status'] = $this->request->getPost('status');
-        $menu_m = new MenuModel();
+        $menu_m = new CategoryModel();
         $is_update = $menu_m->update($id, $data);
         if (!$is_update) {
-            return $this->respond(response_failed(), HTTP_OK);
+            return $this->respond(response_failed(), Response::HTTP_OK);
         }
 
-        return $this->respond(response_successed(), HTTP_OK);
+        return $this->respond(response_successed(), Response::HTTP_OK);
     }
 
 
@@ -135,15 +136,15 @@ class Menu extends BaseController
     {
         $id = $this->request->getPost('id');
         if (!$id) {
-            return $this->respond(response_failed(), HTTP_OK);
+            return $this->respond(response_failed(), Response::HTTP_OK);
         }
 
         //delete menu
-        $menu_m = new MenuModel();
+        $menu_m = new CategoryModel();
         $is_delete = $menu_m->delete($id);
         if (!$is_delete) {
-            return $this->respond(response_failed(), HTTP_OK);
+            return $this->respond(response_failed(), Response::HTTP_OK);
         }
-        return $this->respond(response_successed(), HTTP_OK);
+        return $this->respond(response_successed(), Response::HTTP_OK);
     }
 }

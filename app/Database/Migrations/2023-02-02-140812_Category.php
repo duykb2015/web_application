@@ -26,6 +26,11 @@ class Category extends Migration
                 'constraint' => 255,
                 'null' => FALSE
             ],
+            'slug' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => FALSE
+            ],
             'status' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
