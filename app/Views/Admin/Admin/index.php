@@ -35,7 +35,6 @@
                                         <th>Đăng nhập lần cuối</th>
                                         <th width="10%">Trạng thái</th>
                                         <th width="10%">Hành động</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,12 +49,21 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-group btn-group-sm">
-                                                        <a href="<?= base_url('admin/detail/' . $account['id']) ?>" class="tabledit-edit-button btn btn-primary waves-effect waves-light" style="float: none;margin: 5px;">
-                                                            <span class="icofont icofont-ui-edit"></span>
-                                                        </a>
-                                                        <a href="javascript:void(0)" onclick="delete_account('<?= $account['id'] ?>', '<?= $account['username'] ?>')" class="tabledit-delete-button btn btn-danger waves-effect waves-light" style="float: none;margin: 5px;">
-                                                            <span class="icofont icofont-ui-delete"></span>
-                                                        </a>
+                                                        <?php if (session()->get('level') == 0) : ?>
+                                                            <a href="<?= base_url('dashboard/admin/detail/' . $account['id']) ?>" class="tabledit-edit-button btn btn-primary waves-effect waves-light" style="float: none;margin: 5px;">
+                                                                <span class="icofont icofont-ui-edit"></span>
+                                                            </a>
+
+                                                            <a href="javascript:void(0)" onclick="delete_account('<?= $account['id'] ?>', '<?= $account['username'] ?>')" class="tabledit-delete-button btn btn-danger waves-effect waves-light" style="float: none;margin: 5px;">
+                                                                <span class="icofont icofont-ui-delete"></span>
+                                                            </a>
+                                                        <?php else : ?>
+                                                            <?php if (session()->get('id') == $account['id']) : ?>
+                                                                <a href="<?= base_url('dashboard/admin/detail/' . $account['id']) ?>" class="tabledit-edit-button btn btn-primary waves-effect waves-light" style="float: none;margin: 5px;">
+                                                                    <span class="icofont icofont-ui-edit"></span>
+                                                                </a>
+                                                            <?php endif ?>
+                                                        <?php endif ?>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -107,7 +115,7 @@
             redirect: 'follow'
         };
 
-        fetch('<?= base_url('admin/delete') ?>', requestOptions)
+        fetch('<?= base_url('dashboard/admin/delete') ?>', requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.success) {

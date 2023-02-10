@@ -24,15 +24,16 @@
                         </div>
                         <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                             <li>
-                                <a href="<?= base_url('admin/profile') ?>">
-                                    <i class="feather icon-user"></i> Trang cá nhân
+                                <a>
+                                    <i class="feather icon-user"></i> Có cho vui
                                 </a>
                             </li>
-                            <li>
-                                <a href="<?= base_url('logout') ?>">
+                            <a href="<?= base_url('logout') ?>">
+                                <li>
+
                                     <i class="feather icon-log-out"></i> Đăng xuất
-                                </a>
-                            </li>
+                                </li>
+                            </a>
                         </ul>
                     </div>
                 </li>
