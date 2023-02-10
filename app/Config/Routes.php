@@ -36,26 +36,29 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/', 'Home::index');
+$routes->get('', 'Home::index');
 
-$routes->get('/shop', 'Shop::index');
+$routes->get('shop', 'Shop::index');
 
-$routes->get('/detail', 'Detail::index');
-$routes->get('/cart', 'Cart::index');
-$routes->get('/checkout', 'Checkout::index');
-$routes->get('/contact', 'Contact::index');
-
-
+$routes->get('detail', 'Detail::index');
+$routes->get('cart', 'Cart::index');
+$routes->get('checkout', 'Checkout::index');
+$routes->get('contact', 'Contact::index');
 
 
 $routes->get('admin-login', 'Admin\Login::index');
-$routes->post('admin-login', 'Admin\Login::Auth');
+$routes->post('admin-login', 'Admin\Login::authentication');
+$routes->get('logout', 'Admin\Login::logout');
 
-$routes->group('/dashboard', ["filter" => "auth-admin"], function($routes) {
+$routes->group('dashboard', ["filter" => "auth-admin"], function ($routes) {
     $routes->get('', 'Admin\Home::index');
+    $routes->get('admin', 'Admin\Admin::index');
+    $routes->get('admin/detail/:any', 'Admin\Admin::detail');
+
+    $routes->post('admin/save', 'Admin\Admin::save');
+
 });
 
-$routes->get('/dashboard/admin', 'Admin\Admin::index');
 
 /*
  * --------------------------------------------------------------------

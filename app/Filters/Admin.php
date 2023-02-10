@@ -25,7 +25,7 @@ class Admin implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        if (!session()->get('admin_is_logged')) {
+        if (!session()->get('admin_logged_in')) {
             return redirect()->to('admin-login');
         }
     }

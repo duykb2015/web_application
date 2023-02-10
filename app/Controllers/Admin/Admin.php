@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 use App\Controllers\BaseController;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\AdminModel;
+use CodeIgniter\HTTP\Response;
 
 class Admin extends BaseController
 {
@@ -51,7 +52,7 @@ class Admin extends BaseController
             return redirect()->to('/admin');
         }
         $data['account'] = $account;
-        return view('Admin/profile', $data);
+        return view('Admin/Admin/profile', $data);
     }
 
     /**
@@ -61,19 +62,19 @@ class Admin extends BaseController
     public function detail()
     {
 
-        $id = $this->request->getUri()->getSegment(3);
+        $id = $this->request->getUri()->getSegment(4);
         if (!$id) {
             $data['title'] = "Thêm Mới Tài Khoản";
-            return view('Admin/detail', $data);
+            return view('Admin/Admin/detail', $data);
         }
         $admin_m = new AdminModel();
         $account = $admin_m->find($id);
         if (empty($account)) {
-            return redirect()->to('/admin');
+            return redirect()->to('dashboard/admin');
         }
         $data['title'] = "Chỉnh Sửa Tài Khoản";
         $data['account'] = $account;
-        return view('Admin/detail', $data);
+        return view('Admin/Admin/detail', $data);
     }
 
     /**
@@ -83,16 +84,15 @@ class Admin extends BaseController
     public function save()
     {
         $user_id  = $this->request->getPost('id');
-        $username = $this->request->getPost('username');
+        $username = $this->request->getPost('username') ? $this->request->getPost('username') : session()->get('name');
         $password = $this->request->getPost('password');
-        $level    = $this->request->getPost('level');
-        $status   = $this->request->getPost('status');
+        $level    = $this->request->getPost('level') || 1;
+        $status   = $this->request->getPost('status') || 1;
 
         $inputs = array(
             'username' => $username,
             'password' => $password
         );
-
         $rules['username'] = 'required';
         //if create new user or update password, then require password validation
         if (!$user_id || !empty($password)) {
@@ -104,26 +104,28 @@ class Admin extends BaseController
         if (!$validation->run($inputs)) {
             $error_msg = $validation->getErrors();
             if (!$user_id) {
-                return redirect_with_message(site_url('Admin/detail'), $error_msg);
+                return redirect_with_message(site_url('dashboard/admin/detail'), $error_msg);
             }
-            return redirect_with_message(site_url('Admin/detail?id=') . $user_id, $error_msg);
+            return redirect_with_message(site_url('dashboard/admin/detail/') . $user_id, $error_msg);
         }
 
         $admin_m = new AdminModel();
         $user = $admin_m->where('username', $username)->first();
-        if ($user) {
+        if ($user && !$user_id) {
             $error_msg = 'Tài khoản đã tồn tại!';
-            return redirect_with_message(site_url('Admin/detail'), $error_msg);
+            return redirect_with_message(site_url('dashboard/admin/detail'), $error_msg);
         }
         $data = [
             'username' => $username,
-            'password' => $password,
             'level'    => $level,
             'status'   => $status
         ];
-
         if ($user_id) {
             $data['id'] = $user_id;
+        }
+
+        if ($password) {
+            $data['password'] = $password;
         }
 
         //if create failed, notice and redirect to register page again
@@ -131,7 +133,7 @@ class Admin extends BaseController
         if (!$is_save) {
             return redirect_with_message(site_url('Admin/detail'), UNEXPECTED_ERROR_MESSAGE);
         }
-        return redirect()->to('admin');
+        return redirect()->to('dashboard/admin');
     }
 
     /**
@@ -144,17 +146,17 @@ class Admin extends BaseController
         $id = $this->request->getPost('id');
         //if account id is empty, return error response
         if (!$id) {
-            return $this->respond(response_failed(), HTTP_OK);
+            return $this->respond(response_failed(), Response::HTTP_OK);
         }
         //cannot delete exclusive admin account, of course
         if ($id == 1) {
-            return $this->respond(response_failed('Bạn không thể xoá tài khoản này!'), HTTP_OK);
+            return $this->respond(response_failed('Bạn không thể xoá tài khoản này!'), Response::HTTP_OK);
         }
 
         $admin_m = new AdminModel();
         if ($admin_m->delete($id)) {
-            return $this->respond(response_failed(), HTTP_OK);
+            return $this->respond(response_failed(), Response::HTTP_OK);
         }
-        return $this->respond(response_successed(), HTTP_OK);
+        return $this->respond(response_successed(), Response::HTTP_OK);
     }
 }

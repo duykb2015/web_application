@@ -1,4 +1,4 @@
-<?= $this->extend('layout') ?>
+<?= $this->extend('admin/layout') ?>
 <?= $this->section('content') ?>
 
 <div class="pcoded-content">
@@ -37,7 +37,7 @@
                                             <?php if (isset($errors)) : ?>
                                                 <?php if (!is_array($errors)) : ?>
                                                     <div class="alert alert-danger">
-                                                        <div class="col-11">
+                                                        <div class="col-10">
                                                             <?= $errors ?>
                                                         </div>
                                                         <div class="col-1 text-right">
@@ -65,20 +65,20 @@
                                             <div class="edit-info">
                                                 <div class="row">
                                                     <div class="col-lg-12">
-                                                        <form action="<?= base_url('admin/save') ?>" method="post">
+                                                        <form action="<?= base_url('dashboard/admin/save') ?>" method="post">
                                                             <input type="hidden" name="id" value="<?= isset($account['id']) ? $account['id'] : '' ?>">
                                                             <div class="general-info">
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <label for="username">Tên tài khoản</label>
                                                                         <div class="input-group">
-                                                                            <input type="text" class="form-control" value="<?= isset($account['username']) ? $account['username'] : set_value('username') ?>" name="username" placeholder="Tên ...">
+                                                                            <input type="text" class="form-control" <?= (session()->get('level') > 0) ? 'disabled' : '' ?> value="<?= isset($account['username']) ? $account['username'] : set_value('username') ?>" name="username" placeholder="Tên ...">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label for="password">Mật khẩu</label>
                                                                         <div class="input-group">
-                                                                            <input type="password" name="password" class="form-control" placeholder="Mật khẩu ...">
+                                                                            <input type="password" name="password" class="form-control" placeholder="Để trống nếu không đổi mật khẩu ...">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -87,7 +87,8 @@
                                                                     <div class="col-md-6">
                                                                         <label for="status">Trạng thái</label>
                                                                         <div class="input-group">
-                                                                            <select name="status" class="form-control">
+
+                                                                            <select name="status" class="form-control" <?= (session()->get('level') > 0) ? 'disabled' : '' ?>>
                                                                                 <option value="1" <?= isset($account['status']) && $account['status'] == 1 ? 'selected' : '' ?>>Bình thường</option>
                                                                                 <option value="0" <?= isset($account['status']) && $account['status'] == 0 ? 'selected' : '' ?>>Bị cấm</option>
                                                                             </select>
@@ -96,15 +97,12 @@
                                                                     <div class="col-md-6">
                                                                         <label for="level">Cấp bậc</label>
                                                                         <div class="input-group">
-                                                                            <select name="level" class="form-control">
-                                                                                <option value="1" <?= isset($account['level']) && $account['level'] == 1 ? 'selected' : '' ?>>
+                                                                            <select name="level" class="form-control" <?= (session()->get('level') > 0) ? 'disabled' : '' ?>>
+                                                                                <option value="0" <?= isset($account['level']) && $account['level'] == 0 ? 'selected' : '' ?>>
                                                                                     Không cấp quyền
                                                                                 </option>
-                                                                                <option value="2" <?= isset($account['level']) && $account['level'] == 2 ? 'selected' : '' ?>>
+                                                                                <option value="1" <?= isset($account['level']) && $account['level'] == 1 ? 'selected' : '' ?>>
                                                                                     Moderator
-                                                                                </option>
-                                                                                <option value="3" <?= isset($account['level']) && $account['level'] == 3 ? 'selected' : '' ?>>
-                                                                                    Admin
                                                                                 </option>
                                                                             </select>
                                                                         </div>
@@ -115,7 +113,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12 text-right">
                                                                         <button type="submit" class="btn btn-primary waves-effect waves-light m-r-20">Lưu</button>
-                                                                        <a href="<?= base_url('admin/') ?>" id="edit-cancel" class="btn btn-default waves-effect">Huỷ</a>
+                                                                        <a href="<?= base_url('dashboard/admin') ?>" id="edit-cancel" class="btn btn-default waves-effect">Huỷ</a>
                                                                     </div>
                                                                 </div>
                                                             </div>
