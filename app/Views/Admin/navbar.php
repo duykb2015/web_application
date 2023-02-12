@@ -17,23 +17,25 @@ $menu = [
                 'name' => 'Danh sách',
             ],
             [
-                'url' => base_url('admin/detail'),
-                'name' => 'Thêm',
+                'url' => base_url('dashboard/admin/detail'),
+                'name' => 'Thêm mới',
             ],
         ]
     ],
     [
         'url' => '',
-        'name' => 'Quản lý Menu',
-        'active' => 'menu',
+
+        'name' => 'Quản lý Danh mục',
+        'active' => 'dashboard/category',
+
         'icon' => '<i class="feather icon-menu"></i>',
         'sub_menu' => [
             [
-                'url' => base_url('menu'),
+                'url' => base_url('dashboard/category'),
                 'name' => 'Danh sách',
             ],
             [
-                'url' => base_url('menu/detail'),
+                'url' => base_url('dashboard/category/detail'),
                 'name' => 'Thêm mới',
             ],
         ]

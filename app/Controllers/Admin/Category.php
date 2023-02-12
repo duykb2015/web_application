@@ -1,69 +1,68 @@
 <?php
 
-namespace App\Controllers;
+
+namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\CategoryModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\Response;
 
-class Menu extends BaseController
+class Category extends BaseController
 {
     use ResponseTrait;
 
 
     /**
-     * Used to view all menus
+     * Used to view all categorys
      * 
      */
     public function index()
     {
-        $menu_m = new CategoryModel();
+        $categoryModel = new CategoryModel();
         //The method is not deprecated, the optional [$upper] parameter is deprecated.
         if ($this->request->getMethod() == 'get') {
-            $menu_name   = $this->request->getGet('menu_name');
-            $menu_parent = $this->request->getGet('menu_parent');
-            $menu_type   = $this->request->getGet('menu_type');
-            $menu_status = $this->request->getGet('menu_status');
+            $category_name   = $this->request->getGet('category_name');
+            $category_parent = $this->request->getGet('category_parent');
+            $category_status = $this->request->getGet('category_status');
             $filter_data = [
-                'name'      => $menu_name,
-                'parent_id' => $menu_parent,
-                'type'      => $menu_type,
-                'status'    => $menu_status,
+                'name'      => $category_name,
+                'parent_id' => $category_parent,
+                'status'    => $category_status,
             ];
-            $menu_m->filter($filter_data);
+            $categoryModel->filter($filter_data);
         }
 
-        $data = $menu_m->find_all();
-        $parent_menu = $menu_m->where(['parent_id' => 0, 'status' => 1])->findAll();
-        $data['parent_menu'] = $parent_menu;
-        return view('Menu/index', $data);
+        $data = $categoryModel->customFindAll();
+        $parent_category = $categoryModel->where(['parent_id' => 0, 'status' => 1])->findAll();
+        $data['parent_category'] = $parent_category;
+        return view('Admin/Category/index', $data);
     }
 
     /**
-     * Used to view menu infomation 
+     * Used to view category infomation 
      * 
      */
     public function detail()
     {
-        $menu_id = $this->request->getUri()->getSegment(3);
-        $menu_m = new CategoryModel();
-        $data['parent_menu'] = $menu_m->where(['parent_id' => 0, 'status' => 1])->findAll();
+        $category_id = $this->request->getUri()->getSegment(4);
+        $categoryModel = new CategoryModel();
+        $data['parent_category'] = $categoryModel->where(['parent_id' => 0, 'status' => 1])->findAll();
 
-        if (!$menu_id) {
-            $data['title'] = "Thêm Mới Menu";
-            return view('Menu/detail', $data);
+        if (!$category_id) {
+            $data['title'] = "Thêm Mới Category";
+            return view('Admin/Category/detail', $data);
         }
 
-        $menu = $menu_m->find($menu_id);
-        //just in case if menu not found
-        if (!$menu) {
-            return redirect()->to('/menu');
+        $category = $categoryModel->find($category_id);
+        //just in case if category not found
+        if (!$category) {
+            return redirect()->to('dashboard/category/index');
         }
 
-        $data['title'] = "Chỉnh Sửa Menu";
-        $data['menu'] = $menu;
-        return view('Menu/detail', $data);
+        $data['title'] = "Chỉnh Sửa Category";
+        $data['category'] = $category;
+        return view('Admin/Category/detail', $data);
     }
 
     /**
@@ -73,53 +72,51 @@ class Menu extends BaseController
     public function save()
     {
         //get post data
-        $menu_id        = $this->request->getPost('menu_id');
-        $menu_name      = $this->request->getPost('name');
-        $menu_slug      = $this->request->getPost('slug');
-        $menu_parent_id = $this->request->getPost('parent_id');
-        $menu_status    = $this->request->getPost('status');
-        $menu_type      = ($menu_parent_id == 0) ? 0 : 1;
+        $category_id        = $this->request->getPost('category_id');
+        $category_name      = $this->request->getPost('name');
+        $category_slug      = $this->request->getPost('slug');
+        $category_parent_id = $this->request->getPost('parent_id');
+        $category_status    = $this->request->getPost('status');
 
         $data = [
-            'name'      => $menu_name,
-            'slug'      => $menu_slug,
-            'parent_id' => $menu_parent_id,
-            'type'      => $menu_type,
-            'status'    => $menu_status
+            'name'      => $category_name,
+            'slug'      => $category_slug,
+            'parent_id' => $category_parent_id,
+            'status'    => $category_status
         ];
 
-        $menu_m = new CategoryModel();
-        $menu = $menu_m->where(['slug' => $menu_slug])->find();
-        if ($menu) {
-            if ($menu['id'] != $menu_id) {
-                return redirect_with_message(base_url('Menu/detail') . '/' . $menu_id, 'Menu đã tồn tại');
+        $categoryModel = new CategoryModel();
+        $category = $categoryModel->where(['slug' => $category_slug])->first();
+        if ($category) {
+            if ($category['id'] != $category_id) {
+                return redirect_with_message(base_url('dashboard/category/detail') . '/' . $category_id, 'Category đã tồn tại');
             }
         }
-        if ($menu_id) {
-            $data['id'] = $menu_id;
+        if ($category_id) {
+            $data['id'] = $category_id;
         }
 
-        if (!$menu_m->save($data)) {
-            return redirect_with_message(site_url('Menu/create/' . $menu_id), UNEXPECTED_ERROR_MESSAGE);
+        if (!$categoryModel->save($data)) {
+            return redirect_with_message(site_url('dashboard/category/detail/' . $category_id ? $category_id : ''), UNEXPECTED_ERROR_MESSAGE);
         }
-        return redirect()->to('menu');
+        return redirect()->to('dashboard/category');
     }
 
     /**
-     * Used to change status of a menu
+     * Used to change status of a category
      * 
      */
     public function change_status()
     {
-        //get menu id from post data
+        //get category id from post data
         $id = $this->request->getPost('id');
         if (!$id) {
             return $this->respond(response_failed(), Response::HTTP_OK);
         }
 
         $data['status'] = $this->request->getPost('status');
-        $menu_m = new CategoryModel();
-        $is_update = $menu_m->update($id, $data);
+        $categoryModel = new CategoryModel();
+        $is_update = $categoryModel->update($id, $data);
         if (!$is_update) {
             return $this->respond(response_failed(), Response::HTTP_OK);
         }
@@ -129,7 +126,7 @@ class Menu extends BaseController
 
 
     /**
-     * Used to delete a menu
+     * Used to delete a category
      * 
      */
     public function delete()
@@ -139,9 +136,10 @@ class Menu extends BaseController
             return $this->respond(response_failed(), Response::HTTP_OK);
         }
 
-        //delete menu
-        $menu_m = new CategoryModel();
-        $is_delete = $menu_m->delete($id);
+
+        //delete category
+        $categoryModel = new CategoryModel();
+        $is_delete = $categoryModel->delete($id);
         if (!$is_delete) {
             return $this->respond(response_failed(), Response::HTTP_OK);
         }

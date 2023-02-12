@@ -115,9 +115,9 @@ define('STATUS', [
  */
 define('MAIN', 0);
 define('SUB', 1);
-define('MENU_TYPE', [
-    MAIN => 'Menu cha',
-    SUB => 'Menu con',
+define('CATEGORY_TYPE', [
+    MAIN => 'Danh mục cha',
+    SUB => 'Danh mục con',
 ]);
 
 /**
@@ -149,3 +149,5 @@ define('ACCOUNT_STATUS', [
 
 define('WRONG_LOGIN_INFO_MESSAGE', "Tài khoản hoặc mật khẩu sai, vui lòng kiểm tra lại!");
 define('UNEXPECTED_ERROR_MESSAGE', "Có lỗi đã xảy ra, vui lòng thử lại sau!");
+
+define('RESULT_LIMIT', 7);

@@ -36,7 +36,8 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('', 'Home::index');
+$routes->get('/', 'Home::index');
+
 
 $routes->get('shop', 'Shop::index');
 
@@ -52,10 +53,25 @@ $routes->get('logout', 'Admin\Login::logout');
 
 $routes->group('dashboard', ["filter" => "auth-admin"], function ($routes) {
     $routes->get('', 'Admin\Home::index');
-    $routes->get('admin', 'Admin\Admin::index');
-    $routes->get('admin/detail/:any', 'Admin\Admin::detail');
 
-    $routes->post('admin/save', 'Admin\Admin::save');
+    $routes->group('admin', function ($routes) {
+        $routes->get('/', 'Admin\Admin::index');
+        $routes->get('detail', 'Admin\Admin::detail');
+        $routes->get('detail/:any', 'Admin\Admin::detail');
+
+        $routes->post('save', 'Admin\Admin::save');
+        $routes->post('delete', 'Admin\Admin::delete');
+    });
+
+    $routes->group('category', function ($routes) {
+        $routes->get('/', 'Admin\Category::index');
+        $routes->get('detail', 'Admin\Category::detail');
+        $routes->get('detail/:any', 'Admin\Category::detail');
+
+        $routes->post('save', 'Admin\Category::save');
+        $routes->post('delete', 'Admin\Category::delete');
+        $routes->post('action-status', 'Admin\Category::change_status');
+    });
 
 });
 
