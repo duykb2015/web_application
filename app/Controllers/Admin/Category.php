@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
@@ -134,6 +135,7 @@ class Category extends BaseController
         if (!$id) {
             return $this->respond(response_failed(), Response::HTTP_OK);
         }
+
 
         //delete category
         $categoryModel = new CategoryModel();

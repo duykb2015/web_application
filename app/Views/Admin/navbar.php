@@ -24,8 +24,10 @@ $menu = [
     ],
     [
         'url' => '',
+
         'name' => 'Quản lý Danh mục',
         'active' => 'dashboard/category',
+
         'icon' => '<i class="feather icon-menu"></i>',
         'sub_menu' => [
             [

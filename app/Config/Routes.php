@@ -38,6 +38,7 @@ $routes->set404Override();
 
 $routes->get('/', 'Home::index');
 
+
 $routes->get('shop', 'Shop::index');
 
 $routes->get('detail', 'Detail::index');
@@ -71,6 +72,7 @@ $routes->group('dashboard', ["filter" => "auth-admin"], function ($routes) {
         $routes->post('delete', 'Admin\Category::delete');
         $routes->post('action-status', 'Admin\Category::change_status');
     });
+
 });
 
 

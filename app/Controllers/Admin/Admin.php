@@ -33,7 +33,7 @@ class Admin extends BaseController
         $data['accounts'] = $accounts;
         return view('Admin/Admin/index', $data);
     }
-    
+
     /**
      * Used to view create and update account page
      * 
@@ -136,9 +136,10 @@ class Admin extends BaseController
         }
 
         $admin_m = new AdminModel();
-        if ($admin_m->delete($id)) {
-            return $this->respond(response_successed(), Response::HTTP_OK);
+        if (!$admin_m->delete($id)) {
+            return $this->respond(response_failed(), Response::HTTP_OK);
         }
-        return $this->respond(response_failed(), Response::HTTP_OK);
+        return $this->respond(response_successed(), Response::HTTP_OK);
+
     }
 }

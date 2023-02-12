@@ -7,6 +7,7 @@ use CodeIgniter\Model;
 class CategoryModel extends Model
 {
     protected $DBGroup          = 'default';
+
     protected $table            = 'category';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
@@ -81,4 +82,5 @@ class CategoryModel extends Model
         }
         return $this;
     }
+
 }

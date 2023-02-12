@@ -73,16 +73,18 @@
                                                                         <label for="username">Tên tài khoản</label>
                                                                         <div class="input-group">
                                                                             <input type="text" class="form-control" <?= (session()->get('level') > 0) ? 'disabled' : '' ?> value="<?= isset($account['username']) ? $account['username'] : set_value('username') ?>" name="username" placeholder="Tên ..." required>
+
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label for="password">Mật khẩu</label>
-                                                                        <div class="input-group">
+                                                                        <div class="input-group"
 
                                                                             <?php $placeHolder = isset($account['id']) ? 'Để trống nếu không đổi mật khẩu ...' : 'Nhập mật khẩu' ?>
                                                                             <?php $required = isset($account['id']) ? '' : 'required' ?>
 
                                                                             <input type="password" name="password" class="form-control" placeholder="<?= $placeHolder ?>" <?= $required ?>>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -104,6 +106,7 @@
                                                                             <select name="level" class="form-control" <?= (session()->get('level') > 0) ? 'disabled' : '' ?>>
                                                                                 <option value="0" <?= isset($account['level']) && $account['level'] == 0 ? 'selected' : '' ?>>
                                                                                     Admin
+
                                                                                 </option>
                                                                                 <option value="1" <?= isset($account['level']) && $account['level'] == 1 ? 'selected' : '' ?>>
                                                                                     Moderator
