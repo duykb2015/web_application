@@ -39,7 +39,7 @@ class Category extends Migration
             ],
         ]);
         $this->forge->addPrimaryKey('id');
-        $this->forge->addForeignKey('parent_id', 'category', 'id');
+        // $this->forge->addForeignKey('parent_id', 'category', 'id');
         $attributes = [
             'ENGINE' => 'InnoDB',
             'CHARACTER SET' => 'utf8',

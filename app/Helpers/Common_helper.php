@@ -88,10 +88,7 @@ function response_successed($url = null)
 {
     return [
         'success' => true,
-        'message' => 'Thành công',
-        'result'  =>  [
-            'url_redirect' => ($url != null) ? $url : ''
-        ]
+        'message' => 'Thành công'
     ];
 }
 

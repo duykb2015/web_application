@@ -1,4 +1,4 @@
-<?= $this->extend('layout') ?>
+<?= $this->extend('admin/layout') ?>
 
 
 <?= $this->section('content') ?>
@@ -14,7 +14,7 @@
                         <div class="col-lg-8">
                             <div class="page-header-title">
                                 <div class="d-inline">
-                                    <h4>Danh sách Menu</h4>
+                                    <h4>Danh sách Danh mục</h4>
                                 </div>
                             </div>
                         </div>
@@ -28,21 +28,21 @@
                                 <thead>
                                     <tr>
                                         <td class="align-middle" colspan="7">
-                                            <form action="<?= base_url('menu') ?>" method="get">
+                                            <form action="<?= base_url('dashboard/category') ?>" method="get">
                                                 <div class="row">
 
                                                     <div class="col-sm-3">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control " value="<?= isset($_GET['menu_name']) ? $_GET['menu_name'] : '' ?>" name="menu_name" placeholder="Nhập tên menu để tìm">
+                                                            <input type="text" class="form-control " value="<?= isset($_GET['category_name']) ? $_GET['category_name'] : '' ?>" name="category_name" placeholder="Nhập tên menu để tìm">
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="input-group mb-3">
-                                                            <select class="form-control" name="menu_parent">
-                                                                <option value="">Menu cha</option>
-                                                                <?php if (isset($parent_menu)) : ?>
-                                                                    <?php foreach ($parent_menu as $val) : ?>
-                                                                        <option value="<?= $val['id'] ?>" <?= isset($_GET['menu_parent']) && ($_GET['menu_parent'] == $val['id']) ? 'selected' : '' ?>><?= $val['id'] ?></option>
+                                                            <select class="form-control" name="category_parent">
+                                                                <option value="">Danh mục cha</option>
+                                                                <?php if (isset($parent_category)) : ?>
+                                                                    <?php foreach ($parent_category as $val) : ?>
+                                                                        <option value="<?= $val['id'] ?>" <?= isset($_GET['category_parent']) && ($_GET['category_parent'] == $val['id']) ? 'selected' : '' ?>><?= $val['name'] ?></option>
                                                                     <?php endforeach ?>
                                                                 <?php endif ?>
                                                             </select>
@@ -50,25 +50,15 @@
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <div class="input-group mb-3">
-                                                            <select class="form-control" name="menu_type">
-                                                                <option value="">Loại menu</option>
-                                                                <?php foreach (MENU_TYPE as $key => $val) : ?>
-                                                                    <option value="<?= $key ?>" <?= isset($_GET['menu_type']) && ($_GET['menu_type'] == $key) ? 'selected' : '' ?>><?= $val ?></option>
-                                                                <?php endforeach ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <div class="input-group mb-3">
-                                                            <select class="form-control" name="menu_status">
+                                                            <select class="form-control" name="category_status">
                                                                 <option value="">Trạng thái</option>
                                                                 <?php foreach (STATUS as $key => $val) : ?>
-                                                                    <option value="<?= $key ?>" <?= isset($_GET['menu_status']) && $_GET['menu_status'] != '' && $_GET['menu_status'] == $key ? 'selected' : '' ?>><?= $val ?></option>
+                                                                    <option value="<?= $key ?>" <?= isset($_GET['category_status']) && $_GET['category_status'] != '' && $_GET['category_status'] == $key ? 'selected' : '' ?>><?= $val ?></option>
                                                                 <?php endforeach ?>
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-1 text-center">
+                                                    <div class="col-sm-2 text-center">
                                                         <button type="submit" class="btn btn-success">Lọc</button>
                                                     </div>
                                                 </div>
@@ -79,20 +69,16 @@
                                 <thead>
                                     <tr>
                                         <th width="20%">Tên</th>
-                                        <th width="20%">Phân Loại</th>
-                                        <th width="20%">Menu Cha</th>
+                                        <th width="20%">Danh mục cha</th>
                                         <th width="10%">Trạng thái</th>
-                                        <th width="10%">Ngày tạo</th>
-                                        <th width="10%">Ngày cập nhật</th>
                                         <th width="10%"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (!empty($menu)) : ?>
-                                        <?php foreach ($menu as $row) : ?>
-                                            <tr id="menu-<?= $row['id'] ?>">
+                                    <?php if (!empty($categorys)) : ?>
+                                        <?php foreach ($categorys as $row) : ?>
+                                            <tr id="category-<?= $row['id'] ?>">
                                                 <td class="font-weight-bold"><?= $row['name'] ?></td>
-                                                <td><?= MENU_TYPE[$row['type']] ?></td>
                                                 <td><?= isset($row['parent_name']) ? $row['parent_name'] : 'Không có' ?></td>
                                                 <td class="">
                                                     <div class="checkbox-fade fade-in-primary ml-3">
@@ -104,14 +90,12 @@
                                                         </label>
                                                     </div>
                                                 </td>
-                                                <td><?= $row['created_at'] ?></td>
-                                                <td><?= $row['updated_at'] ?></td>
                                                 <td>
                                                     <div class="btn-group btn-group-sm">
-                                                        <a href="<?= base_url('menu/detail/' . $row['id']) ?>" class="tabledit-edit-button btn btn-primary waves-effect waves-light" style="float: none;margin: 5px;">
+                                                        <a href="<?= base_url('dashboard/category/detail/' . $row['id']) ?>" class="tabledit-edit-button btn btn-primary waves-effect waves-light" style="float: none;margin: 5px;">
                                                             <span class="icofont icofont-ui-edit"></span>
                                                         </a>
-                                                        <a href="javascript:void(0)" onclick="delete_menu('<?= $row['id'] ?>', '<?= $row['name'] ?>')" class="tabledit-delete-button btn btn-danger waves-effect waves-light" style="float: none;margin: 5px;">
+                                                        <a href="javascript:void(0)" onclick="delete_category('<?= $row['id'] ?>', '<?= $row['name'] ?>')" class="tabledit-delete-button btn btn-danger waves-effect waves-light" style="float: none;margin: 5px;">
                                                             <span class="icofont icofont-ui-delete"></span>
                                                         </a>
                                                     </div>
@@ -121,7 +105,7 @@
                                     <?php else : ?>
                                         <tr>
                                             <td colspan="7">
-                                                <p class="card-text text-center">Hiện tại không có menu nào</p>
+                                                <p class="card-text text-center">Hiện tại không có danh mục nào</p>
                                             </td>
                                         </tr>
                                     <?php endif ?>
@@ -147,7 +131,7 @@
     <?= $this->section('js') ?>
     <script>
         function change_status(element, id, name) {
-            const is_confirm = confirm(`Bạn muốn thay đổi trạng thái của Menu "${name}" ?`);
+            const is_confirm = confirm(`Bạn muốn thay đổi trạng thái của Category "${name}" ?`);
             if (!is_confirm) {
                 return false
             }
@@ -161,7 +145,7 @@
                 redirect: 'follow'
             };
 
-            fetch('<?= base_url('menu/action-status') ?>', requestOptions)
+            fetch('<?= base_url('dashboard/category/action-status') ?>', requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.success) {
@@ -172,6 +156,7 @@
                     const error = result.result.error;
                     if (error) {
                         msgbox_error(error)
+                        
                         return false
                     }
 
@@ -182,8 +167,8 @@
                 });
         }
 
-        function delete_menu(id, name) {
-            const is_confirm = confirm(`Bạn muốn xóa Menu "${name}" ?`);
+        function delete_category(id, name) {
+            const is_confirm = confirm(`Bạn muốn xóa Category "${name}" ?`);
             if (!is_confirm) {
                 return
             }
@@ -196,12 +181,12 @@
                 redirect: 'follow'
             };
 
-            fetch('<?= base_url('menu/delete') ?>', requestOptions)
+            fetch('<?= base_url('dashboard/category/delete') ?>', requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.success) {
                         msgbox_success(result.message)
-                        document.getElementById(`menu-${id}`).remove()
+                        document.getElementById(`category-${id}`).remove()
                         return
                     }
 

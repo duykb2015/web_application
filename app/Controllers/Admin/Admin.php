@@ -33,28 +33,7 @@ class Admin extends BaseController
         $data['accounts'] = $accounts;
         return view('Admin/Admin/index', $data);
     }
-
-    /**
-     * Used to view account infomation
-     * 
-     */
-    public function profile()
-    {
-        //get id from store session
-        $id = session()->get('id');
-        if ($id == null) {
-            return redirect()->to('/admin');
-        }
-        $admin_m = new AdminModel();
-        $account = $admin_m->find($id);
-        //yes, be careful never too much
-        if (empty($account)) {
-            return redirect()->to('/admin');
-        }
-        $data['account'] = $account;
-        return view('Admin/Admin/profile', $data);
-    }
-
+    
     /**
      * Used to view create and update account page
      * 
@@ -64,6 +43,9 @@ class Admin extends BaseController
 
         $id = $this->request->getUri()->getSegment(4);
         if (!$id) {
+            if (session()->get('level') > 0) {
+                return redirect()->to('dashboard/admin');
+            }
             $data['title'] = "Thêm Mới Tài Khoản";
             return view('Admin/Admin/detail', $data);
         }
@@ -155,8 +137,8 @@ class Admin extends BaseController
 
         $admin_m = new AdminModel();
         if ($admin_m->delete($id)) {
-            return $this->respond(response_failed(), Response::HTTP_OK);
+            return $this->respond(response_successed(), Response::HTTP_OK);
         }
-        return $this->respond(response_successed(), Response::HTTP_OK);
+        return $this->respond(response_failed(), Response::HTTP_OK);
     }
 }

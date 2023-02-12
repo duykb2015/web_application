@@ -1,4 +1,4 @@
-<?= $this->extend('layout') ?>
+<?= $this->extend('admin/layout') ?>
 <?= $this->section('content') ?>
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
@@ -11,7 +11,7 @@
                         <div class="col-lg-8">
                             <div class="page-header-title">
                                 <div class="d-inline">
-                                    <h4>Thêm menu</h4>
+                                    <h4>Thêm Danh mục</h4>
                                 </div>
                             </div>
                         </div>
@@ -39,19 +39,19 @@
                                             </div>
                                         </div>
                                     <?php endif ?>
-                                    <form id="form-menu" action="<?= base_url('menu/save') ?>" method="POST">
-                                        <input type="hidden" name="menu_id" value="<?= !empty($menu['id']) ? $menu['id'] : '' ?>">
+                                    <form id="form-category" action="<?= base_url('dashboard/category/save') ?>" method="POST">
+                                        <input type="hidden" name="category_id" value="<?= !empty($category['id']) ? $category['id'] : '' ?>">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <label for="name">Tên menu</label>
+                                                <label for="name">Tên danh mục</label>
                                                 <div class="input-group">
-                                                    <input id="name" type="text" name="name" class="form-control" value="<?= !empty($menu['name']) ? $menu['name'] : set_value('name') ?>" required>
+                                                    <input id="name" type="text" name="name" class="form-control" value="<?= !empty($category['name']) ? $category['name'] : set_value('name') ?>" required>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="slug">Slug</label>
                                                 <div class="input-group">
-                                                    <input id="slug" type="text" name="slug" class="form-control" value="<?= !empty($menu['slug']) ? $menu['slug'] : set_value('slug') ?>">
+                                                    <input id="slug" type="text" name="slug" class="form-control" value="<?= !empty($category['slug']) ? $category['slug'] : set_value('slug') ?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -61,9 +61,9 @@
                                                 <div class="input-group">
                                                     <select class="form-control" name="parent_id">
                                                         <option value="0">Không</option>
-                                                        <?php if (isset($parent_menu)) : ?>
-                                                            <?php foreach ($parent_menu as $val) : ?>
-                                                                <option <?= !empty($menu['parent_id']) && $menu['parent_id'] == $val['id'] ? 'selected' : '' ?> value="<?= $val['id'] ?>"><?= $val['name'] ?></option>
+                                                        <?php if (isset($parent_category)) : ?>
+                                                            <?php foreach ($parent_category as $val) : ?>
+                                                                <option <?= !empty($category['parent_id']) && $category['parent_id'] == $val['id'] ? 'selected' : '' ?> value="<?= $val['id'] ?>"><?= $val['name'] ?></option>
                                                             <?php endforeach ?>
                                                         <?php endif ?>
                                                     </select>
@@ -74,7 +74,7 @@
                                                 <div class="input-group">
                                                     <select class="form-control" name="status">
                                                         <?php foreach (STATUS as $key => $val) : ?>
-                                                            <option <?= !empty($menu['status']) && $menu['status'] == $key ? 'selected' : '' ?> value="<?= $key ?>"><?= $val ?></option>
+                                                            <option <?= !empty($category['status']) && $category['status'] == $key ? 'selected' : '' ?> value="<?= $key ?>"><?= $val ?></option>
                                                         <?php endforeach ?>
                                                     </select>
                                                 </div>
@@ -84,7 +84,7 @@
                                         <div class="row">
                                             <div class="col-sm-12 text-right">
                                                 <button type="submit" class="btn btn-primary m-b-0 ">Lưu</button>
-                                                <a href="<?= base_url('menu') ?>" class="btn btn-default waves-effect">Huỷ</a>
+                                                <a href="<?= base_url('dashboard/category') ?>" class="btn btn-default waves-effect">Huỷ</a>
                                             </div>
                                         </div>
                                     </form>
