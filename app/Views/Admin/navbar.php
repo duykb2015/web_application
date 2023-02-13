@@ -43,20 +43,20 @@ $menu = [
     [
         'url' => '',
         'name' => 'Quản lý sản phẩm',
-        'active' => 'product',
+        'active' => 'dashboard/product',
         'icon' => '<i class="feather icon-shopping-cart"></i>',
         'sub_menu' => [
             [
                 'url' => '',
-                'name' => 'Danh mục',
-                'active' => 'product-category',
+                'name' => 'Thuộc tính sản phẩm',
+                'active' => 'dashboard/product/atribute',
                 'sub_menu' => [
                     [
-                        'url' => base_url('product-category'),
+                        'url' => base_url('dashboard/product/atribute'),
                         'name' => 'Danh sách',
                     ],
                     [
-                        'url' => base_url('product-category/detail'),
+                        'url' => base_url('dashboard/product/atribute/detail'),
                         'name' => 'Thêm mới',
                     ],
                 ]

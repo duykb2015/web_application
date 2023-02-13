@@ -14,7 +14,6 @@ class ProductCartOption extends Migration
                'type' => 'INT',
                'constraint' => 11,
                'null' => FALSE,
-               'auto_increment' => TRUE,
            ],
            'product_attribute_id' => [
                'type' => 'INT',
