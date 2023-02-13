@@ -49,14 +49,14 @@ $menu = [
             [
                 'url' => '',
                 'name' => 'Thuộc tính sản phẩm',
-                'active' => 'dashboard/product/atribute',
+                'active' => 'dashboard/product/attribute',
                 'sub_menu' => [
                     [
-                        'url' => base_url('dashboard/product/atribute'),
+                        'url' => base_url('dashboard/product/attribute'),
                         'name' => 'Danh sách',
                     ],
                     [
-                        'url' => base_url('dashboard/product/atribute/detail'),
+                        'url' => base_url('dashboard/product/attribute/detail'),
                         'name' => 'Thêm mới',
                     ],
                 ]

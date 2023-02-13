@@ -23,8 +23,8 @@ class Admin extends BaseController
      */
     public function index()
     {
-        $admin_m = new AdminModel();
-        $accounts  = $admin_m->findAll();
+        $adminModel = new AdminModel();
+        $accounts  = $adminModel->findAll();
 
         foreach ($accounts as $key => $account) {
             $account['last_login_at'] = get_time_ago(strtotime($account['last_login_at']));
@@ -49,8 +49,8 @@ class Admin extends BaseController
             $data['title'] = "Thêm Mới Tài Khoản";
             return view('Admin/Admin/detail', $data);
         }
-        $admin_m = new AdminModel();
-        $account = $admin_m->find($id);
+        $adminModel = new AdminModel();
+        $account = $adminModel->find($id);
         if (empty($account)) {
             return redirect()->to('dashboard/admin');
         }
@@ -91,8 +91,8 @@ class Admin extends BaseController
             return redirect_with_message(site_url('dashboard/admin/detail/') . $user_id, $error_msg);
         }
 
-        $admin_m = new AdminModel();
-        $user = $admin_m->where('username', $username)->first();
+        $adminModel = new AdminModel();
+        $user = $adminModel->where('username', $username)->first();
         if ($user && !$user_id) {
             $error_msg = 'Tài khoản đã tồn tại!';
             return redirect_with_message(site_url('dashboard/admin/detail'), $error_msg);
@@ -111,7 +111,7 @@ class Admin extends BaseController
         }
 
         //if create failed, notice and redirect to register page again
-        $is_save = $admin_m->save($data);
+        $is_save = $adminModel->save($data);
         if (!$is_save) {
             return redirect_with_message(site_url('Admin/detail'), UNEXPECTED_ERROR_MESSAGE);
         }
@@ -128,18 +128,18 @@ class Admin extends BaseController
         $id = $this->request->getPost('id');
         //if account id is empty, return error response
         if (!$id) {
-            return $this->respond(response_failed(), Response::HTTP_OK);
+            return $this->respond(responseFailed(), Response::HTTP_OK);
         }
         //cannot delete exclusive admin account, of course
         if ($id == 1) {
-            return $this->respond(response_failed('Bạn không thể xoá tài khoản này!'), Response::HTTP_OK);
+            return $this->respond(responseFailed('Bạn không thể xoá tài khoản này!'), Response::HTTP_OK);
         }
 
-        $admin_m = new AdminModel();
-        if (!$admin_m->delete($id)) {
-            return $this->respond(response_failed(), Response::HTTP_OK);
+        $adminModel = new AdminModel();
+        if (!$adminModel->delete($id)) {
+            return $this->respond(responseFailed(), Response::HTTP_OK);
         }
-        return $this->respond(response_successed(), Response::HTTP_OK);
+        return $this->respond(responseSuccessed(), Response::HTTP_OK);
 
     }
 }

@@ -61,6 +61,9 @@
                                                     <div class="col-sm-2 text-center">
                                                         <button type="submit" class="btn btn-success">Lọc</button>
                                                     </div>
+                                                    <div class="col-sm-1 text-center">
+                                                        <a href="<?= base_url('dashboard/product/attribute') ?>" class="btn btn-danger">Xoá</a>
+                                                    </div>
                                                 </div>
                                             </form>
                                         </td>
