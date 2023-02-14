@@ -63,6 +63,16 @@ $routes->group('dashboard', ["filter" => "auth-admin"], function ($routes) {
         $routes->post('delete', 'Admin\Admin::delete');
     });
 
+    $routes->group('banner', function ($routes) {
+        $routes->get('/', 'Admin\Banner::index');
+        $routes->get('detail', 'Admin\Banner::detail');
+        $routes->get('detail/:any', 'Admin\Banner::detail');
+
+        $routes->post('save', 'Admin\Banner::save');
+        $routes->post('delete', 'Admin\Banner::delete');
+        $routes->post('action-status', 'Admin\Banner::changeStatus');
+    });
+
     $routes->group('category', function ($routes) {
         $routes->get('/', 'Admin\Category::index');
         $routes->get('detail', 'Admin\Category::detail');

@@ -193,6 +193,8 @@
                     if (result.success) {
                         msgbox_success(result.message)
                         document.getElementById(`attribute-${id}`).remove()
+                        sleep(1)
+                        window.location.reload()
                         return
                     }
 

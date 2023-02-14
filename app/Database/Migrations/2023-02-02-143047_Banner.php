@@ -22,6 +22,24 @@ class Banner extends Migration
                 'null' => FALSE,
                 'auto_increment' => TRUE,
             ],
+            'description' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => FALSE,
+                'auto_increment' => TRUE,
+            ],
+            'link' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => FALSE,
+                'auto_increment' => TRUE,
+            ],
+            'image' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => FALSE,
+                'auto_increment' => TRUE,
+            ],
             'status' => [
                 'type' => 'TINYINT',
                 'constraint' => 1,
