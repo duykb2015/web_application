@@ -20,10 +20,10 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>\eshopper\css\style.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>\eshopper\css\style.min.css">
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>/eshopper/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <!-- <link href="css/style.css" rel="stylesheet"> -->
+    <link href="<?= base_url() ?>/eshopper/css/style.css" rel="stylesheet">
     
 </head>
 

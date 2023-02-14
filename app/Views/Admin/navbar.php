@@ -3,7 +3,7 @@ $menu = [
     [
         'url' => base_url('dashboard'),
         'active' => 'dashboard',
-        'name' => 'Admin',
+        'name' => 'Dashboard',
         'icon' => '<i class="feather icon-home"></i>',
     ],
     [
@@ -24,11 +24,27 @@ $menu = [
     ],
     [
         'url' => '',
+        'active' => 'dashboard/banner',
+        'name' => 'Quản lý Banner',
+        'icon' => '<i class="fa fa-photo"></i>',
+        'sub_menu' => [
+            [
+                'url' => base_url('dashboard/banner'),
+                'name' => 'Danh sách',
+            ],
+            [
+                'url' => base_url('dashboard/banner/detail'),
+                'name' => 'Thêm mới',
+            ],
+        ]
+    ],
+    [
+        'url' => '',
 
         'name' => 'Quản lý Danh mục',
         'active' => 'dashboard/category',
 
-        'icon' => '<i class="feather icon-menu"></i>',
+        'icon' => '<i class="fa fa-bars"></i>',
         'sub_menu' => [
             [
                 'url' => base_url('dashboard/category'),
@@ -48,45 +64,15 @@ $menu = [
         'sub_menu' => [
             [
                 'url' => '',
-                'name' => 'Thuộc tính sản phẩm',
-                'active' => 'dashboard/product/atribute',
-                'sub_menu' => [
-                    [
-                        'url' => base_url('dashboard/product/atribute'),
-                        'name' => 'Danh sách',
-                    ],
-                    [
-                        'url' => base_url('dashboard/product/atribute/detail'),
-                        'name' => 'Thêm mới',
-                    ],
-                ]
-            ],
-            [
-                'url' => '',
                 'name' => 'Thuộc tính',
-                'active' => 'product-attribute',
+                'active' => 'dashboard/product/attribute',
                 'sub_menu' => [
                     [
-                        'url' => base_url('product-attribute'),
+                        'url' => base_url('dashboard/product/attribute'),
                         'name' => 'Danh sách',
                     ],
                     [
-                        'url' => base_url('product-attribute/detail'),
-                        'name' => 'Thêm mới',
-                    ],
-                ]
-            ],
-            [
-                'url' => '',
-                'name' => 'Dòng sản phẩm',
-                'active' => 'product-line',
-                'sub_menu' => [
-                    [
-                        'url' => base_url('product-line'),
-                        'name' => 'Danh sách',
-                    ],
-                    [
-                        'url' => base_url('product-line/detail'),
+                        'url' => base_url('dashboard/product/attribute/detail'),
                         'name' => 'Thêm mới',
                     ],
                 ]
@@ -108,7 +94,22 @@ $menu = [
             ]
         ]
     ],
-
+    [
+        'url' => '',
+        'active' => 'dashboard/admin',
+        'name' => 'Quản lý Giao dịch',
+        'icon' => '<i class="fa fa-credit-card-alt"></i>',
+        'sub_menu' => [
+            [
+                'url' => base_url('dashboard/banner'),
+                'name' => 'Danh sách',
+            ],
+            [
+                'url' => base_url('dashboard/banner/detail'),
+                'name' => 'Thêm mới',
+            ],
+        ]
+    ],
 
 
 ];

@@ -1,5 +1,8 @@
 <?= $this->extend('admin/layout') ?>
-
+<?= $this->section('css') ?>
+<link rel="stylesheet" type="text/css" href="<?= base_url() ?>\templates\libraries\bower_components\datatables.net-bs4\css\dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="<?= base_url() ?>\templates\libraries\assets\pages\data-table\css\buttons.dataTables.min.css">
+<?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 
@@ -14,46 +17,43 @@
                         <div class="col-lg-8">
                             <div class="page-header-title">
                                 <div class="d-inline">
-                                    <h4>Danh sách Danh mục</h4>
+                                    <h4>Danh sách thuộc tính sản phẩm</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Page-header end -->
+
                 <div class="page-body">
+                    <!-- Extra Large table start -->
+
+
                     <div class="card">
-                        <!-- table-responsive -->
-                        <div class="">
+
+
+                        <!-- <div class="card-block"> -->
+                        <div class="table-responsive">
+
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <td class="align-middle" colspan="7">
-                                            <form action="<?= base_url('dashboard/category') ?>" method="get">
+                                            <form action="<?= base_url('dashboard/product/attribute') ?>" method="GET">
                                                 <div class="row">
 
-                                                    <div class="col-sm-4">
+                                                    <div class="col-sm-5">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control " value="<?= isset($_GET['category_name']) ? $_GET['category_name'] : '' ?>" name="category_name" placeholder="Nhập tên danh mục để tìm">
+                                                            <input type="text" class="form-control" value="<?= isset($_GET['attribute_name']) ? $_GET['attribute_name'] : '' ?>" name="attribute_name" placeholder="Nhập tên thuộc tính để tìm">
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-3">
+                                                    <div class="col-sm-5">
+
                                                         <div class="input-group mb-3">
-                                                            <select class="form-control" name="category_parent">
-                                                                <option value="">Danh mục cha</option>
-                                                                <?php if (isset($parent_category)) : ?>
-                                                                    <?php foreach ($parent_category as $val) : ?>
-                                                                        <option value="<?= $val['id'] ?>" <?= isset($_GET['category_parent']) && ($_GET['category_parent'] == $val['id']) ? 'selected' : '' ?>><?= $val['name'] ?></option>
-                                                                    <?php endforeach ?>
-                                                                <?php endif ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <div class="input-group mb-3">
-                                                            <select class="form-control" name="category_status">
+                                                            <select class="form-control" name="attribute_status">
                                                                 <option value="">Trạng thái</option>
                                                                 <?php foreach (STATUS as $key => $val) : ?>
-                                                                    <option value="<?= $key ?>" <?= isset($_GET['category_status']) && $_GET['category_status'] != '' && $_GET['category_status'] == $key ? 'selected' : '' ?>><?= $val ?></option>
+                                                                    <option value="<?= $key ?>" <?= isset($_GET['attribute_status']) && $_GET['attribute_status'] != '' && $_GET['attribute_status'] == $key ? 'selected' : '' ?>><?= $val ?></option>
                                                                 <?php endforeach ?>
                                                             </select>
                                                         </div>
@@ -62,7 +62,7 @@
                                                         <button type="submit" class="btn btn-success">Lọc</button>
                                                     </div>
                                                     <div class="col-sm-1 text-center">
-                                                        <a href="<?= base_url('dashboard/category') ?>" class="btn btn-danger">Xoá</a>
+                                                        <a href="<?= base_url('dashboard/product/attribute') ?>" class="btn btn-danger">Xoá</a>
                                                     </div>
                                                 </div>
                                             </form>
@@ -71,22 +71,21 @@
                                 </thead>
                                 <thead>
                                     <tr>
-                                        <th width="20%">Tên</th>
-                                        <th width="20%">Danh mục cha</th>
-                                        <th width="10%">Trạng thái</th>
-                                        <th width="10%"></th>
+                                        <th class="text-center">Tên</th>
+                                        <th class="text-center">Trạng thái</th>
+                                        <th style="width: 10%;"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (!empty($categorys)) : ?>
-                                        <?php foreach ($categorys as $row) : ?>
-                                            <tr id="category-<?= $row['id'] ?>">
+                                    <?php if (!empty($attributes)) : ?>
+
+                                        <?php foreach ($attributes as $row) : ?>
+                                            <tr id="attribute-<?= $row['id'] ?>">
                                                 <td class="font-weight-bold"><?= $row['name'] ?></td>
-                                                <td><?= isset($row['parent_name']) ? $row['parent_name'] : 'Không có' ?></td>
-                                                <td class="">
-                                                    <div class="checkbox-fade fade-in-primary ml-3">
+                                                <td class="text-center">
+                                                    <div class="checkbox-fade fade-in-primary ml-1">
                                                         <label class="check-task">
-                                                            <input type="checkbox" onclick="return change_status(this, '<?= $row['id'] ?>', '<?= $row['name'] ?>')" <?= $row['status'] == DISPLAY ? 'checked' : '' ?>>
+                                                            <input type="checkbox" id="checkbox" onclick="return change_status(this, '<?= $row['id'] ?>', '<?= $row['name'] ?>')" <?= $row['status'] == DISPLAY ? 'checked' : '' ?>>
                                                             <span class="cr">
                                                                 <i class="cr-icon feather icon-check txt-default"></i>
                                                             </span>
@@ -95,10 +94,10 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-group btn-group-sm">
-                                                        <a href="<?= base_url('dashboard/category/detail/' . $row['id']) ?>" class="tabledit-edit-button btn btn-primary waves-effect waves-light" style="float: none;margin: 5px;">
+                                                        <a href="<?= base_url('dashboard/product/attribute/detail/' . $row['id']) ?>" class="tabledit-edit-button btn btn-primary waves-effect waves-light" style="float: none;margin: 5px;">
                                                             <span class="icofont icofont-ui-edit"></span>
                                                         </a>
-                                                        <a href="javascript:void(0)" onclick="delete_category('<?= $row['id'] ?>', '<?= $row['name'] ?>')" class="tabledit-delete-button btn btn-danger waves-effect waves-light" style="float: none;margin: 5px;">
+                                                        <a href="javascript:void(0)" onclick="delete_attribute('<?= $row['id'] ?>', '<?= $row['name'] ?>')" class="tabledit-delete-button btn btn-danger waves-effect waves-light" style="float: none;margin: 5px;">
                                                             <span class="icofont icofont-ui-delete"></span>
                                                         </a>
                                                     </div>
@@ -107,23 +106,27 @@
                                         <?php endforeach ?>
                                     <?php else : ?>
                                         <tr>
-                                            <td colspan="7">
-                                                <p class="card-text text-center">Hiện tại không có danh mục nào</p>
+                                            <td colspan="3">
+                                                <p class="card-text text-center">Hiện tại không có thuộc tính nào</p>
                                             </td>
                                         </tr>
                                     <?php endif ?>
                                 </tbody>
                             </table>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="text-center">
-                                        <?php if (isset($pager)) : ?>
-                                            <?= $pager->links('default', 'default_full') ?>
-                                        <?php endif ?>
-                                    </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="text-center">
+                                    <?php if (!empty($pager)) : ?>
+                                        <?= $pager->links('default', 'default_full') ?>
+                                    <?php endif ?>
                                 </div>
                             </div>
+                            <!-- </div> -->
+
                         </div>
+                        <!-- Extra Large table end -->
                     </div>
                 </div>
             </div>
@@ -134,7 +137,8 @@
     <?= $this->section('js') ?>
     <script>
         function change_status(element, id, name) {
-            const is_confirm = confirm(`Bạn muốn thay đổi trạng thái của Category "${name}" ?`);
+
+            const is_confirm = confirm(`Bạn muốn thay đổi trạng thái của thuộc tính "${name}" ?`);
             if (!is_confirm) {
                 return false
             }
@@ -148,7 +152,7 @@
                 redirect: 'follow'
             };
 
-            fetch('<?= base_url('dashboard/category/action-status') ?>', requestOptions)
+            fetch('<?= base_url('dashboard/product/attribute/action-status') ?>', requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.success) {
@@ -159,7 +163,6 @@
                     const error = result.result.error;
                     if (error) {
                         msgbox_error(error)
-                        
                         return false
                     }
 
@@ -170,8 +173,8 @@
                 });
         }
 
-        function delete_category(id, name) {
-            const is_confirm = confirm(`Bạn muốn xóa Category "${name}" ?`);
+        function delete_attribute(id, name) {
+            const is_confirm = confirm(`Bạn muốn xóa thuộc tính "${name}" ?`);
             if (!is_confirm) {
                 return
             }
@@ -184,12 +187,12 @@
                 redirect: 'follow'
             };
 
-            fetch('<?= base_url('dashboard/category/delete') ?>', requestOptions)
+            fetch('<?= base_url('dashboard/product/attribute/delete') ?>', requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.success) {
                         msgbox_success(result.message)
-                        document.getElementById(`category-${id}`).remove()
+                        document.getElementById(`attribute-${id}`).remove()
                         sleep(1)
                         window.location.reload()
                         return

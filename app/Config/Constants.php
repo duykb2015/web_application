@@ -151,3 +151,6 @@ define('WRONG_LOGIN_INFO_MESSAGE', "Tài khoản hoặc mật khẩu sai, vui l�
 define('UNEXPECTED_ERROR_MESSAGE', "Có lỗi đã xảy ra, vui lòng thử lại sau!");
 
 define('RESULT_LIMIT', 7);
+
+define('PUBLIC_PATH', ROOTPATH . 'public/uploads/');
+define('BANNER_IMAGE_PATH', PUBLIC_PATH . 'banner/');

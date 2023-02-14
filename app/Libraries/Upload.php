@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Libraries;
+
+use CodeIgniter\Config\Services;
+
+/**
+ * Upload file class
+ */
+class Upload
+{
+
+    /**
+     * Validate file upload
+     * 
+     * @param string $inputName name of input file
+     * @return bool true if valid, false if not
+     */
+    public function validationImage(string $inputName)
+    {
+        $validationRule = [
+            $inputName => [
+                'label' => 'Image File',
+                'rules' => 'uploaded[' . $inputName . ']'
+                    . '|is_image[' . $inputName . ']'
+                    . '|mime_in[' . $inputName . ', image/jpg, image/jpeg, image/gif, image/png, image/webp]'
+                    . '|max_size[' . $inputName . ', 5120]' // 5MB
+                //. '|max_dims['.$name_from_input.',1024,768]',
+            ],
+        ];
+        $validate = Services::validation();
+        if (!$validate->setRules($validationRule)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Used to upload multiple images to server
+     *
+     * @param mixed $images Images to upload
+     * @param string $path path to upload folder
+     * @return array|bool a string name of uploaded images or FALSE on failure
+     */
+    function singleImages($image, $path = PUBLIC_PATH)
+    {
+        if (!$image) {
+            return false;
+        }
+
+        if (!$image->isValid() || $image->hasMoved()) {
+            return false;
+        }
+        $newName = $image->getRandomName();
+        $fileName = $newName;
+        $image->move($path, $newName);
+
+        return $fileName;
+    }
+
+    /**
+     * Used to upload multiple images to server
+     *
+     * @param mixed $images Images to upload
+     * @param string $inputName Name of input field
+     * @return array|bool a string name of uploaded images or FALSE on failure
+     */
+    function multipleImages($images, $path = PUBLIC_PATH, $inputName = 'images')
+    {
+        if (!$images) {
+            return false;
+        }
+        foreach ($images[$inputName] as $img) {
+            if (!$img->isValid() || $img->hasMoved()) {
+                return false;
+            }
+            $newName = $img->getRandomName();
+            $fileNames[] = $newName;
+            $img->move($path, $newName);
+        }
+        return $fileNames;
+    }
+}

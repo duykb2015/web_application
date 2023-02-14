@@ -68,7 +68,7 @@ function get_time_ago($time)
  * @param string $error Error message to show
  * @return array an array of data for failed response
  */
-function response_failed(?string $error = null)
+function responseFailed(?string $error = null)
 {
     return [
         'success' => false,
@@ -84,7 +84,7 @@ function response_failed(?string $error = null)
  * 
  * @return array an array of data for successed response
  */
-function response_successed($url = null)
+function responseSuccessed()
 {
     return [
         'success' => true,

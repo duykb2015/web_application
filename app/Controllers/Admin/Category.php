@@ -22,15 +22,15 @@ class Category extends BaseController
         $categoryModel = new CategoryModel();
         //The method is not deprecated, the optional [$upper] parameter is deprecated.
         if ($this->request->getMethod() == 'get') {
-            $category_name   = $this->request->getGet('category_name');
-            $category_parent = $this->request->getGet('category_parent');
-            $category_status = $this->request->getGet('category_status');
-            $filter_data = [
-                'name'      => $category_name,
-                'parent_id' => $category_parent,
-                'status'    => $category_status,
+            $categoryName   = $this->request->getGet('category_name');
+            $categoryParent = $this->request->getGet('category_parent');
+            $categoryStatus = $this->request->getGet('category_status');
+            $filterData = [
+                'name'      => $categoryName,
+                'parent_id' => $categoryParent,
+                'status'    => $categoryStatus,
             ];
-            $categoryModel->filter($filter_data);
+            $categoryModel->filter($filterData);
         }
 
         $data = $categoryModel->customFindAll();
@@ -106,22 +106,22 @@ class Category extends BaseController
      * Used to change status of a category
      * 
      */
-    public function change_status()
+    public function changeStatus()
     {
         //get category id from post data
         $id = $this->request->getPost('id');
         if (!$id) {
-            return $this->respond(response_failed(), Response::HTTP_OK);
+            return $this->respond(responseFailed(), Response::HTTP_OK);
         }
 
         $data['status'] = $this->request->getPost('status');
         $categoryModel = new CategoryModel();
         $is_update = $categoryModel->update($id, $data);
         if (!$is_update) {
-            return $this->respond(response_failed(), Response::HTTP_OK);
+            return $this->respond(responseFailed(), Response::HTTP_OK);
         }
 
-        return $this->respond(response_successed(), Response::HTTP_OK);
+        return $this->respond(responseSuccessed(), Response::HTTP_OK);
     }
 
 
@@ -133,7 +133,7 @@ class Category extends BaseController
     {
         $id = $this->request->getPost('id');
         if (!$id) {
-            return $this->respond(response_failed(), Response::HTTP_OK);
+            return $this->respond(responseFailed(), Response::HTTP_OK);
         }
 
 
@@ -141,8 +141,8 @@ class Category extends BaseController
         $categoryModel = new CategoryModel();
         $is_delete = $categoryModel->delete($id);
         if (!$is_delete) {
-            return $this->respond(response_failed(), Response::HTTP_OK);
+            return $this->respond(responseFailed(), Response::HTTP_OK);
         }
-        return $this->respond(response_successed(), Response::HTTP_OK);
+        return $this->respond(responseSuccessed(), Response::HTTP_OK);
     }
 }
