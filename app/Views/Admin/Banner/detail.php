@@ -145,6 +145,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="text-right m-t-20">
+                                                            
                                                             <button type="submit" class="btn btn-primary waves-effect waves-light m-r-10">Lưu</button>
                                                             <a href="<?= base_url('dashboard/banner') ?>" class="btn btn-light waves-effect waves-light">Huỷ</a>
                                                         </div>

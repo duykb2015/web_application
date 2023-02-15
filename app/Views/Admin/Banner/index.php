@@ -59,8 +59,10 @@
                                 </thead>
                                 <thead>
                                     <tr>
-                                        <th width="30%">Tên</th>
-                                        <th width="30%">Trạng thái</th>
+                                        <th width="30%" class="text-center">Tên</th>
+                                        <th width="30%" class="text-center">Hình Banner</th>
+                                        <th width="30%" class="text-center">Trạng thái</th>
+                                        <th width="30%" class="text-center">Quản Lý</th>
                                         <th width="10%"></th>
                                     </tr>
                                 </thead>
@@ -68,8 +70,9 @@
                                     <?php if (!empty($banners)) : ?>
                                         <?php foreach ($banners as $row) : ?>
                                             <tr id="banner-<?= $row['id'] ?>">
-                                                <td class="font-weight-bold"><?= $row['name'] ?></td>
-                                                <td class="">
+                                                <td class="text-center font-weight-bold"><?= $row['name'] ?></td>
+                                                <td class="text-center font-weight-bold"><img height="150px" class="rounded" src="<?= base_url('uploads/banner/'.$row['image']) ?>" alt="#" ></td>
+                                                <td class="text-center">
                                                     <div class="checkbox-fade fade-in-primary ml-3">
                                                         <label class="check-task">
                                                             <input type="checkbox" onclick="return change_status(this, '<?= $row['id'] ?>', '<?= $row['name'] ?>')" <?= $row['status'] == DISPLAY ? 'checked' : '' ?>>
