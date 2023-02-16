@@ -1,4 +1,4 @@
-<?= $this->extend('layout') ?>
+<?= $this->extend('admin/layout') ?>
 <?= $this->section('content') ?>
 
 <div class="pcoded-content">
@@ -32,45 +32,46 @@
                                                 <thead>
                                                     <tr>
                                                         <td class="align-middle border-0" colspan="7">
-                                                            <form action="<?= base_url('product-line') ?>" method="get">
+                                                            <form action="<?= base_url('dashboard/product/') ?>" method="get">
                                                                 <div class="row">
-                                                                    <div class="col-sm-3">
+                                                                    <div class="col-sm-4">
                                                                         <div class="input-group">
-                                                                            <input type="text" class="form-control" name="product_name" placeholder="Nhập tên dòng sản phẩm để lọc">
+                                                                            <input type="text" class="form-control" name="name" placeholder="Nhập tên dòng sản phẩm để lọc">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-3">
                                                                         <div class="input-group mb-3">
-                                                                            <select class="form-control" name="product_category">
+                                                                            <select class="form-control" name="category">
                                                                                 <option value="">Danh mục</option>
                                                                                 <?php if (isset($category)) : ?>
-                                                                                    <?php foreach ($category as $val) : ?>
-                                                                                        <option value="<?= $val['id'] ?>" <?= !empty($_GET['product_category']) && $_GET['product_category'] != '' && $_GET['product_category'] == $val['id'] ? 'selected' : '' ?>><?= $val['name'] ?></option>
-                                                                                    <?php endforeach ?>
-                                                                                <?php endif ?>
+                                                                                    <?php foreach ($category as $item) : ?>
+                                                                                        <optgroup label="<?= $item['name'] ?>">
+                                                                                            <?php if (isset($item['subCategory'])) : ?>
+                                                                                                <?php foreach ($item['subCategory'] as $row) : ?>
+                                                                                                    <option value="<?= $row['id'] ?>" <?= !empty($_GET['category']) && $_GET['category'] != '' && $_GET['category'] == $row['id'] ? 'selected' : '' ?>><?= $row['name'] ?></option>
+                                                                                                <?php endforeach ?>
+                                                                                        </optgroup>
+                                                                                    <?php endif ?>
+                                                                                <?php endforeach ?>
+                                                                            <?php endif ?>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-3">
-                                                                        <div class="input-group">
-                                                                            <select class="form-control" name="creator">
-                                                                                <option value="">Người tạo</option>
-                                                                                <option value="<?= session()->get('id') ?>">Bạn</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-2">
                                                                         <div class="input-group mb-3">
-                                                                            <select class="form-control" name="product_status">
+                                                                            <select class="form-control" name="status">
                                                                                 <option value="">Trạng thái</option>
                                                                                 <?php foreach (PRODUCT_STATUS as $key => $val) : ?>
-                                                                                    <option value="<?= $key ?>" <?= !empty($_GET['product_status']) && $_GET['product_status'] != '' && $_GET['product_status'] == $key ? 'selected' : '' ?>><?= $val ?></option>
+                                                                                    <option value="<?= $key ?>" <?= !empty($_GET['status']) && $_GET['status'] != '' && $_GET['status'] == $key ? 'selected' : '' ?>><?= $val ?></option>
                                                                                 <?php endforeach ?>
                                                                             </select>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-1 text-center">
                                                                         <button type="submit" class="btn btn-success">Lọc</button>
+                                                                    </div>
+                                                                    <div class="col-sm-1 text-center">
+                                                                        <a href="<?= base_url('dashboard/category') ?>" class="btn btn-danger">Xoá</a>
                                                                     </div>
                                                                 </div>
                                                             </form>

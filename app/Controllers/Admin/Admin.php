@@ -68,7 +68,7 @@ class Admin extends BaseController
         $user_id  = $this->request->getPost('id');
         $username = $this->request->getPost('username') ? $this->request->getPost('username') : session()->get('name');
         $password = $this->request->getPost('password');
-        $level    = $this->request->getPost('level') || 1;
+        $level    = $this->request->getPost('level');
         $status   = $this->request->getPost('status') || 1;
 
         $inputs = array(
@@ -140,6 +140,5 @@ class Admin extends BaseController
             return $this->respond(responseFailed(), Response::HTTP_OK);
         }
         return $this->respond(responseSuccessed(), Response::HTTP_OK);
-
     }
 }
