@@ -154,3 +154,14 @@ define('RESULT_LIMIT', 7);
 
 define('PUBLIC_PATH', ROOTPATH . 'public/uploads/');
 define('BANNER_IMAGE_PATH', PUBLIC_PATH . 'banner/');
+
+define('UPCOMING', 2);
+define('STOPSELL', 3);
+define('SOLDOUT', 4);
+define('PRODUCT_STATUS', [
+    HIDDEN => 'Ẩn',
+    DISPLAY => 'Hiển thị',
+    UPCOMING => 'Sắp ra mắt',
+    STOPSELL => 'Ngưng bán',
+    SOLDOUT => 'Hết hàng'
+]);

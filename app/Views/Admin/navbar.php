@@ -80,14 +80,14 @@ $menu = [
             [
                 'url' => '',
                 'name' => 'Sản phẩm',
-                'active' => 'product-item',
+                'active' => 'dashboard/product/product',
                 'sub_menu' => [
                     [
-                        'url' => base_url('product-item'),
+                        'url' => base_url('dashboard/product/'),
                         'name' => 'Danh sách',
                     ],
                     [
-                        'url' => base_url('product-item/detail'),
+                        'url' => base_url('dashboard/product/detail'),
                         'name' => 'Thêm mới',
                     ],
                 ]

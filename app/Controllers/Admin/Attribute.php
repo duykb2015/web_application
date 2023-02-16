@@ -3,7 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use App\Models\ProductAttributeModel;
+use App\Models\AttributeModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\Response;
 
@@ -17,7 +17,7 @@ class Attribute extends BaseController
      */
     public function index()
     {
-        $productAttributeModel = new ProductAttributeModel();
+        $productAttributeModel = new AttributeModel();
         if ($this->request->getMethod() == 'get') {
             $productAttributeName   = $this->request->getGet('attribute_name'); 
             $productAttributeStatus = $this->request->getGet('attribute_status');
@@ -45,7 +45,7 @@ class Attribute extends BaseController
             $data['title'] = 'Thêm mới thuộc tính';
             return view('Admin/Product/Attribute/detail', $data);
         }
-        $attributeModel = new ProductAttributeModel();
+        $attributeModel = new AttributeModel();
         $attribute = $attributeModel->find($attributeId);
         if (!$attribute) {
             return redirect()->to('dashboard/product/attribute');
@@ -72,7 +72,7 @@ class Attribute extends BaseController
         ];
 
         //Check if product attribute is exist
-        $attributeModel = new ProductAttributeModel();
+        $attributeModel = new AttributeModel();
         $attributeValue = $attributeModel->where('name', $attributeName)->first();
         if ($attributeValue) {
             if ($attributeValue['id'] != $attributeId) {
@@ -102,7 +102,7 @@ class Attribute extends BaseController
         }
 
         $data['status'] = $this->request->getPost('status');
-        $attributeModel = new ProductAttributeModel();
+        $attributeModel = new AttributeModel();
         $isUpdate = $attributeModel->update($id, $data);
         if (!$isUpdate) {
             return $this->respond(responseFailed(), Response::HTTP_OK);
@@ -123,7 +123,7 @@ class Attribute extends BaseController
         }
 
         //delete attribute
-        $attributeModel = new ProductAttributeModel();
+        $attributeModel = new AttributeModel();
         $isDelete = $attributeModel->delete($id);
         if (!$isDelete) {
             return $this->respond(responseFailed(), Response::HTTP_OK);

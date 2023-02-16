@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\CategoryModel;
 use App\Models\ProductModel;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\ProductAttributesModel;
@@ -17,27 +18,41 @@ class Product extends BaseController
      */
     function index()
     {
-        $product_m = new ProductModel();
-        $product_category_m = new ProductCategoryModel();
+        $productModel = new ProductModel();
         if ($this->request->getMethod() == 'get') {
-            $product_name     = $this->request->getGet('product_name');
-            $product_category = $this->request->getGet('product_category');
-            $product_status   = $this->request->getGet('product_status');
-            $product_creator  = $this->request->getGet('product_creator');
-            $filter_data = [
-                'name'     => $product_name,
-                'category_id' => $product_category,
-                'admin_id' => $product_creator,
-                'status'   => $product_status
+            $productName     = $this->request->getGet('name');
+            $productCategory = $this->request->getGet('category');
+            $productStatus   = $this->request->getGet('status');
+            $filterData = [
+                'name'     => $productName,
+                'category_id' => $productCategory,
+                'status'   => $productStatus
             ];
-            $product_m->filter($filter_data);
+            $productModel->filter($filterData);
         }
+
         $data = [
-            'products' => $product_m->findAll(),
-            'pager'    => $product_m->pager,
-            'category' => $product_category_m->findAll()
+            'products' => $productModel->findAll(),
+            'pager'    => $productModel->pager,
+            'category' => $this->getSubCategory()
         ];
-        return view('Product/index', $data);
+        return view('Admin/Product/index', $data);
+    }
+
+    public function getSubCategory()
+    {
+        $categoryModel = new CategoryModel();
+
+        $category = $categoryModel->where('parent_id', 0)->findAll();
+        $subCategory = $categoryModel->where('parent_id > 0')->findAll();
+        foreach ($category as $key => $item) {
+            foreach ($subCategory as $row) {
+                if ($row['parent_id'] == $item['id'])
+                    $item['subCategory'][]  = $row;
+            }
+            $category[$key] = $item;
+        }
+        return $category;
     }
 
     /**

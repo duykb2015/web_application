@@ -78,7 +78,7 @@
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <label for="password">Mật khẩu</label>
-                                                                        <div class="input-group"
+                                                                        <div class="input-group">
 
                                                                             <?php $placeHolder = isset($account['id']) ? 'Để trống nếu không đổi mật khẩu ...' : 'Nhập mật khẩu' ?>
                                                                             <?php $required = isset($account['id']) ? '' : 'required' ?>
