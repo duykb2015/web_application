@@ -1,3 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>EShopper - Bootstrap Shop Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>\eshopper\css\style.css">
+    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>\eshopper\css\style.min.css">
+    <!-- Libraries Stylesheet -->
+    <link href="<?= base_url() ?>/eshopper/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="<?= base_url() ?>/eshopper/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+
+
+
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="row bg-secondary py-2 px-xl-5">
@@ -48,16 +82,7 @@
                     </div>
                 </form>
             </div>
-            <div class="col-lg-3 col-6 text-right">
-                <a href="" class="btn border">
-                    <i class="fas fa-heart text-primary"></i>
-                    <span class="badge">0</span>
-                </a>
-                <a href="<?= base_url('cart') ?>" class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
-                </a>
-            </div>
+
         </div>
     </div>
     <!-- Topbar End -->
@@ -66,33 +91,8 @@
     <!-- Navbar Start -->
     <div class="container-fluid mb-5">
         <div class="row border-top px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
-                    <h6 class="m-0">Categories</h6>
-                    <i class="fa fa-angle-down text-dark"></i>
-                </a>
-                <nav <?= uri_string() != '/' ? 'style="width: calc(100% - 30px);"' : '' ?>  class="<?= uri_string() == '/' ? 'collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 ' : 'collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light' ?>" id="navbar-vertical">
 
-                    <div class="navbar-nav w-100 overflow-hidden" >
-                        <?php foreach ($category as $item) : ?>
-                            <div class="nav-item dropdown">
-                                <a href="<?= base_url('cua-hang?danh-muc=') . $item['slug'] ?>" class="nav-link" data-toggle="dropdown"><?= $item['name'] ?><i class="fa fa-angle-down float-right mt-1"></i></a>
-                                <?php if (isset($item['subCategory']) && !empty($item['subCategory'])) : ?>
-
-                                    <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                        <?php foreach ($item['subCategory'] as $row) : ?>
-                                            <a href="<?= base_url('cua-hang?danh-muc=') . $row['slug'] ?>" class="dropdown-item"><?= $row['name'] ?></a>
-                                        <?php endforeach ?>
-                                    </div>
-                                <?php endif ?>
-
-                            </div>
-                        <?php endforeach ?>
-
-                    </div>
-                </nav>
-            </div>
-            <div class="col-lg-9">
+            <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
                     <a href="" class="text-decoration-none d-block d-lg-none">
                         <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
@@ -114,10 +114,7 @@
                             </div>
                             <a href="<?= base_url('contact') ?>" class="nav-item nav-link">Contact</a>
                         </div>
-                        <div class="navbar-nav ml-auto py-0">
-                            <a href="" class="nav-item nav-link">Login</a>
-                            <a href="" class="nav-item nav-link">Register</a>
-                        </div>
+
                     </div>
                 </nav>
                 <?= $this->renderSection('banner') ?>
@@ -125,3 +122,50 @@
         </div>
     </div>
     <!-- Navbar End -->
+    <div class="container ">
+        <div class=" col-md-12 mb-5 d-flex justify-content-center">
+            <div style="width: 400px;" class="border p-3">
+                <h5 class="font-weight-bold text-center text-dark mb-4 ">Đăng Nhập</h5>
+                <form action="">
+                    <div class="form-group">
+                        <label>Tên tài khoản</label>
+                        <input type="text" class=" form-control border py-4" placeholder="Your UserName" required="required" />
+                    </div>
+                    <div class="form-group">
+                    <label>Mật khẩu</label>
+                        <input type="password" class="form-control border py-4" placeholder="Your PassWord" required="required" />
+                    </div>
+                    <div class="p-1">
+                        <button class="btn btn-primary btn-block border-0 py-3" type="submit">Đăng Nhập</button>
+                    </div> 
+                    <div class="p-1">
+                        <a href="<?= base_url('dang-ky') ?>" class="btn btn-outline-secondary btn-block border-0 py-3 text-dark" type="submit">Đăng Ký</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <?= $this->include("Site/footer") ?>
+
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url() ?>\eshopper\lib\easing\easing.min.js"></script>
+    <script src="<?= base_url() ?>\eshopper\lib\owlcarousel\owl.carousel.min.js"></script>
+
+
+    <!-- Contact Javascript File -->
+
+    <script src="<?= base_url() ?>\eshopper\mail\jqBootstrapValidation.min.js"></script>
+    <script src="<?= base_url() ?>\eshopper\mail\contact.js"></script>
+
+
+    <!-- Template Javascript -->
+    <script src="<?= base_url() ?>\eshopper\js\main.js"></script>
+</body>
+
+</html>

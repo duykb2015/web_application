@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\CategoryModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -48,5 +49,20 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+    }
+    public function getSubCategory()
+    {
+        $categoryModel = new CategoryModel();
+
+        $category = $categoryModel->where('parent_id = 0 AND status = 1')->findAll();
+        $subCategory = $categoryModel->where('parent_id > 0 AND status = 1')->findAll();
+        foreach ($category as $key => $item) {
+            foreach ($subCategory as $row) {
+                if ($row['parent_id'] == $item['id'])
+                    $item['subCategory'][]  = $row;
+            }
+            $category[$key] = $item;
+        }
+        return $category;
     }
 }
