@@ -5,11 +5,11 @@
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
-            <h1 class="font-weight-semi-bold text-uppercase mb-3">Our Shop</h1>
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Cửa hàng chúng tôi</h1>
             <div class="d-inline-flex">
-                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0"><a href="">Trang chủ</a></p>
                 <p class="m-0 px-2">-</p>
-                <p class="m-0">Shop</p>
+                <p class="m-0">Cửa hàng</p>
             </div>
         </div>
     </div>
@@ -21,11 +21,11 @@
             <div class="col-lg-3 col-md-12">
                 <!-- Price Start -->
                 <div class="border-bottom mb-4 pb-4">
-                    <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
+                    <h5 class="font-weight-semi-bold mb-4">Lọc giá</h5>
                     <form>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" checked id="price-all">
-                            <label class="custom-control-label" for="price-all">All Price</label>
+                            <label class="custom-control-label" for="price-all">Tất cả</label>
                             <span class="badge border font-weight-normal">1000</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -59,36 +59,36 @@
                 
                 <!-- Color Start -->
                 <div class="border-bottom mb-4 pb-4">
-                    <h5 class="font-weight-semi-bold mb-4">Filter by color</h5>
+                    <h5 class="font-weight-semi-bold mb-4">Lọc màu sắc</h5>
                     <form>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" checked id="color-all">
-                            <label class="custom-control-label" for="price-all">All Color</label>
+                            <label class="custom-control-label" for="price-all">Tất cả màu sắc</label>
                             <span class="badge border font-weight-normal">1000</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" id="color-1">
-                            <label class="custom-control-label" for="color-1">Black</label>
+                            <label class="custom-control-label" for="color-1">Đen</label>
                             <span class="badge border font-weight-normal">150</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" id="color-2">
-                            <label class="custom-control-label" for="color-2">White</label>
+                            <label class="custom-control-label" for="color-2">Trắng</label>
                             <span class="badge border font-weight-normal">295</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" id="color-3">
-                            <label class="custom-control-label" for="color-3">Red</label>
+                            <label class="custom-control-label" for="color-3">Đỏ</label>
                             <span class="badge border font-weight-normal">246</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" id="color-4">
-                            <label class="custom-control-label" for="color-4">Blue</label>
+                            <label class="custom-control-label" for="color-4">Xanh da trời </label>
                             <span class="badge border font-weight-normal">145</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                             <input type="checkbox" class="custom-control-input" id="color-5">
-                            <label class="custom-control-label" for="color-5">Green</label>
+                            <label class="custom-control-label" for="color-5">Xanh lá</label>
                             <span class="badge border font-weight-normal">168</span>
                         </div>
                     </form>
@@ -97,11 +97,11 @@
 
                 <!-- Size Start -->
                 <div class="mb-5">
-                    <h5 class="font-weight-semi-bold mb-4">Filter by size</h5>
+                    <h5 class="font-weight-semi-bold mb-4">Lọc kích cỡ</h5>
                     <form>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" checked id="size-all">
-                            <label class="custom-control-label" for="size-all">All Size</label>
+                            <label class="custom-control-label" for="size-all">Tất cả</label>
                             <span class="badge border font-weight-normal">1000</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -143,7 +143,7 @@
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <form action="">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search by name">
+                                    <input type="text" class="form-control" placeholder="Tìm kiếm">
                                     <div class="input-group-append">
                                         <span class="input-group-text bg-transparent text-primary">
                                             <i class="fa fa-search"></i>
@@ -154,12 +154,12 @@
                             <div class="dropdown ml-4">
                                 <button class="btn border dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
-                                            Sort by
+                                            Sắp xếp 
                                         </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                    <a class="dropdown-item" href="#">Latest</a>
-                                    <a class="dropdown-item" href="#">Popularity</a>
-                                    <a class="dropdown-item" href="#">Best Rating</a>
+                                    <a class="dropdown-item" href="#">Mới nhất</a>
+                                    <a class="dropdown-item" href="#">Phổ biến</a>
+                                    <a class="dropdown-item" href="#">Thịnh hành</a>
                                 </div>
                             </div>
                         </div>
@@ -170,14 +170,14 @@
                                 <img class="img-fluid w-100" src="<?= base_url() ?>\eshopper\img/product-1.jpg" alt="">
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                <h6 class="text-truncate mb-3">Colorful Stylish Shirt</h6>
+                                <h6 class="text-truncate mb-3">Áo sơ mi sành điệu</h6>
                                 <div class="d-flex justify-content-center">
                                     <h6>$123.00</h6><h6 class="text-muted ml-2"><del>$123.00</del></h6>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                                <a href="<?= base_url('cart') ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Xem chi tiết</a>
+                                <a href="<?= base_url('cart') ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Thêm giỏ hàng</a>
                             </div>
                         </div>
                     </div>
@@ -323,7 +323,7 @@
                             <li class="page-item disabled">
                               <a class="page-link" href="#" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
+                                <span class="sr-only">Trước</span>
                               </a>
                             </li>
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
@@ -332,7 +332,7 @@
                             <li class="page-item">
                               <a class="page-link" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
+                                <span class="sr-only">Kế tiếp</span>
                               </a>
                             </li>
                           </ul>
