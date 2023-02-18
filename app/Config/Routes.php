@@ -86,13 +86,15 @@ $routes->group('dashboard', ["filter" => "auth-admin"], function ($routes) {
 
     $routes->group('product', function ($routes) {
 
-        $routes->get('/', 'Admin\Product::index');
-        $routes->get('detail', 'Admin\Product::detail');
-        $routes->get('detail/:any', 'Admin\Product::detail');
+        $routes->group('manage', function ($routes) {
+            $routes->get('/', 'Admin\Product::index');
+            $routes->get('detail', 'Admin\Product::detail');
+            $routes->get('detail/:any', 'Admin\Product::detail');
 
-        $routes->post('save', 'Admin\Product::save');
-        $routes->post('delete', 'Admin\Product::delete');
-        $routes->post('action-status', 'Admin\Product::changeStatus');
+            $routes->post('save', 'Admin\Product::save');
+            $routes->post('delete', 'Admin\Product::delete');
+            $routes->post('action-status', 'Admin\Product::changeStatus');
+        });
 
         $routes->group('attribute', function ($routes) {
             $routes->get('/', 'Admin\Attribute::index');
@@ -103,14 +105,6 @@ $routes->group('dashboard', ["filter" => "auth-admin"], function ($routes) {
             $routes->post('delete', 'Admin\Attribute::delete');
             $routes->post('action-status', 'Admin\Attribute::changeStatus');
         });
-
-        $routes->get('/', 'Admin\Category::index');
-        $routes->get('detail', 'Admin\Category::detail');
-        $routes->get('detail/:any', 'Admin\Category::detail');
-
-        $routes->post('save', 'Admin\Category::save');
-        $routes->post('delete', 'Admin\Category::delete');
-        $routes->post('action-status', 'Admin\Category::change_status');
     });
 });
 

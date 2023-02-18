@@ -41,19 +41,19 @@
                                                                     </div>
                                                                     <div class="col-sm-3">
                                                                         <div class="input-group mb-3">
-                                                                            <select class="form-control" name="category">
+                                                                            <select class="form-control" name="category" required>
                                                                                 <option value="">Danh mục</option>
                                                                                 <?php if (isset($category)) : ?>
                                                                                     <?php foreach ($category as $item) : ?>
-                                                                                        <optgroup label="<?= $item['name'] ?>">
-                                                                                            <?php if (isset($item['subCategory'])) : ?>
+                                                                                        <?php if (isset($item['subCategory'])) : ?>
+                                                                                            <optgroup label="<?= $item['name'] ?>">
                                                                                                 <?php foreach ($item['subCategory'] as $row) : ?>
                                                                                                     <option value="<?= $row['id'] ?>" <?= !empty($_GET['category']) && $_GET['category'] != '' && $_GET['category'] == $row['id'] ? 'selected' : '' ?>><?= $row['name'] ?></option>
                                                                                                 <?php endforeach ?>
-                                                                                        </optgroup>
-                                                                                    <?php endif ?>
-                                                                                <?php endforeach ?>
-                                                                            <?php endif ?>
+                                                                                            </optgroup>
+                                                                                        <?php endif ?>
+                                                                                    <?php endforeach ?>
+                                                                                <?php endif ?>
                                                                             </select>
                                                                         </div>
                                                                     </div>

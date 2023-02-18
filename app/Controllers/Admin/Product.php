@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Models\AttributeModel;
 use App\Models\CategoryModel;
 use App\Models\ProductModel;
 use CodeIgniter\API\ResponseTrait;
@@ -39,49 +40,32 @@ class Product extends BaseController
         return view('Admin/Product/index', $data);
     }
 
-    public function getSubCategory()
-    {
-        $categoryModel = new CategoryModel();
-
-        $category = $categoryModel->where('parent_id', 0)->findAll();
-        $subCategory = $categoryModel->where('parent_id > 0')->findAll();
-        foreach ($category as $key => $item) {
-            foreach ($subCategory as $row) {
-                if ($row['parent_id'] == $item['id'])
-                    $item['subCategory'][]  = $row;
-            }
-            $category[$key] = $item;
-        }
-        return $category;
-    }
-
     /**
      * Used to create and edit new product
      * 
      */
     function detail()
     {
-        $product_id = $this->request->getUri()->getSegment(3);
-
-        $product_category_m = new ProductCategoryModel();
-        $category = $product_category_m->select('id, name')->findAll();
+        $productID = $this->request->getUri()->getSegment(5);
+        $categoryModel = new CategoryModel();
+        $category = $categoryModel->select('id, name')->findAll();
         if (!$category) {
             return redirect_with_message('product-category/detail', 'Bạn cần có danh mục trước mới có thể thêm sản phẩm');
         }
-        $data['category'] = $category;
+        $data['category'] = $this->getSubCategory();
 
-        $product_attribute_values_m = new ProductAttributeValuesModel();
-        $data['product_attribute_values'] = $product_attribute_values_m->findAll();
+        $attributeModel = new AttributeModel();
+        $data['attribute'] = $attributeModel->findAll();
 
-        if (!$product_id) {
-            $data['title'] = 'Thêm mới dòng sản phẩm';
-            return view('Product/detail', $data);
+        if (!$productID) {
+            $data['title'] = 'Thêm mới sản phẩm';
+            return view('Admin/Product/detail', $data);
         }
 
-        $product_m = new ProductModel();
-        $product = $product_m->find($product_id);
+        $productModel = new ProductModel();
+        $product = $productModel->find($productID);
         if (!$product) {
-            return redirect()->to('product-line');
+            return redirect()->to('dashboard/product/manage');
         }
 
         //select all product attributes of this product, that already have to edit
@@ -102,6 +86,7 @@ class Product extends BaseController
      */
     function save()
     {
+        pre($this->request->getFiles());
         //get product data
         $admin_id               = session()->get('id');
         $product_id             = $this->request->getPost('product_id');

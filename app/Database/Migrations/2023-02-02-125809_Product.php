@@ -50,6 +50,7 @@ class Product extends Migration
                 'type' => 'INT',
                 'constraint' => 11,
                 'null' => FALSE,
+                'default' => '0'
             ],
             'status' => [
                 'type' => 'TINYINT',

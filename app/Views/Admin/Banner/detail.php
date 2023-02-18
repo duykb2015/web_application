@@ -176,13 +176,11 @@
 
 <?= $this->section('js') ?>
 <script type="text/javascript" src="<?= base_url() ?>\templates\libraries\bower_components\select2\js\select2.full.min.js"></script>
-<script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\js\jquery.quicksearch.js"></script>
 <!-- Multiselect js -->
 <script type="text/javascript" src="<?= base_url() ?>\templates\libraries\bower_components\bootstrap-multiselect\js\bootstrap-multiselect.js"></script>
 <!-- Custom js -->
 <script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\pages\advance-elements\select2-custom.js"></script>
 <!-- Clone form -->
-<script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\pages\j-pro\js\jquery-cloneya.min.js"></script>
 <script>
     function delete_image() {
         const is_confirm = confirm(`Bạn có chắc muốn xóa ảnh này ?`);

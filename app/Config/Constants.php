@@ -154,6 +154,7 @@ define('RESULT_LIMIT', 7);
 
 define('PUBLIC_PATH', ROOTPATH . 'public/uploads/');
 define('BANNER_IMAGE_PATH', PUBLIC_PATH . 'banner/');
+define('PRODUCT_IMAGE_PATH', PUBLIC_PATH . 'product/');
 
 define('UPCOMING', 2);
 define('STOPSELL', 3);
