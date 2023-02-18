@@ -74,7 +74,7 @@ class CategoryModel extends Model
         if ($data['name']) {
             $this->like('category.name', $data['name']);
         }
-        if ($data['parent_id']) {
+        if (isset($data['parent_id']) && $data['parent_id'] != '') {
             $this->where('category.parent_id', $data['parent_id']);
         }
         if (isset($data['status']) && $data['status'] != '') {

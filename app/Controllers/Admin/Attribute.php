@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\AttributeModel;
+use App\Models\ProductAttributeModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\Response;
 
@@ -120,6 +121,12 @@ class Attribute extends BaseController
         $id = $this->request->getPost('id');
         if (!$id) {
             return $this->respond(responseFailed(), Response::HTTP_OK);
+        }
+
+        $productAttributeModel = new ProductAttributeModel();
+        $isAttributeInUse = $productAttributeModel->where('attribute_id', $id)->first();
+        if ($isAttributeInUse) {
+            return $this->respond(responseFailed('Thuộc tính có chứa sản phẩm, không thể xoá!'), Response::HTTP_OK);
         }
 
         //delete attribute

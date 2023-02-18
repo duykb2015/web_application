@@ -39,10 +39,10 @@
                                                     <div class="col-sm-3">
                                                         <div class="input-group mb-3">
                                                             <select class="form-control" name="category_parent">
-                                                                <option value="">Danh mục cha</option>
-                                                                <?php if (isset($parent_category)) : ?>
-                                                                    <?php foreach ($parent_category as $val) : ?>
-                                                                        <option value="<?= $val['id'] ?>" <?= isset($_GET['category_parent']) && ($_GET['category_parent'] == $val['id']) ? 'selected' : '' ?>><?= $val['name'] ?></option>
+                                                                <option value="0">Danh mục cha</option>
+                                                                <?php if (isset($parentCategory)) : ?>
+                                                                    <?php foreach ($parentCategory as $item) : ?>
+                                                                        <option value="<?= $item['id'] ?>" <?= isset($_GET['category_parent']) && ($_GET['category_parent'] == $item['id']) ? 'selected' : '' ?>><?= $item['name'] ?></option>
                                                                     <?php endforeach ?>
                                                                 <?php endif ?>
                                                             </select>

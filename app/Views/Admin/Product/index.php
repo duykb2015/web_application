@@ -12,7 +12,7 @@
                         <div class="col-lg-8">
                             <div class="page-header-title">
                                 <div class="d-inline">
-                                    <h4>Danh sách Dòng Sản Phẩm</h4>
+                                    <h4>Danh sách Sản Phẩm</h4>
                                 </div>
                             </div>
                         </div>
@@ -36,7 +36,7 @@
                                                                 <div class="row">
                                                                     <div class="col-sm-4">
                                                                         <div class="input-group">
-                                                                            <input type="text" class="form-control" name="name" placeholder="Nhập tên dòng sản phẩm để lọc">
+                                                                            <input type="text" class="form-control" name="name" placeholder="Tên sản phẩm ...">
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-3">
@@ -80,10 +80,8 @@
                                                 </thead>
                                                 <thead>
                                                     <tr>
-                                                        <th width="30%" class="text-center">Tên dòng sản phẩm</th>
+                                                        <th width="30%" class="text-center">Tên sản phẩm</th>
                                                         <th width="10%" class="text-center">Trạng thái</th>
-                                                        <th width="15%" class="text-center">Ngày tạo</th>
-                                                        <th width="15%" class="text-center">Ngày cập nhật</th>
                                                         <th width="10%" class="text-center"></th>
                                                     </tr>
                                                 </thead>

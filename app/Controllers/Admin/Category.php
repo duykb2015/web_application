@@ -5,6 +5,8 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
 use App\Models\CategoryModel;
+use App\Models\ProductModel;
+use App\Models\ProductToCategoryModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\HTTP\Response;
 
@@ -34,8 +36,8 @@ class Category extends BaseController
         }
 
         $data = $categoryModel->customFindAll();
-        $parent_category = $categoryModel->where(['parent_id' => 0, 'status' => 1])->findAll();
-        $data['parent_category'] = $parent_category;
+        $parentCategory = $categoryModel->where(['parent_id' => 0, 'status' => 1])->findAll();
+        $data['parentCategory'] = $parentCategory;
         return view('Admin/Category/index', $data);
     }
 
@@ -136,11 +138,23 @@ class Category extends BaseController
             return $this->respond(responseFailed(), Response::HTTP_OK);
         }
 
+        //check if have product use or not
+        $productToCategoryModel = new ProductToCategoryModel();
+        $haveProductUse = $productToCategoryModel->where('category_id', $id)->first();
+        if ($haveProductUse) {
+            return $this->respond(responseFailed('Xoá thất bại, danh mục có chứa sản phẩm!'), Response::HTTP_OK);
+        }
+
+        $categoryModel = new CategoryModel();
+        //check if category have child or not
+        $haveChild = $categoryModel->where('parent_id', $id)->first();
+        if ($haveChild) {
+            return $this->respond(responseFailed('Xoá thất bại, danh mục có chứa danh mục con!'), Response::HTTP_OK);
+        }
 
         //delete category
-        $categoryModel = new CategoryModel();
-        $is_delete = $categoryModel->delete($id);
-        if (!$is_delete) {
+        $isDelete = $categoryModel->delete($id);
+        if (!$isDelete) {
             return $this->respond(responseFailed(), Response::HTTP_OK);
         }
         return $this->respond(responseSuccessed(), Response::HTTP_OK);
