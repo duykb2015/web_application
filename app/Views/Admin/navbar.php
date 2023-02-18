@@ -96,7 +96,7 @@ $menu = [
     ],
     [
         'url' => '',
-        'active' => 'dashboard/admin',
+        'active' => 'dashboard/transaction',
         'name' => 'Quản lý Giao dịch',
         'icon' => '<i class="fa fa-credit-card-alt"></i>',
         'sub_menu' => [
@@ -121,7 +121,7 @@ $menu = [
         <ul class="pcoded-item pcoded-left-item">
             <?php foreach ($menu as $row) : ?>
                 <?php $classActive = url_is($row['active'] . '*') ? ' pcoded-trigger' : '' ?>
-                <li class="<?= !empty($row['url']) ? '' : 'pcoded-hasmenu' ?> <?= $class_active ?>">
+                <li class="<?= !empty($row['url']) ? '' : 'pcoded-hasmenu' ?> <?= $classActive ?>">
                     <a href="<?= !empty($row['url']) ? $row['url'] : 'javascript:void(0)' ?>">
                         <span class="pcoded-micon"><?= $row['icon'] ?></span>
                         <span class="pcoded-mtext"><?= $row['name'] ?></span>
