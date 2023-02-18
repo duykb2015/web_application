@@ -12,7 +12,7 @@ class Home extends BaseController
 
         $datas['title'] = 'Home';
         $datas['category'] = $this->getSubCategory();
-        $datas['data']=$this->banner();
+        $datas['banner']=$this->banner();
         return view('site/home/index', $datas);
     }
 
@@ -34,18 +34,8 @@ class Home extends BaseController
     public function banner(){
         $bannerModel = new BannerModel();
         //The method is not deprecated, the optional [$upper] parameter is deprecated.
-        if ($this->request->getMethod() == 'get') {
-            $bannerStatus = $this->request->getGet('banner_status');
-            $filterData = [
-                'status'    => $bannerStatus,
-            ];
-            $bannerModel->filter($filterData);
-        }
-
-        $data = [
-            'banners' => $bannerModel->paginate(10),
-            'pager'      => $bannerModel->pager
-        ];
-        return $data;
+        $banner=$bannerModel->findAll();
+        
+        return $banner;
     }
 }
