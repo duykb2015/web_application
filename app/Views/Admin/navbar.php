@@ -80,7 +80,7 @@ $menu = [
             [
                 'url' => '',
                 'name' => 'Sản phẩm',
-                'active' => 'dashboard/product/product',
+                'active' => 'dashboard/product/',
                 'sub_menu' => [
                     [
                         'url' => base_url('dashboard/product/'),
@@ -120,20 +120,18 @@ $menu = [
         <div class="pcoded-navigatio-lavel">Bảng điều khiển</div>
         <ul class="pcoded-item pcoded-left-item">
             <?php foreach ($menu as $row) : ?>
-                <?php $class_active = url_is($row['active'] . '*') ? ' pcoded-trigger' : '' ?>
+                <?php $classActive = url_is($row['active'] . '*') ? ' pcoded-trigger' : '' ?>
                 <li class="<?= !empty($row['url']) ? '' : 'pcoded-hasmenu' ?> <?= $class_active ?>">
                     <a href="<?= !empty($row['url']) ? $row['url'] : 'javascript:void(0)' ?>">
                         <span class="pcoded-micon"><?= $row['icon'] ?></span>
                         <span class="pcoded-mtext"><?= $row['name'] ?></span>
                     </a>
-
                     <?php if (!empty($row['sub_menu'])) : ?>
                         <ul class="pcoded-submenu">
                             <?php foreach ($row['sub_menu'] as $sub) : ?>
-
                                 <?php if (!empty($sub['sub_menu'])) : ?>
-                                    <?php $sub_class_active = url_is($sub['active'] . '*') ? ' pcoded-trigger' : '' ?>
-                                    <li class="pcoded-hasmenu <?= $sub_class_active ?>">
+                                    <?php $subClassActive = url_is($sub['active'] . '*') ? ' pcoded-trigger' : '' ?>
+                                    <li class="pcoded-hasmenu <?= $subClassActive ?>">
                                         <a href="javascript:void(0)">
                                             <span class="pcoded-mtext"><?= $sub['name'] ?></span>
                                         </a>
