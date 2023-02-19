@@ -5,7 +5,9 @@
     <!-- Page Header Start -->
     <div class="container-fluid bg-secondary mb-5">
         <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+
             <h1 class="font-weight-semi-bold text-uppercase mb-3">Cửa hàng</h1>
+
             <div class="d-inline-flex">
                 <p class="m-0"><a href="">Trang chủ</a></p>
                 <p class="m-0 px-2">-</p>
@@ -21,6 +23,7 @@
             <div class="col-lg-3 col-md-12">
                 <!-- Price Start -->
                 <div class="border-bottom mb-4 pb-4">
+
                     <h5 class="font-weight-semi-bold mb-4">Lọc theo giá bán</h5>
                     <form>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -45,7 +48,9 @@
                 
                 <!-- Color Start -->
                 <div class="border-bottom mb-4 pb-4">
+
                     <h5 class="font-weight-semi-bold mb-4">Lọc theo màu sắc</h5>
+
                     <form>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" checked id="color-all">
@@ -62,18 +67,36 @@
                             <label class="custom-control-label" for="color-2">Trắng</label>
                             <span class="badge border font-weight-normal">295</span>
                         </div>
-                        
+
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="color-3">
+                            <label class="custom-control-label" for="color-3">Đỏ</label>
+                            <span class="badge border font-weight-normal">246</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="color-4">
+                            <label class="custom-control-label" for="color-4">Xanh da trời </label>
+                            <span class="badge border font-weight-normal">145</span>
+                        </div>
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                            <input type="checkbox" class="custom-control-input" id="color-5">
+                            <label class="custom-control-label" for="color-5">Xanh lá</label>
+                            <span class="badge border font-weight-normal">168</span>
+                        </div>
+
                     </form>
                 </div>
                 <!-- Color End -->
 
                 <!-- Size Start -->
                 <div class="mb-5">
-                    <h5 class="font-weight-semi-bold mb-4">Lọc theo size</h5>
+
+                    <h5 class="font-weight-semi-bold mb-4">Lọc theo kích cỡ</h5>
                     <form>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" checked id="size-all">
                             <label class="custom-control-label" for="size-all">Tất cả Size</label>
+
                             <span class="badge border font-weight-normal">1000</span>
                         </div>
                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -115,7 +138,9 @@
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <form action="">
                                 <div class="input-group">
+
                                     <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm...">
+
                                     <div class="input-group-append">
                                         <span class="input-group-text bg-transparent text-primary">
                                             <i class="fa fa-search"></i>
@@ -129,9 +154,10 @@
                                             Sắp xếp theo
                                         </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="triggerId">
-                                    <a class="dropdown-item" href="#">Cũ</a>
+                                    <a class="dropdown-item" href="#">Mới nhất</a>
+                                    <a class="dropdown-item" href="#">Phổ biến</a>
                                     <a class="dropdown-item" href="#">Thịnh hành</a>
-                                    <a class="dropdown-item" href="#">Đánh giá cao</a>
+
                                 </div>
                             </div>
                         </div>
@@ -142,14 +168,17 @@
                                 <img class="img-fluid w-100" src="<?= base_url() ?>\eshopper\img/product-1.jpg" alt="">
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                                <h6 class="text-truncate mb-3">Áo mới cà mau</h6>
+                                <h6 class="text-truncate mb-3">Áo sơ mi sành điệu</h6>
+
                                 <div class="d-flex justify-content-center">
                                     <h6>123 VNĐ</h6><h6 class="text-muted ml-2"><del>$123.000VNĐ</del></h6>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Chi tiết</a>
-                                <a href="<?= base_url('cart') ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Thêm vào giỏ </a>
+
+                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Xem chi tiết</a>
+                                <a href="<?= base_url('cart') ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Thêm giỏ hàng</a>
+
                             </div>
                         </div>
                     </div>
@@ -304,7 +333,8 @@
                             <li class="page-item">
                               <a class="page-link" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Sâu</span>
+                                <span class="sr-only">Sau</span>
+
                               </a>
                             </li>
                           </ul>
