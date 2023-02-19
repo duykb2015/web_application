@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>EShopper - Bootstrap Shop Template</title>
+    <title>EShopper</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -37,11 +37,9 @@
         <div class="row bg-secondary py-2 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-dark" href="">FAQs</a>
+                <a class="text-dark" href="">FAQs</a>
                     <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="">Help</a>
-                    <span class="text-muted px-2">|</span>
-                    <a class="text-dark" href="">Support</a>
+                    <a class="text-dark" href="">Hỗ trợ</a>
                 </div>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
@@ -73,7 +71,7 @@
             <div class="col-lg-6 col-6 text-left">
                 <form action="">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
@@ -101,18 +99,17 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
-                            <a href="<?= base_url('') ?>" class="nav-item nav-link active">Home</a>
-                            <a href="<?= base_url('shop') ?>" class="nav-item nav-link">Shop</a>
-                            <a href="<?= base_url('detail') ?>" class="nav-item nav-link">Shop Detail</a>
-                            <div class="nav-item dropdown">
+                    <div class="navbar-nav mr-auto py-0">
+                            <a href="<?= base_url('') ?>" class="nav-item nav-link active">Trang chủ</a>
+                            <a href="<?= base_url('shop') ?>" class="nav-item nav-link">Cửa hàng</a>
+                            <!-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     <a href="<?= base_url('cart') ?>" class="dropdown-item">Shopping Cart</a>
                                     <a href="<?= base_url('checkout') ?>" class="dropdown-item">Checkout</a>
                                 </div>
-                            </div>
-                            <a href="<?= base_url('contact') ?>" class="nav-item nav-link">Contact</a>
+                            </div> -->
+                            <a href="<?= base_url('contact') ?>" class="nav-item nav-link">Liên hệ</a>
                         </div>
 
                     </div>
