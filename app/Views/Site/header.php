@@ -5,13 +5,12 @@
                 <div class="d-inline-flex align-items-center">
                     <a class="text-dark" href="">FAQs</a>
                     <span class="text-muted px-2">|</span>
-                  
                     <a class="text-dark" href="">Hỗ trợ</a>
                 </div>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
                 <div class="d-inline-flex align-items-center">
-                    <a class="text-dark px-2" href="">
+                    <a class="text-dark px-2" href="#">
                         <i class="fab fa-facebook-f"></i>
                     </a>
                     <a class="text-dark px-2" href="">
@@ -38,7 +37,8 @@
             <div class="col-lg-6 col-6 text-left">
                 <form action="">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm...">
+
                         <div class="input-group-append">
                             <span class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
@@ -67,7 +67,9 @@
         <div class="row border-top px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100" data-toggle="collapse" href="#navbar-vertical" style="height: 65px; margin-top: -1px; padding: 0 30px;">
-                    <h6 class="m-0">Danh Mục</h6>
+
+                    <h6 class="m-0">Danh Mục Sản Phẩm</h6>
+
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
                 <nav <?= uri_string() != '/' ? 'style="width: calc(100% - 30px);"' : '' ?>  class="<?= uri_string() == '/' ? 'collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 ' : 'collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light' ?>" id="navbar-vertical">
@@ -119,6 +121,7 @@
                         <div class="navbar-nav ml-auto py-0">
                             <a href="<?= base_url('dang-nhap')?>" class="nav-item nav-link">Đăng nhập</a>
                             <a href="<?= base_url('dang-ky')?>" class="nav-item nav-link">Đăng ký</a>
+
                         </div>
                     </div>
                 </nav>
