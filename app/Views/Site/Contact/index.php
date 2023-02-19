@@ -62,13 +62,13 @@
                     <h5 class="font-weight-semi-bold mb-3">Chi nhánh 1</h5>
                     <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>180 Cao Lỗ, phường 4, quận 8, TP.HCM</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>duychicken@ga.com</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt text-primary mr-3"></i>012 345 6789</p>
                 </div>
                 <div class="d-flex flex-column">
                     <h5 class="font-weight-semi-bold mb-3">Chi nhánh 2</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>200 Cao Lỗ, phường 4, quận 8, TP.HCM</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>69 Nguyễn Huệ, Bến Nghé, quận 1, TP.HCM</p>
                     <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>luanbird@ga.com</p>
-                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
+                    <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>090 090 9090</p>
                 </div>
             </div>
         </div>

@@ -332,7 +332,7 @@
                             <li class="page-item">
                               <a class="page-link" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Kế tiếp</span>
+                                <span class="sr-only">Sau</span>
                               </a>
                             </li>
                           </ul>

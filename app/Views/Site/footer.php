@@ -5,15 +5,16 @@
                 <a href="" class="text-decoration-none">
                     <h1 class="mb-4 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border border-white px-3 mr-1">E</span>Shopper</h1>
                 </a>
-                <p>Dolore erat dolor sit lorem vero amet. Sed sit lorem magna, ipsum no sit erat lorem et magna ipsum dolore amet erat.</p>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>180 Cao Lỗ, phường 4, quận 8, TP.HCM</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Chi nhánh 1: 180 Cao Lỗ, phường 4, quận 8, TP.HCM</p>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>Chi nhánh 2: 69 Nguyễn Huệ, Bến Nghé, quận 1, TP.HCM</p>
+
                 <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>duychicken@ga.com</p>
                 <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890</p>
             </div>
             <div class="col-lg-8 col-md-12">
                 <div class="row">
                     <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Đường dẫn</h5>
+                        <h5 class="font-weight-bold text-dark mb-4">Về chúng tôi</h5>
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-dark mb-2" href="<?= base_url('') ?>"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
                             <a class="text-dark mb-2" href="<?= base_url('shop') ?>"><i class="fa fa-angle-right mr-2"></i>Cửa hàng</a>
@@ -23,19 +24,18 @@
                             <a class="text-dark" href="<?= base_url('contact') ?>"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
                         </div>
                     </div>
-                    <!-- <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="<?= base_url('') ?>"><i class="fa fa-angle-right mr-2"></i>Trang chủ</a>
-                            <a class="text-dark mb-2" href="<?= base_url('shop') ?>"><i class="fa fa-angle-right mr-2"></i>Cửa hàng</a>
-                            <a class="text-dark mb-2" href="<?= base_url('detail') ?>"><i class="fa fa-angle-right mr-2"></i>Chi tiết</a>
-                            <a class="text-dark mb-2" href="<?= base_url('cart') ?>"><i class="fa fa-angle-right mr-2"></i>Giỏ hàng</a>
-                            <a class="text-dark mb-2" href="<?= base_url('checkout') ?>"><i class="fa fa-angle-right mr-2"></i>Thanh toán</a>
-                            <a class="text-dark" href="<?= base_url('contact') ?>"><i class="fa fa-angle-right mr-2"></i>Liên hệ</a>
-                        </div>
-                    </div> -->
                     <div class="col-md-4 mb-5">
-                        <h5 class="font-weight-bold text-dark mb-4">Bản tin</h5>
+                        <h5 class="font-weight-bold text-dark mb-4">Trung tâm trợ giúp</h5>
+                        <div class="d-flex flex-column justify-content-start">
+                            <a class="text-dark mb-2" href="<?= base_url('') ?>"><i class="fa fa-angle-right mr-2"></i>Hướng dẫn mua hàng</a>
+                            <a class="text-dark mb-2" href="<?= base_url('') ?>"><i class="fa fa-angle-right mr-2"></i>Chính sách Bảo hành & Đổi trả</a>
+                            <a class="text-dark mb-2" href="<?= base_url('') ?>"><i class="fa fa-angle-right mr-2"></i>Chính sách vận chuyển</a>
+                            <a class="text-dark mb-2" href="<?= base_url('') ?>"><i class="fa fa-angle-right mr-2"></i>Câu hỏi thường gặp</a>
+                        
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-5">
+                        <h5 class="font-weight-bold text-dark mb-4">Đăng ký nhận tin từ E-Shopper</h5>
                         <form action="">
                             <div class="form-group">
                                 <input type="text" class="form-control border-0 py-4" placeholder="Tên" required="required" />
@@ -45,7 +45,7 @@
                                     required="required" />
                             </div>
                             <div>
-                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Theo dõi</button>
+                                <button class="btn btn-primary btn-block border-0 py-3" type="submit">Đăng ký</button>
                             </div>
                         </form>
                     </div>
