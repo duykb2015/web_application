@@ -9,6 +9,7 @@ class TestSeeder extends Seeder
     public function run()
     {
         $this->call('Admin');
+        $this->call('Attribute');
         $this->call('Category');
     }
 }

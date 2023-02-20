@@ -40,6 +40,9 @@ $routes->get('/', 'Home::index');
 $routes->get('dang-nhap', 'Login::login');
 $routes->get('dang-ky', 'Login::register');
 
+$routes->post('dang-nhap', 'Login::authLogin');
+$routes->post('dang-ky', 'Login::authRegister');
+
 $routes->get('shop', 'Shop::index');
 
 $routes->get('detail', 'Detail::index');
