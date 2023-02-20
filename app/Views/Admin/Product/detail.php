@@ -162,21 +162,33 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-12 mb-3">
-                                                        <h5>Thông số kĩ thuật chung</h5>
+                                                        <h5>Thuộc tính sản phẩm</h5>
                                                     </div>
                                                 </div>
-                                                <div id="attributes" class="row">
-                                                    <div class="col-sm-12">
-                                                        <select class="js-example-basic-multiple col-sm-12" name="product_attribute_value[]" multiple="multiple">
-                                                            <option value=""></option>
-                                                            <?php if (isset($product_attribute_values)) : ?>
-                                                                <?php foreach ($product_attribute_values as $row) : ?>
-                                                                    <option value="<?= $row['id'] ?>" <?= isset($product_attributes) && in_array($row['id'], $product_attributes) ? 'selected' : '' ?>><?= $row['name'] ?></option>
-                                                                <?php endforeach ?>
-                                                            <?php endif ?>
-                                                        </select>
+                                                <div class="clone-link mb-3">
+                                                    <div class="d-inline ">
+                                                        <h5 class="mb-3">Màu sắc sản phẩm</h5>
                                                     </div>
+                                                    <div class="toclone mt-3">
+                                                        <button class=" clone btn btn-primary m-b-15">Thêm màu</button>
+                                                        <button class=" delete btn btn-danger m-b-15">Xoá màu</button>
+                                                        <div id="attributes" class="row">
+                                                            <div class="col-sm-3 pb-2">
+                                                                <select class="js-example-basic-single col-sm-12" name="product_attribute[]">
+                                                                    <option value="">Chọn thuộc tính</option>
+                                                                    <?php if (isset($attributes)) : ?>
+                                                                        <?php foreach ($attributes as $item) : ?>
+                                                                            <option value="<?= $item['id'] ?>"><?= $item['name'] ?></option>
+                                                                        <?php endforeach ?>
+                                                                    <?php endif ?>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <!-- end /.toclone -->
                                                 </div>
+
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="text-right m-t-20">

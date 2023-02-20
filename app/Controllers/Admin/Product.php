@@ -55,7 +55,7 @@ class Product extends BaseController
         $data['category'] = $this->getSubCategory();
 
         $attributeModel = new AttributeModel();
-        $data['attribute'] = $attributeModel->findAll();
+        $data['attributes'] = $attributeModel->findAll();
 
         if (!$productID) {
             $data['title'] = 'Thêm mới sản phẩm';
@@ -68,13 +68,6 @@ class Product extends BaseController
             return redirect()->to('dashboard/product/manage');
         }
 
-        //select all product attributes of this product, that already have to edit
-        $product_attribute_m = new ProductAttributesModel();
-        $product_attributes = $product_attribute_m->select('product_attribute_value_id')->where('product_id', $product_id)->findAll();
-        foreach ($product_attributes as $row) {
-            $attributes[] = $row['product_attribute_value_id'];
-        }
-        $data['product_attributes'] = $attributes;
         $data['product'] = $product;
         $data['title'] = 'Chỉnh sửa dòng sản phẩm';
         return view('Product/detail', $data);

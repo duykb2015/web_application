@@ -37,7 +37,7 @@
         <div class="row bg-secondary py-2 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="d-inline-flex align-items-center">
-                <a class="text-dark" href="">FAQs</a>
+                    <a class="text-dark" href="">FAQs</a>
                     <span class="text-muted px-2">|</span>
                     <a class="text-dark" href="">Hỗ trợ</a>
                 </div>
@@ -99,7 +99,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <div class="navbar-nav mr-auto py-0">
+                        <div class="navbar-nav mr-auto py-0">
                             <a href="<?= base_url('') ?>" class="nav-item nav-link active">Trang chủ</a>
                             <a href="<?= base_url('shop') ?>" class="nav-item nav-link">Cửa hàng</a>
                             <!-- <div class="nav-item dropdown">
@@ -120,23 +120,23 @@
     </div>
     <!-- Navbar End -->
     <div class="container ">
-        <div class=" col-md-12 mb-5 d-flex justify-content-center">
-            <div style="width: 400px;" class="border p-3">
+        <div class=" mb-5 d-flex justify-content-center">
+            <div class="border border-primary rounded p-3 col-md-7">
                 <h5 class="font-weight-bold text-center text-dark mb-4 ">Đăng Nhập</h5>
                 <form action="">
                     <div class="form-group">
                         <label>Tên tài khoản</label>
-                        <input type="text" class=" form-control border py-4" placeholder="Your UserName" required="required" />
+                        <input type="text" class=" form-control border border-primary rounded py-4" placeholder="Your UserName" required="required" />
                     </div>
                     <div class="form-group">
-                    <label>Mật khẩu</label>
-                        <input type="password" class="form-control border py-4" placeholder="Your PassWord" required="required" />
+                        <label>Mật khẩu</label>
+                        <input type="password" class="form-control border border-primary rounded py-4" placeholder="Your PassWord" required="required" />
                     </div>
                     <div class="p-1">
-                        <button class="btn btn-primary btn-block border-0 py-3" type="submit">Đăng Nhập</button>
-                    </div> 
+                        <button class="btn btn-primary btn-block border-0 rounded py-3" type="submit">Đăng Nhập</button>
+                    </div>
                     <div class="p-1">
-                        <a href="<?= base_url('dang-ky') ?>" class="btn btn-outline-secondary btn-block border-0 py-3 text-dark" type="submit">Đăng Ký</a>
+                        <a href="<?= base_url('dang-ky') ?>" class="btn btn-outline-secondary rounded btn-block border-0 py-3 text-dark" type="submit">Đăng Ký</a>
                     </div>
                 </form>
             </div>

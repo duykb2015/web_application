@@ -132,7 +132,7 @@
     <script src="<?= base_url() ?>\templates\libraries\assets\js\vartical-layout.min.js"></script>
     <script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\js\script.js"></script>
 
-    <link rel="stylesheet" href="<?= base_url() ?>\templates\libraries\bower_components\select2\css\select2.min.css">
+    <!-- <link rel="stylesheet" href="<?= base_url() ?>\templates\libraries\bower_components\select2\css\select2.min.css"> -->
 
     <script type="text/javascript" src="<?= base_url() ?>\templates\js\app.js"></script>
     <script>
