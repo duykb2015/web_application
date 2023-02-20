@@ -118,34 +118,61 @@
     <!-- Navbar End -->
     <div class="container ">
         <div class=" col-md-12 mb-5 d-flex justify-content-center">
-            <div style="width: 400px;" class="border p-3">
+        <?php $error = session()->getFlashdata('error') ?>
+                                    <?php if (!empty($error)) : ?>
+                                        <div class="alert alert-danger">
+                                            <div class="row">
+                                                <div class="col-11">
+                                                    <?= $error ?>
+                                                </div>
+                                                <div class="col-1 text-right">
+                                                    <span aria-hidden="true" id="remove-alert">&times;</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endif ?>
+            <div  class="border border-danger p-3  col-md-7 rounded">
                 <h5 class="font-weight-bold text-center text-dark mb-4 ">Đăng Ký</h5>
-                <form action="">
+                <div class="alert alert-success success" role="alert" style="display: none;">
+                    This is a success alert—check it out!
+                </div>
+                <div class="alert alert-danger error" role="alert" style="display: none;">
+                    This is a success alert—check it out!
+                </div>
+                <form action="<?= base_url('dang-ky') ?>" method="POST">
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" class=" form-control border py-4" placeholder="Your UserName" required="required" />
+                        <label>Email*</label>
+                        <input type="text" class=" form-control border border-danger py-4 rounded" id="email" placeholder="Your Email" required />
+                    </div>
+                    <div class="form-group ">
+                        <label>Tên tài khoản*</label>
+                        <input type="text" class=" form-control border py-4 border-danger rounded" id="username" placeholder="Your UserName" required />
                     </div>
                     <div class="form-group">
-                        <label>Tên tài khoản</label>
-                        <input type="text" class=" form-control border py-4" placeholder="Your UserName" required="required" />
+                        <label>Họ*</label>
+                        <input type="text" class=" form-control border border-danger py-4 rounded" id="firstname" placeholder="Your FirstName" required />
                     </div>
                     <div class="form-group">
-                        <label>Mật khẩu</label>
-                        <input type="password" class="form-control border py-4" placeholder="Your PassWord" required="required" />
+                        <label>Tên*</label>
+                        <input type="text" class=" form-control border border-danger py-4 rounded" id="lastname" placeholder="Your LastName" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu*</label>
+                        <input type="password" class="form-control border border-danger py-4 rounded" id="password" placeholder="Your PassWord" required />
                     </div>
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        <input type="text" class="form-control border py-4" placeholder="Đia chỉ" required="required" />
+                        <input type="text" class="form-control border border-danger py-4 rounded" id="address1" placeholder="Đia chỉ"  />
                     </div>
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input type="tel" class="form-control border py-4" placeholder="Phone" required="required" />
+                        <input type="tel" class="form-control border border-danger py-4 rounded" id="telephone" placeholder="Phone"  />
+                    </div>
+                    <div class="p-2 ">
+                        <button class="btn btn-primary btn-block border-0 py-3 rounded" type="submit" id="btnregister">Đăng Ký</button>
                     </div>
                     <div class="p-1">
-                        <button class="btn btn-primary btn-block border-0 py-3" type="submit">Đăng Ký</button>
-                    </div>
-                    <div class="p-1">
-                        <a href="<?= base_url('dang-nhap') ?>" class="btn btn-outline-secondary btn-block border-0 py-3 text-dark" type="submit">Đăng Nhập</a>
+                        <a href="<?= base_url('dang-nhap') ?>" class="btn btn-outline-secondary btn-block border-0 py-3 text-dark rounded" type="submit">Đăng Nhập</a>
                     </div>
                 </form>
             </div>
@@ -172,6 +199,44 @@
 
     <!-- Template Javascript -->
     <script src="<?= base_url() ?>\eshopper\js\main.js"></script>
+    <script type="text/javascript">
+        $('#btnregister').on('click', function() {
+            var $username = $('#username').val();
+            var $email = $('#email').val();
+            var $password = $('#password').val();
+            var $firstname = $('#firstname').val();
+            var $lastname = $('#lastname').val();
+            var $address1 = $('#address1').val();
+            var $telephone = $('#telephone').val();
+
+
+            $.ajax({
+                url: "<?php base_url("/dang-ky") ?>",
+                type: "POST",
+                data:{
+                    username:$username,
+                    email:$email,
+                    password:$password,
+                    firstname:$firstname,
+                    lastname:$lastname,
+                    address1:$address1,
+                    telephone:$telephone
+                },
+                success: function(mess) {
+                    var $obj = $.parseJSON(mess);
+                    if ($obj.success == false) {
+                        $('.success').hide();
+                        $('.error').show();
+                        $('.error').html($obj.error);
+                    } else {
+                        $('.error').hide();
+                        $('.success').show();
+                        $('.success').html($obj.success);
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
