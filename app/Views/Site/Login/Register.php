@@ -117,56 +117,59 @@
     </div>
     <!-- Navbar End -->
     <div class="container ">
+
         <div class=" col-md-12 mb-5 d-flex justify-content-center">
-        <?php $error = session()->getFlashdata('error') ?>
-                                    <?php if (!empty($error)) : ?>
-                                        <div class="alert alert-danger">
-                                            <div class="row">
-                                                <div class="col-11">
-                                                    <?= $error ?>
-                                                </div>
-                                                <div class="col-1 text-right">
-                                                    <span aria-hidden="true" id="remove-alert">&times;</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endif ?>
-            <div  class="border border-danger p-3  col-md-7 rounded">
-                <h5 class="font-weight-bold text-center text-dark mb-4 ">Đăng Ký</h5>
-                <div class="alert alert-success success" role="alert" style="display: none;">
-                    This is a success alert—check it out!
-                </div>
-                <div class="alert alert-danger error" role="alert" style="display: none;">
-                    This is a success alert—check it out!
+
+            <div class="border border-primary p-3  col-md-7 rounded">
+                <h4 class="font-weight-bold text-center text-dark mb-5 ">Đăng Ký</h4>
+                <div class="col-12 mb-3">
+                    <?php $errors = session()->getFlashdata('error_msg') ?>
+                    <?php if (!empty($errors)) :  ?>
+                        <?php if (!is_array($errors)) : ?>
+                            <div class="alert alert-primary mb-1">
+                                <?= $errors ?>
+                            </div>
+                        <?php else : ?>
+                            <?php foreach ($errors as $error) : ?>
+                                <div class="alert alert-primary mb-1">
+                                    <?= $error ?>
+                                </div>
+                            <?php endforeach ?>
+                        <?php endif ?>
+                    <?php endif ?>
                 </div>
                 <form action="<?= base_url('dang-ky') ?>" method="POST">
                     <div class="form-group">
-                        <label>Email*</label>
-                        <input type="text" class=" form-control border border-danger py-4 rounded" id="email" placeholder="Your Email" required />
+                        <label class="font-weight-bold">Email<span class="text-danger">*</span></label>
+                        <input type="email" class=" form-control border border-primary py-4 rounded" name="email" value="<?= set_value('email') ?>" placeholder="Nhập Email" required />
                     </div>
                     <div class="form-group ">
-                        <label>Tên tài khoản*</label>
-                        <input type="text" class=" form-control border py-4 border-danger rounded" id="username" placeholder="Your UserName" required />
+                        <label class="font-weight-bold">Tên tài khoản<span class="text-danger">*</span></label>
+                        <input type="text" class=" form-control border py-4 border-primary rounded" name="username" placeholder="Nhập tên tài khoản" required />
                     </div>
                     <div class="form-group">
-                        <label>Họ*</label>
-                        <input type="text" class=" form-control border border-danger py-4 rounded" id="firstname" placeholder="Your FirstName" required />
+                        <label class="font-weight-bold">Họ<span class="text-danger">*</span></label>
+                        <input type="text" class=" form-control border border-primary py-4 rounded" name="firstname" placeholder="Nhập họ" required />
                     </div>
                     <div class="form-group">
-                        <label>Tên*</label>
-                        <input type="text" class=" form-control border border-danger py-4 rounded" id="lastname" placeholder="Your LastName" required />
+                        <label class="font-weight-bold">Tên<span class="text-danger">*</span></label>
+                        <input type="text" class=" form-control border border-primary py-4 rounded" name="lastname" placeholder="Nhập tên" required />
                     </div>
                     <div class="form-group">
-                        <label>Mật khẩu*</label>
-                        <input type="password" class="form-control border border-danger py-4 rounded" id="password" placeholder="Your PassWord" required />
+                        <label class="font-weight-bold">Mật khẩu<span class="text-danger">*</span></label>
+                        <input type="password" class="form-control border border-primary py-4 rounded" name="password" placeholder="Nhập mật khẩu" required />
                     </div>
                     <div class="form-group">
-                        <label>Địa chỉ</label>
-                        <input type="text" class="form-control border border-danger py-4 rounded" id="address1" placeholder="Đia chỉ"  />
+                        <label class="font-weight-bold">Địa chỉ 1</label>
+                        <input type="text" class="form-control border border-primary py-4 rounded" name="address1" placeholder="Nhập Đia chỉ 1" />
                     </div>
                     <div class="form-group">
-                        <label>Số điện thoại</label>
-                        <input type="tel" class="form-control border border-danger py-4 rounded" id="telephone" placeholder="Phone"  />
+                        <label class="font-weight-bold">Địa chỉ 2</label>
+                        <input type="text" class="form-control border border-primary py-4 rounded" name="address2" placeholder="Nhập Đia chỉ 2" />
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-bold">Số điện thoại<span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control border border-primary py-4 rounded" name="telephone" placeholder="Số điện thoại, ít nhất 9 kí tự" required />
                     </div>
                     <div class="p-2 ">
                         <button class="btn btn-primary btn-block border-0 py-3 rounded" type="submit" id="btnregister">Đăng Ký</button>
@@ -199,44 +202,6 @@
 
     <!-- Template Javascript -->
     <script src="<?= base_url() ?>\eshopper\js\main.js"></script>
-    <script type="text/javascript">
-        $('#btnregister').on('click', function() {
-            var $username = $('#username').val();
-            var $email = $('#email').val();
-            var $password = $('#password').val();
-            var $firstname = $('#firstname').val();
-            var $lastname = $('#lastname').val();
-            var $address1 = $('#address1').val();
-            var $telephone = $('#telephone').val();
-
-
-            $.ajax({
-                url: "<?php base_url("/dang-ky") ?>",
-                type: "POST",
-                data:{
-                    username:$username,
-                    email:$email,
-                    password:$password,
-                    firstname:$firstname,
-                    lastname:$lastname,
-                    address1:$address1,
-                    telephone:$telephone
-                },
-                success: function(mess) {
-                    var $obj = $.parseJSON(mess);
-                    if ($obj.success == false) {
-                        $('.success').hide();
-                        $('.error').show();
-                        $('.error').html($obj.error);
-                    } else {
-                        $('.error').hide();
-                        $('.success').show();
-                        $('.success').html($obj.success);
-                    }
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>
