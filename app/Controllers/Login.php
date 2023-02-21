@@ -51,7 +51,7 @@ class Login extends BaseController
                 'firstname' => 'required',
                 'lastname'  => 'required',
                 'password' => 'required|min_length[6]',
-                'telephone' => 'required|min_length[9]'
+                'telephone' => 'required|min_length[9]|max_length[10]'
             ],
             //Custom error message
             customValidationErrorMessage()

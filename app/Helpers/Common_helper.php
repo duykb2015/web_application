@@ -121,6 +121,7 @@ function customValidationErrorMessage()
         'telephone' => [
             'required' => 'Số điện thoại không được để trống!',
             'min_length' => 'Số điện thoại phải có ít nhất 9 kí tự!',
+            'max_length' => 'Vui lòng nhập đúng số điện thoại!',
         ]
     ];
 }
