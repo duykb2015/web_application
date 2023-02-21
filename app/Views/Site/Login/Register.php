@@ -126,12 +126,12 @@
                     <?php $errors = session()->getFlashdata('error_msg') ?>
                     <?php if (!empty($errors)) :  ?>
                         <?php if (!is_array($errors)) : ?>
-                            <div class="alert alert-primary mb-1">
+                            <div class="alert alert-danger mb-1">
                                 <?= $errors ?>
                             </div>
                         <?php else : ?>
                             <?php foreach ($errors as $error) : ?>
-                                <div class="alert alert-primary mb-1">
+                                <div class="alert alert-danger mb-1">
                                     <?= $error ?>
                                 </div>
                             <?php endforeach ?>
