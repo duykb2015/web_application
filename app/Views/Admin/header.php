@@ -30,7 +30,6 @@
                             </li>
                             <a href="<?= base_url('logout') ?>">
                                 <li>
-
                                     <i class="feather icon-log-out"></i> Đăng xuất
                                 </li>
                             </a>
