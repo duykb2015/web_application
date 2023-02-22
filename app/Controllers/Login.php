@@ -19,6 +19,7 @@ class Login extends BaseController
         }
         return view('Site/Login/login');
     }
+    
     public function authLogin()
     {
 
@@ -69,6 +70,7 @@ class Login extends BaseController
         session()->set($sessionData);
         return redirect()->to('');
     }
+
 
 
     // Register  
@@ -159,4 +161,5 @@ class Login extends BaseController
         session()->destroy();
         return redirect()->to('');
     }
+
 }
