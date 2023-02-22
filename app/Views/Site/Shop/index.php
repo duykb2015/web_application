@@ -176,7 +176,7 @@
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">
 
-                                <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Xem chi tiết</a>
+                                <a href="<?= base_url('detail') ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Xem chi tiết</a>
                                 <a href="<?= base_url('cart') ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Thêm giỏ hàng</a>
 
                             </div>
