@@ -39,12 +39,12 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 $routes->get('dang-nhap', 'Login::login');
 $routes->get('dang-ky', 'Login::register');
+$routes->get('dang-xuat', 'Admin\Login::logout');
 
 $routes->post('dang-nhap', 'Login::authLogin');
 $routes->post('dang-ky', 'Login::authRegister');
 
 $routes->get('shop', 'Shop::index');
-
 $routes->get('detail', 'Detail::index');
 $routes->get('cart', 'Cart::index');
 $routes->get('checkout', 'Checkout::index');

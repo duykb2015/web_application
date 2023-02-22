@@ -16,8 +16,8 @@ class Login extends BaseController
 	public function index()
 	{
 		//if user already login, redirect to dashboard
-		$is_logged_in = session()->get('admin_logged_in');
-		if (!empty($is_logged_in) && $is_logged_in == true) {
+		$isLoggedIn = session()->get('admin_logged_in');
+		if (!empty($isLoggedIn) && $isLoggedIn == true) {
 			return redirect()->to(site_url('/dashboard'));
 		}
 		return view('Admin/Login/index');
@@ -30,7 +30,7 @@ class Login extends BaseController
 	function logout()
 	{
 		session()->destroy();
-		return redirect()->to('admin-login');
+		return redirect()->to('');
 	}
 
 	/**
@@ -93,4 +93,5 @@ class Login extends BaseController
 		session()->set($sessionData);
 		return redirect()->to('/dashboard');
 	}
+
 }

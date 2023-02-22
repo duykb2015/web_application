@@ -102,13 +102,6 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="<?= base_url('') ?>" class="nav-item nav-link active">Trang chủ</a>
                             <a href="<?= base_url('shop') ?>" class="nav-item nav-link">Cửa hàng</a>
-                            <!-- <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="<?= base_url('cart') ?>" class="dropdown-item">Shopping Cart</a>
-                                    <a href="<?= base_url('checkout') ?>" class="dropdown-item">Checkout</a>
-                                </div>
-                            </div> -->
                             <a href="<?= base_url('contact') ?>" class="nav-item nav-link">Liên hệ</a>
                         </div>
 
@@ -121,16 +114,32 @@
     <!-- Navbar End -->
     <div class="container ">
         <div class=" mb-5 d-flex justify-content-center">
-            <div class="border border-primary rounded p-3 col-md-7">
+            <div class="border border-primary rounded p-3 col-md-6">
                 <h5 class="font-weight-bold text-center text-dark mb-4 ">Đăng Nhập</h5>
-                <form action="">
+                <div class="col-12 mb-3">
+                    <?php $errors = session()->getFlashdata('error_msg') ?>
+                    <?php if (!empty($errors)) :  ?>
+                        <?php if (!is_array($errors)) : ?>
+                            <div class="alert alert-danger mb-1">
+                                <?= $errors ?>
+                            </div>
+                        <?php else : ?>
+                            <?php foreach ($errors as $error) : ?>
+                                <div class="alert alert-danger mb-1">
+                                    <?= $error ?>
+                                </div>
+                            <?php endforeach ?>
+                        <?php endif ?>
+                    <?php endif ?>
+                </div>
+                <form action="<?= base_url('dang-nhap') ?>" method="POST">
                     <div class="form-group">
-                        <label>Tên tài khoản</label>
-                        <input type="text" class=" form-control border border-primary rounded py-4" placeholder="Your UserName" required="required" />
+                        <label class="font-weight-bold">Tên tài khoản</label>
+                        <input type="text" name="username" value="<?= set_value('username') ?>" class=" form-control border border-primary rounded" required="" placeholder="Tài khoản" />
                     </div>
                     <div class="form-group">
-                        <label>Mật khẩu</label>
-                        <input type="password" class="form-control border border-primary rounded py-4" placeholder="Your PassWord" required="required" />
+                        <label class="font-weight-bold">Mật khẩu</label>
+                        <input type="password" name="password" class="form-control border border-primary rounded" placeholder="Nhập mật khẩu" required="" />
                     </div>
                     <div class="p-1">
                         <button class="btn btn-primary btn-block border-0 rounded py-3" type="submit">Đăng Nhập</button>
