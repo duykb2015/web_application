@@ -148,7 +148,9 @@ define('ACCOUNT_STATUS', [
 ]);
 
 define('WRONG_LOGIN_INFO_MESSAGE', "Tài khoản hoặc mật khẩu sai, vui lòng kiểm tra lại!");
+define('ACCOUNT_ALREADY_EXISTS',  "Tài khoản đã tồn tại!");
 define('UNEXPECTED_ERROR_MESSAGE', "Có lỗi đã xảy ra, vui lòng thử lại sau!");
+define('RESGISTER_SUCCESSED', "Đăng ký thành công");
 
 define('RESULT_LIMIT', 7);
 

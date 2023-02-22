@@ -98,7 +98,7 @@ function responseSuccessed()
  * 
  * @return array an array of error messages 
  */
-function custom_validation_error_message()
+function customValidationErrorMessage()
 {
     return [
         'username' => [
@@ -110,8 +110,19 @@ function custom_validation_error_message()
         ],
         'password' => [
             'required' => 'Mật khẩu không được để trống!',
-            'min_length' => 'Mật khẩu phải có ít nhất 3 kí tự!',
+            'min_length' => 'Mật khẩu có ít nhất 6 kí tự!',
         ],
+        'firstname' => [
+            'required' => 'Họ không được để trống!',
+        ],
+        'lastname' => [
+            'required' => 'Họ không được để trống!',
+        ],
+        'telephone' => [
+            'required' => 'Số điện thoại không được để trống!',
+            'min_length' => 'Số điện thoại phải có ít nhất 9 kí tự!',
+            'max_length' => 'Vui lòng nhập đúng số điện thoại!',
+        ]
     ];
 }
 
@@ -124,7 +135,7 @@ function custom_validation_error_message()
  * @param string $type Type of message
  * @return \CodeIgniter\HTTP\RedirectResponse destination URL
  */
-function redirect_with_message(string $url, $message, string $type = 'error_msg')
+function redirectWithMessage(string $url, $message, string $type = 'error_msg')
 {
     session()->setFlashdata($type, $message);
     return redirect()->to($url);
