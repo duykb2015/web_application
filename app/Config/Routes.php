@@ -45,7 +45,13 @@ $routes->post('dang-nhap', 'Login::authLogin');
 $routes->post('dang-ky', 'Login::authRegister');
 
 $routes->get('shop', 'Shop::index');
-$routes->get('detail', 'Detail::index');
+
+$routes->get('detail', 'Customer::index');
+$routes->group('ca-nhan', ["filter" => "auth-customer"], function ($routes) {
+    $routes->get('/', 'Customer::index');
+    $routes->post('/', 'Customer::index');
+});
+
 $routes->get('cart', 'Cart::index');
 $routes->get('checkout', 'Checkout::index');
 $routes->get('contact', 'Contact::index');

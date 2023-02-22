@@ -77,7 +77,7 @@ class Attribute extends BaseController
         $attributeValue = $attributeModel->where('name', $attributeName)->first();
         if ($attributeValue) {
             if ($attributeValue['id'] != $attributeId) {
-                return redirect_with_message('product-attribute/detail', 'Thuộc tính đã tồn tại');
+                return redirectWithMessage('product-attribute/detail', 'Thuộc tính đã tồn tại');
             }
         }
 
@@ -86,7 +86,7 @@ class Attribute extends BaseController
         }
         $isSave = $attributeModel->save($data);
         if (!$isSave) {
-            return redirect_with_message('dashboard/product/attribute/detail', UNEXPECTED_ERROR_MESSAGE);
+            return redirectWithMessage('dashboard/product/attribute/detail', UNEXPECTED_ERROR_MESSAGE);
         }
         return redirect()->to(base_url('dashboard/product/attribute'));
     }

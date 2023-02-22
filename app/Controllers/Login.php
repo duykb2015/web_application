@@ -19,7 +19,7 @@ class Login extends BaseController
         }
         return view('Site/Login/login');
     }
-    
+
     public function authLogin()
     {
 
@@ -64,14 +64,11 @@ class Login extends BaseController
             'name'    => $customer['firstname'] . ' ' . $customer['lastname'],
             'isLogin' => true
         ];
-        //T tức kiều quá, KICK
 
         //create new session and start to work
         session()->set($sessionData);
         return redirect()->to('');
     }
-
-
 
     // Register  
 
@@ -161,5 +158,4 @@ class Login extends BaseController
         session()->destroy();
         return redirect()->to('');
     }
-
 }
