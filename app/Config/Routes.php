@@ -52,7 +52,6 @@ $routes->group('ca-nhan', ["filter" => "auth-customer"], function ($routes) {
     $routes->post('/', 'Customer::index');
 });
 
-
 $routes->get('cart', 'Cart::index');
 $routes->get('checkout', 'Checkout::index');
 $routes->get('contact', 'Contact::index');
