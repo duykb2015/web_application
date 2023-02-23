@@ -86,16 +86,16 @@ class Admin extends BaseController
         if (!$validation->run($inputs)) {
             $error_msg = $validation->getErrors();
             if (!$user_id) {
-                return redirect_with_message(site_url('dashboard/admin/detail'), $error_msg);
+                return redirectWithMessage(site_url('dashboard/admin/detail'), $error_msg);
             }
-            return redirect_with_message(site_url('dashboard/admin/detail/') . $user_id, $error_msg);
+            return redirectWithMessage(site_url('dashboard/admin/detail/') . $user_id, $error_msg);
         }
 
         $adminModel = new AdminModel();
         $user = $adminModel->where('username', $username)->first();
         if ($user && !$user_id) {
             $error_msg = 'Tài khoản đã tồn tại!';
-            return redirect_with_message(site_url('dashboard/admin/detail'), $error_msg);
+            return redirectWithMessage(site_url('dashboard/admin/detail'), $error_msg);
         }
         $data = [
             'username' => $username,
@@ -113,7 +113,7 @@ class Admin extends BaseController
         //if create failed, notice and redirect to register page again
         $is_save = $adminModel->save($data);
         if (!$is_save) {
-            return redirect_with_message(site_url('Admin/detail'), UNEXPECTED_ERROR_MESSAGE);
+            return redirectWithMessage(site_url('Admin/detail'), UNEXPECTED_ERROR_MESSAGE);
         }
         return redirect()->to('dashboard/admin');
     }

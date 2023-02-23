@@ -80,8 +80,8 @@
                                                 </thead>
                                                 <thead>
                                                     <tr>
-                                                        <th width="30%" class="text-center">Tên sản phẩm</th>
-                                                        <th width="10%" class="text-center">Trạng thái</th>
+                                                        <th width="50%" class="text-center">Tên sản phẩm</th>
+                                                        <th width="20%" class="text-center">Trạng thái</th>
                                                         <th width="10%" class="text-center"></th>
                                                     </tr>
                                                 </thead>
@@ -91,11 +91,9 @@
                                                             <tr id="product-<?= $product['id'] ?>">
                                                                 <td class="font-weight-bold"><?= $product['name'] ?></th>
                                                                 <td width="10%" class="text-center"><?= PRODUCT_STATUS[$product['status']] ?></td>
-                                                                <td class="text-center"> <?= $product['created_at'] ?></td>
-                                                                <td class="text-center"> <?= $product['updated_at'] ?></td>
                                                                 <td class="text-center">
                                                                     <div class="btn-group btn-group-sm">
-                                                                        <a href="<?= base_url('product-line/detail/' . $product['id']) ?>" class="tabledit-edit-button btn btn-primary waves-effect waves-light" style="float: none;margin: 5px;">
+                                                                        <a href="<?= base_url('dashboard/product/manage/detail/' . $product['id']) ?>" class="tabledit-edit-button btn btn-primary waves-effect waves-light" style="float: none;margin: 5px;">
                                                                             <span class="icofont icofont-ui-edit"></span>
                                                                         </a>
                                                                         <a href="javascript:void(0)" onclick="delete_product('<?= $product['id'] ?>', '<?= $product['name'] ?>')" class="tabledit-delete-button btn btn-danger waves-effect waves-light" style="float: none;margin: 5px;">
@@ -141,7 +139,7 @@
 
     <script>
         function delete_product(id, name) {
-            const is_confirm = confirm(`Bạn muốn xóa dòng sản phẩm "${name}" ?`);
+            const is_confirm = confirm(`Bạn muốn xóa sản phẩm "${name}" ?`);
             if (!is_confirm) {
                 return
             }
@@ -154,7 +152,7 @@
                 redirect: 'follow'
             };
 
-            fetch('<?= base_url('product-line/delete') ?>', requestOptions)
+            fetch('<?= base_url('dashboard/product/manage/delete') ?>', requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.success) {
@@ -162,6 +160,7 @@
                         document.getElementById(`product-${id}`).remove()
                         return true
                     }
+                    console.log(result)
 
                     const error = result.result.error;
                     if (error) {

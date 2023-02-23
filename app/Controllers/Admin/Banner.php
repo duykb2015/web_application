@@ -92,7 +92,7 @@ class Banner extends BaseController
 
         $bannerModel = new BannerModel();
         if (!$bannerModel->save($data)) {
-            return redirect_with_message(site_url('dashboard/banner/detail/' . $bannerId ? $bannerId : ''), UNEXPECTED_ERROR_MESSAGE);
+            return redirectWithMessage(site_url('dashboard/banner/detail/' . $bannerId ? $bannerId : ''), UNEXPECTED_ERROR_MESSAGE);
         }
         return redirect()->to('dashboard/banner');
     }

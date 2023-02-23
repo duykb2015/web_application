@@ -91,7 +91,7 @@ class Category extends BaseController
         $category = $categoryModel->where(['slug' => $category_slug])->first();
         if ($category) {
             if ($category['id'] != $category_id) {
-                return redirect_with_message(base_url('dashboard/category/detail') . '/' . $category_id, 'Category đã tồn tại');
+                return redirectWithMessage(base_url('dashboard/category/detail') . '/' . $category_id, 'Category đã tồn tại');
             }
         }
         if ($category_id) {
@@ -99,7 +99,7 @@ class Category extends BaseController
         }
 
         if (!$categoryModel->save($data)) {
-            return redirect_with_message(site_url('dashboard/category/detail/' . $category_id ? $category_id : ''), UNEXPECTED_ERROR_MESSAGE);
+            return redirectWithMessage(site_url('dashboard/category/detail/' . $category_id ? $category_id : ''), UNEXPECTED_ERROR_MESSAGE);
         }
         return redirect()->to('dashboard/category');
     }

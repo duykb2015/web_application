@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class ProductAttributeModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'attribute';
+    protected $table            = 'product_attribute';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;

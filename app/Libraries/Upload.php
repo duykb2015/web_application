@@ -25,7 +25,6 @@ class Upload
                     . '|is_image[' . $inputName . ']'
                     . '|mime_in[' . $inputName . ', image/jpg, image/jpeg, image/gif, image/png, image/webp]'
                     . '|max_size[' . $inputName . ', 5120]' // 5MB
-                //. '|max_dims['.$name_from_input.',1024,768]',
             ],
         ];
         $validate = Services::validation();
@@ -42,7 +41,7 @@ class Upload
      * @param string $path path to upload folder
      * @return array|bool a string name of uploaded images or FALSE on failure
      */
-    function singleImages($image, $path = PUBLIC_PATH)
+    function singleImages($image, $path = UPLOAD_PATH)
     {
         if (!$image) {
             return false;
@@ -65,7 +64,7 @@ class Upload
      * @param string $inputName Name of input field
      * @return array|bool a string name of uploaded images or FALSE on failure
      */
-    function multipleImages($images, $path = PUBLIC_PATH, $inputName = 'images')
+    function multipleImages($images, $path = UPLOAD_PATH, $inputName = 'images')
     {
         if (!$images) {
             return false;
@@ -79,5 +78,15 @@ class Upload
             $img->move($path, $newName);
         }
         return $fileNames;
+    }
+
+    function cleanImage($images, $path = null)
+    {
+        if (!is_array($images)) {
+            return remove($images, $path);
+        }
+        foreach ($images as $image) {
+            remove($image, $path);
+        }
     }
 }

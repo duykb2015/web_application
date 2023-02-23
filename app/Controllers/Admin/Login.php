@@ -61,20 +61,20 @@ class Login extends BaseController
 		//if something wrong, redirect to login page and show error message
 		if (!$validation->run($inputs)) {
 			$error_msg = $validation->getErrors();
-			return redirect_with_message(site_url('admin-login'), $error_msg);
+			return redirectWithMessage(site_url('admin-login'), $error_msg);
 		}
 
 		//Get info user
 		$admin_m = new AdminModel();
 		$user = $admin_m->where('username', $username)->first();
 		if (!$user) {
-			return redirect_with_message(site_url('admin-login'), WRONG_LOGIN_INFO_MESSAGE);
+			return redirectWithMessage(site_url('admin-login'), WRONG_LOGIN_INFO_MESSAGE);
 		}
 
 		$pass = $user['password'];
 		$authPassword = md5($password) === $pass;
 		if (!$authPassword) {
-			return redirect_with_message(site_url('admin-login'), WRONG_LOGIN_INFO_MESSAGE);
+			return redirectWithMessage(site_url('admin-login'), WRONG_LOGIN_INFO_MESSAGE);
 		}
 
 		$sessionData = [
@@ -86,7 +86,7 @@ class Login extends BaseController
 
 		$is_update = $admin_m->update($user['id'], ['last_login_at' => Time::now()]);
 		if (!$is_update) {
-			return redirect_with_message(site_url('admin-login'), UNEXPECTED_ERROR_MESSAGE);
+			return redirectWithMessage(site_url('admin-login'), UNEXPECTED_ERROR_MESSAGE);
 		}
 
 		//create new session and start to work

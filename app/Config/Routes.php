@@ -96,6 +96,7 @@ $routes->group('dashboard', ["filter" => "auth-admin"], function ($routes) {
 
             $routes->post('save', 'Admin\Product::save');
             $routes->post('delete', 'Admin\Product::delete');
+            $routes->post('delete/image', 'Admin\Product::deleteImage');
             $routes->post('action-status', 'Admin\Product::changeStatus');
         });
 

@@ -28,7 +28,7 @@ class ProductAttribute extends Migration
             ],
             'value' => [
                 'type' => 'VARCHAR',
-                'constraint' => 11,
+                'constraint' => 255,
                 'null' => FALSE
             ],
             'status' => [
