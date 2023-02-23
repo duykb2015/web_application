@@ -26,6 +26,11 @@ class Product extends Migration
                 'constraint' => 255,
                 'null' => FALSE,
             ],
+            'category' => [
+                'type' => 'INT',
+                'constraint' => 11,
+                'null' => FALSE,
+            ],
             'price' => [
                 'type' => 'INT',
                 'constraint' => 11,

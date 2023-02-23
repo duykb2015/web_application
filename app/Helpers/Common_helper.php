@@ -68,7 +68,7 @@ function get_time_ago($time)
  * @param string $error Error message to show
  * @return array an array of data for failed response
  */
-function responseFailed(?string $error = null)
+function responseFailed($error = null)
 {
     return [
         'success' => false,
@@ -195,14 +195,15 @@ function create_slug($string)
  * @param string $images json encode string of images name
  * @return bool TRUE on success or FALSE on failure
  */
-function remove($file_name)
+function remove($fileName, $path = null)
 {
-    $file = ROOTPATH . 'public/uploads/' . $file_name;
+    $file = $path . is_array($fileName) ? $fileName['image'] : $fileName;
     if (!file_exists($file)) {
         return false;
     }
     return unlink($file);;
 }
+
 
 /**
  * Return local filesize

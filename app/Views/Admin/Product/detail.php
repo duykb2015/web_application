@@ -45,6 +45,20 @@
                             <div class="card">
                                 <div class="row">
                                     <div class="col-sm-12">
+                                        <?php $errors = session()->getFlashdata('error_msg') ?>
+                                        <?php if (!empty($errors)) :  ?>
+                                            <?php if (!is_array($errors)) : ?>
+                                                <div class="alert alert-danger mb-1">
+                                                    <?= $errors ?>
+                                                </div>
+                                            <?php else : ?>
+                                                <?php foreach ($errors as $error) : ?>
+                                                    <div class="alert alert-danger mb-1">
+                                                        <?= $error ?>
+                                                    </div>
+                                                <?php endforeach ?>
+                                            <?php endif ?>
+                                        <?php endif ?>
                                         <div class="product-edit">
                                             <form class="md-float-material card-block" id="j-forms" action="<?= base_url('dashboard/product/manage/save') ?>" method="POST" enctype="multipart/form-data">
                                                 <input type="hidden" name="product_id" value="<?= !empty($product['id']) ? $product['id'] : '' ?>">
@@ -66,7 +80,7 @@
                                                     <div class="col-sm-6">
                                                         <label for="name">Giá</label>
                                                         <div class="input-group">
-                                                            <input type="number" class="form-control" min="0" name="price" placeholder="Giá sản phẩm" value="<?= !empty($product['price']) ? $product['price'] : set_value('price') ?>" required>
+                                                            <input type="text" class="form-control cleave1" min="0" id="price" name="price" placeholder="Giá sản phẩm" value="<?= !empty($product['price']) ? $product['price'] : set_value('price') ?>" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
@@ -80,7 +94,7 @@
                                                     <div class="col-sm-6">
                                                         <label for="name">Số lượng</label>
                                                         <div class="input-group">
-                                                            <input type="number" class="form-control" min="0" name="quantity" placeholder="Giá sản phẩm" value="<?= !empty($product['price']) ? $product['price'] : set_value('price') ?>" required>
+                                                            <input type="text" class="form-control cleave2" min="0" name="quantity" id="quantity" placeholder="Số lượng" value="<?= !empty($product['quantity']) ? $product['quantity'] : set_value('quantity') ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -88,14 +102,14 @@
                                                     <div class="col-sm-6">
                                                         <label for="menu_id">Danh mục</label>
                                                         <div class="input-group">
-                                                            <select class="form-control" name="category">
+                                                            <select class="form-control" name="category" required>
                                                                 <option value="">Danh mục</option>
                                                                 <?php if (isset($category)) : ?>
                                                                     <?php foreach ($category as $item) : ?>
                                                                         <?php if (isset($item['subCategory'])) : ?>
                                                                             <optgroup label="<?= $item['name'] ?>">
                                                                                 <?php foreach ($item['subCategory'] as $row) : ?>
-                                                                                    <option value="<?= $row['id'] ?>" <?= !empty($_GET['category']) && $_GET['category'] != '' && $_GET['category'] == $row['id'] ? 'selected' : '' ?>><?= $row['name'] ?></option>
+                                                                                    <option value="<?= $row['id'] ?>" <?= !empty($product['category']) && $product['category'] == $row['id'] ? 'selected' : '' ?>><?= $row['name'] ?></option>
                                                                                 <?php endforeach ?>
                                                                             </optgroup>
                                                                         <?php endif ?>
@@ -106,7 +120,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="status">Trạng thái</label>
-                                                        <select name="status" class="form-control">
+                                                        <select name="status" class="form-control" required>
                                                             <?php foreach (PRODUCT_STATUS as $key => $val) : ?>
                                                                 <option value="<?= $key ?>" <?= !empty($product['status'])  && $product['status'] == $key ? 'selected' : '' ?>><?= $val ?></option>
                                                             <?php endforeach ?>
@@ -121,25 +135,27 @@
                                                         <br>
                                                         <h6>Hãy chọn thật kỹ ảnh để tránh xảy ra sai sót. Bức ảnh đầu tiêu sẽ được chọn làm ảnh đại diện!</h6>
                                                         <?php $uri = service('uri');  ?>
-                                                        <input type="file" name="images[]" id="filer_input" <?= !empty($uri->getSegment(4)) ? '' : 'required' ?> multiple>
-                                                        <?php if (isset($image)) : ?>
+                                                        <input type="file" name="images[]" id="filer_input" <?= !empty($uri->getSegment(5)) ? '' : 'required' ?> multiple>
+                                                        <?php if (isset($images)) : ?>
                                                             <ul id="product-image" class="jFiler-items-list jFiler-items-default">
-                                                                <li class="jFiler-item" data-jfiler-index="0">
-                                                                    <div class="jFiler-item-container">
-                                                                        <div class="jFiler-item-inner">
-                                                                            <div class="jFiler-item-icon pull-left"><i class="icon-jfi-file-o jfi-file-type-image jfi-file-ext-png"></i></div>
-                                                                            <div class="jFiler-item-info pull-left">
-                                                                                <div class="jFiler-item-title" title="<?= $banner['image'] ?>"><a href="<?= base_url('uploads/banner/' . $banner['image']) ?>" target="_blank" rel="noopener noreferrer"><?= $banner['image'] ?></a></div>
-                                                                                <div class="jFiler-item-others"><span><?= get_file_size(BANNER_IMAGE_PATH . $banner['image'], 2) ?> MB</span><span>type: <?= getimagesize(BANNER_IMAGE_PATH . $banner['image'])['mime'] ?></span><span class="jFiler-item-status"></span></div>
-                                                                                <div class="jFiler-item-assets">
-                                                                                    <ul class="list-inline">
-                                                                                        <li><a onclick="delete_image()" class="icon-jfi-trash jFiler-item-trash-action"></a></li>
-                                                                                    </ul>
+                                                                <?php foreach ($images as $image) : ?>
+                                                                    <li class="jFiler-item" data-jfiler-index="0" id="img-<?= $image['id'] ?>">
+                                                                        <div class="jFiler-item-container">
+                                                                            <div class="jFiler-item-inner">
+                                                                                <div class="jFiler-item-icon pull-left"><i class="icon-jfi-file-o jfi-file-type-image jfi-file-ext-png"></i></div>
+                                                                                <div class="jFiler-item-info pull-left">
+                                                                                    <div class="jFiler-item-title" title="<?= $image['image'] ?>"><a href="<?= base_url('uploads/product/' . $image['image']) ?>" target="_blank" rel="noopener noreferrer"><?= $image['image'] ?></a></div>
+                                                                                    <div class="jFiler-item-others"><span><?= get_file_size(PRODUCT_IMAGE_PATH . $image['image'], 2) ?> MB</span><span>type: <?= getimagesize(PRODUCT_IMAGE_PATH . $image['image'])['mime'] ?></span><span class="jFiler-item-status"></span></div>
+                                                                                    <div class="jFiler-item-assets">
+                                                                                        <ul class="list-inline">
+                                                                                            <li><a onclick="delete_image(<?= $image['id'] ?>, '<?= $image['image'] ?>')" class="icon-jfi-trash jFiler-item-trash-action"></a></li>
+                                                                                        </ul>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-                                                                </li>
+                                                                    </li>
+                                                                <?php endforeach ?>
                                                             </ul>
                                                         <?php endif ?>
                                                     </div>
@@ -147,17 +163,19 @@
                                                 <div class="row mb-3">
                                                     <div class="col-sm-12 mb-3">
                                                         <h5>Thông tin sản phẩm</h5>
+                                                        <small>Nhập các thông tin về sản phẩm, ví dụ như nhà sản xuất, branch ...</small>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <textarea name="information" id="editor1" required></textarea>
+                                                        <textarea name="information" id="editor1" required><?= !empty($productDescription['information']) ? $productDescription['information'] : set_value('information') ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-4">
                                                     <div class="col-sm-12 mb-3">
                                                         <h5>Mô tả về sản phẩm</h5>
+                                                        <small>Mộ tả về sản phẩm, có thể sử dụng link hình ảnh trong mô tả.</small>
                                                     </div>
                                                     <div class="col-sm-12">
-                                                        <textarea name="description" id="editor2" required><?= isset($product['description']) ? $product['description'] : 'Mô tả về về sản phẩm ...' ?></textarea>
+                                                        <textarea name="description" id="editor2" required><?= !empty($productDescription['description']) ? $productDescription['description'] : set_value('description') ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -165,30 +183,23 @@
                                                         <h5>Thuộc tính sản phẩm</h5>
                                                     </div>
                                                 </div>
-                                                <div class="clone-link mb-3">
-                                                    <div class="d-inline ">
-                                                        <h5 class="mb-3">Màu sắc sản phẩm</h5>
-                                                    </div>
-                                                    <div class="toclone mt-3">
-                                                        <button class=" clone btn btn-primary m-b-15">Thêm màu</button>
-                                                        <button class=" delete btn btn-danger m-b-15">Xoá màu</button>
-                                                        <div id="attributes" class="row">
-                                                            <div class="col-sm-3 pb-2">
-                                                                <select class="js-example-basic-single col-sm-12" name="product_attribute[]">
-                                                                    <option value="">Chọn thuộc tính</option>
-                                                                    <?php if (isset($attributes)) : ?>
-                                                                        <?php foreach ($attributes as $item) : ?>
-                                                                            <option value="<?= $item['id'] ?>"><?= $item['name'] ?></option>
-                                                                        <?php endforeach ?>
-                                                                    <?php endif ?>
-                                                                </select>
+                                                <div id="attributes" class="row">
+                                                    <?php if (isset($attributes)) : ?>
+                                                        <?php foreach ($attributes as $key => $item) : ?>
+                                                            <div class="col-sm-2 pb-2">
+                                                                <input type="hidden" name="attributes[]" value="<?= $item['id'] ?>">
+                                                                <div class="input-group">
+                                                                    <span><?= $item['name'] ?></span>
+                                                                </div>
                                                             </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <!-- end /.toclone -->
+                                                            <div class="col-sm-10 pb-2">
+                                                                <div class="input-group">
+                                                                    <input type="text" class="form-control" name="attribute_values[]" placeholder="<?= $item['name'] ?>, nhiều giá trị có thể cách nhau bằng dấu phẩy, ví dụ: 34, 35, 36..." value="<?= !empty($productAttribute) ? $productAttribute[$key]['value'] : set_value('value') ?>" required>
+                                                                </div>
+                                                            </div>
+                                                        <?php endforeach ?>
+                                                    <?php endif ?>
                                                 </div>
-
                                                 <div class="row">
                                                     <div class="col-sm-12">
                                                         <div class="text-right m-t-20">
@@ -208,48 +219,96 @@
             </div>
         </div>
     </div>
-    <?= $this->endSection() ?>
+</div>
+<?= $this->endSection() ?>
 
-    <?= $this->section('js') ?>
-    <!-- Select 2 js -->
-    <script type="text/javascript" src="<?= base_url() ?>\templates\libraries\bower_components\select2\js\select2.full.min.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\js\jquery.quicksearch.js"></script>
-    <!-- Multiselect js -->
-    <script type="text/javascript" src="<?= base_url() ?>\templates\libraries\bower_components\bootstrap-multiselect\js\bootstrap-multiselect.js"></script>
-    <!-- Custom js -->
-    <script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\pages\advance-elements\select2-custom.js"></script>
-    <!-- Clone form -->
-    <script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\pages\j-pro\js\jquery-cloneya.min.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\pages\j-pro\js\custom\cloned-form.js"></script>
-    <script>
-        CKEDITOR.replace('editor1');
-        CKEDITOR.replace('editor2');
+<?= $this->section('js') ?>
+<!-- Select 2 js -->
+<script type="text/javascript" src="<?= base_url() ?>\templates\libraries\bower_components\cleave\dist\cleave.min.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>\templates\libraries\bower_components\select2\js\select2.full.min.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\js\jquery.quicksearch.js"></script>
+<!-- Multiselect js -->
+<script type="text/javascript" src="<?= base_url() ?>\templates\libraries\bower_components\bootstrap-multiselect\js\bootstrap-multiselect.js"></script>
+<!-- Custom js -->
+<script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\pages\advance-elements\select2-custom.js"></script>
+<!-- Clone form -->
+<script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\pages\j-pro\js\jquery-cloneya.min.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\pages\j-pro\js\custom\cloned-form.js"></script>
+<script>
+    CKEDITOR.replace('editor1');
+    CKEDITOR.replace('editor2');
 
-        function slug(str) {
 
-            str = str.replace(/^\s+|\s+$/g, "");
-            str = str.toLowerCase();
+    var cleave = new Cleave('.cleave1', {
+        numeral: true,
+        numeralThousandsGroupStyle: 'thousand'
+    });
 
-            var from = "àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ·/_,:;";
-            var to = "aaaaaaaaaaaaaaaaaeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyd------";
-            for (var i = 0; i < from.length; i++) {
-                str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
-            }
+    var cleave2 = new Cleave('.cleave2', {
+        numeral: true,
+        numeralThousandsGroupStyle: 'thousand'
+    });
 
-            str = str.replace(/[^a-z0-9 -]/g, '')
-                .replace(/\s+/g, "-")
-                .replace(/-+/g, "-")
 
-            return str
+    function slug(str) {
+
+        str = str.replace(/^\s+|\s+$/g, "");
+        str = str.toLowerCase();
+
+        var from = "àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ·/_,:;";
+        var to = "aaaaaaaaaaaaaaaaaeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyd------";
+        for (var i = 0; i < from.length; i++) {
+            str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
         }
 
-        $('#name').on('input', function() {
-            $('#slug').val(slug($(this).val()))
-        })
+        str = str.replace(/[^a-z0-9 -]/g, '')
+            .replace(/\s+/g, "-")
+            .replace(/-+/g, "-")
 
-        $('#remove-alert').on('click', function() {
-            $('.alert').remove();
-        })
-    </script>
+        return str
+    }
 
-    <?= $this->endSection() ?>
+    $('#name').on('input', function() {
+        $('#slug').val(slug($(this).val()))
+    })
+
+    $('#remove-alert').on('click', function() {
+        $('.alert').remove();
+    })
+
+    function delete_image(id, imgName) {
+        const is_confirm = confirm(`Bạn muốn xóa hình ảnh "${imgName}" không?`);
+        if (!is_confirm) {
+            return
+        }
+
+        const data = new FormData();
+        data.append('id', id);
+        var requestOptions = {
+            method: 'POST',
+            body: data,
+            redirect: 'follow'
+        };
+
+        fetch('<?= base_url('dashboard/product/manage/delete/image') ?>', requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    msgbox_success(result.message)
+                    document.getElementById(`img-${id}`).remove()
+                    return true
+                }
+                console.log(result)
+
+                const error = result.result.error;
+                if (error) {
+                    msgbox_error(error)
+                    return false
+                }
+
+            })
+            .catch(error => msgbox_error(error));
+    }
+</script>
+
+<?= $this->endSection() ?>

@@ -4,10 +4,10 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Example extends Model
+class ProductImageModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'examples';
+    protected $table            = 'product_image';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
@@ -40,5 +40,5 @@ class Example extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public $text = 300;
+    
 }
