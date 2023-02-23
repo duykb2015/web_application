@@ -9,7 +9,6 @@ class Home extends BaseController
 {
     public function index()
     {
-
         $datas['title'] = 'Home';
         $datas['category'] = $this->getSubCategory();
         $datas['banner']=$this->banner();

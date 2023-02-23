@@ -82,7 +82,7 @@ class Admin extends BaseController
         }
 
         $validation = service('validation');
-        $validation->setRules($rules, custom_validation_error_message());
+        $validation->setRules($rules, customValidationErrorMessage());
         if (!$validation->run($inputs)) {
             $error_msg = $validation->getErrors();
             if (!$user_id) {

@@ -5,7 +5,8 @@ updates:
     directory: '/'
     schedule:
       interval: 'daily'
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 0
+    rebase-strategy: "disabled"
 
   - package-ecosystem: 'github-actions'
     directory: '/'
@@ -16,3 +17,4 @@ updates:
         update-types:
           - 'version-update:semver-minor'
           - 'version-update:semver-patch'
+    rebase-strategy: "disabled"

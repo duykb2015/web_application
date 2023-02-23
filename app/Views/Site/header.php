@@ -72,26 +72,26 @@
 
                     <i class="fa fa-angle-down text-dark"></i>
                 </a>
-                <nav <?= uri_string() != '/' ? 'style="width: calc(100% - 30px);"' : '' ?>  class="<?= uri_string() == '/' ? 'collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 ' : 'collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light' ?>" id="navbar-vertical">
+                <nav <?= uri_string() != '/' ? 'style="width: calc(100% - 30px);"' : '' ?> class="<?= uri_string() == '/' ? 'collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 ' : 'collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0 bg-light' ?>" id="navbar-vertical">
 
-                    <div class="navbar-nav w-100 overflow-hidden" >
-                        <?php 
-                        if(isset($category)):
+                    <div class="navbar-nav w-100 overflow-hidden">
+                        <?php
+                        if (isset($category)) :
                         ?>
-                        <?php foreach ($category as $item) : ?>
-                            <div class="nav-item dropdown">
-                                <a href="<?= base_url('cua-hang?danh-muc=') . $item['slug'] ?>" class="nav-link" data-toggle="dropdown"><?= $item['name'] ?><i class="fa fa-angle-down float-right mt-1"></i></a>
-                                <?php if (isset($item['subCategory']) && !empty($item['subCategory'])) : ?>
+                            <?php foreach ($category as $item) : ?>
+                                <div class="nav-item dropdown">
+                                    <a href="<?= base_url('cua-hang?danh-muc=') . $item['slug'] ?>" class="nav-link" data-toggle="dropdown"><?= $item['name'] ?><i class="fa fa-angle-down float-right mt-1"></i></a>
+                                    <?php if (isset($item['subCategory']) && !empty($item['subCategory'])) : ?>
 
-                                    <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
-                                        <?php foreach ($item['subCategory'] as $row) : ?>
-                                            <a href="<?= base_url('cua-hang?danh-muc=') . $row['slug'] ?>" class="dropdown-item"><?= $row['name'] ?></a>
-                                        <?php endforeach ?>
-                                    </div>
-                                <?php endif ?>
+                                        <div class="dropdown-menu position-absolute bg-secondary border-0 rounded-0 w-100 m-0">
+                                            <?php foreach ($item['subCategory'] as $row) : ?>
+                                                <a href="<?= base_url('cua-hang?danh-muc=') . $row['slug'] ?>" class="dropdown-item"><?= $row['name'] ?></a>
+                                            <?php endforeach ?>
+                                        </div>
+                                    <?php endif ?>
 
-                            </div>
-                        <?php endforeach ?>
+                                </div>
+                            <?php endforeach ?>
                         <?php endif ?>
 
                     </div>
@@ -119,9 +119,14 @@
                             <a href="<?= base_url('contact') ?>" class="nav-item nav-link">Liên hệ</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
-                            <a href="<?= base_url('dang-nhap')?>" class="nav-item nav-link">Đăng nhập</a>
-                            <a href="<?= base_url('dang-ky')?>" class="nav-item nav-link">Đăng ký</a>
-
+                            <?php $user = session()->get() ?>
+                            <?php if (isset($user['isLogin']) && $user['isLogin']) : ?>
+                                <a href="<?= base_url('ca-nhan') ?>" class="nav-item nav-link"><?= $user['name'] ?></a>
+                                <a href="<?= base_url('dang-xuat') ?>" onclick="return confirm('Bạn có thật sự muốn thoát?')" class="nav-item nav-link">Thoát</a>
+                            <?php else : ?>
+                                <a href="<?= base_url('dang-nhap') ?>" class="nav-item nav-link">Đăng nhập</a>
+                                <a href="<?= base_url('dang-ky') ?>" class="nav-item nav-link">Đăng ký</a>
+                            <?php endif ?>
                         </div>
                     </div>
                 </nav>
