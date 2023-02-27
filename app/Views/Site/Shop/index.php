@@ -9,9 +9,9 @@
             <h1 class="font-weight-semi-bold text-uppercase mb-3">Cửa hàng</h1>
 
             <div class="d-inline-flex">
-                <p class="m-0"><a href="">Trang chủ</a></p>
+                <p class="m-0"><a href="">Cửa hàng</a></p>
                 <p class="m-0 px-2">-</p>
-                <p class="m-0">Cửa hàng</p>
+                <p class="m-0"> xx</p>
             </div>
         </div>
     </div>

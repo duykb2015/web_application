@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\CategoryModel;
 use App\Models\BannerModel;
+use App\Models\ProductModel;
 
 class Home extends BaseController
 {
@@ -12,7 +13,9 @@ class Home extends BaseController
         $datas['title'] = 'Home';
         $datas['category'] = $this->getSubCategory();
         $datas['banner']=$this->banner();
-        return view('site/home/index', $datas);
+        $datas['product']=$this->product();
+       
+        return view('Site/Home/index', $datas);
     }
 
     public function getSubCategory()
@@ -28,6 +31,7 @@ class Home extends BaseController
             }
             $category[$key] = $item;
         }
+        
         return $category;
     }
     public function banner(){
@@ -36,5 +40,12 @@ class Home extends BaseController
         $banner=$bannerModel->findAll();
         
         return $banner;
+    }
+    public function product(){
+        $pruductModel = new ProductModel();
+        $product = $pruductModel->where('status = 1')->findAll();
+
+        return $product;
+
     }
 }

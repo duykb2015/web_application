@@ -19,23 +19,22 @@
 
 
 <!-- Shop Detail Start -->
+
+             
 <div class="container-fluid py-5">
     <div class="row px-xl-5">
         <div class="col-lg-5 pb-5">
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner border">
                     <div class="carousel-item active">
-                        <img class="w-100 h-100" src="<?= base_url() ?>\eshopper\img\product-1.jpg" alt="Image">
+                        <img class="w-100 h-100" src="" alt="Image">
                     </div>
+                    
                     <div class="carousel-item">
-                        <img class="w-100 h-100" src="<?= base_url() ?>\eshopper\img\product-2.jpg" alt="Image">
+
+                        <img class="w-100 h-100" src="<?= base_url() .PRODUCT_IMAGE_PATH.$productImage['image']?>" alt="Image">
                     </div>
-                    <div class="carousel-item">
-                        <img class="w-100 h-100" src="<?= base_url() ?>\eshopper\img\product-3.jpg" alt="Image">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="w-100 h-100" src="<?= base_url() ?>\eshopper\img\product-4.jpg" alt="Image">
-                    </div>
+                    
                 </div>
                 <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                     <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -47,7 +46,7 @@
         </div>
 
         <div class="col-lg-7 pb-5">
-            <h3 class="font-weight-semi-bold">Colorful Stylish Shirt</h3>
+            <h3 class="font-weight-semi-bold"><?= $product['name'] ?></h3>
             <div class="d-flex mb-3">
                 <div class="text-primary mr-2">
                     <small class="fas fa-star"></small>
@@ -252,6 +251,7 @@
         </div>
     </div>
 </div>
+
 <!-- Shop Detail End -->
 
 

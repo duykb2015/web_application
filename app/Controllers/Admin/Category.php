@@ -64,6 +64,7 @@ class Category extends BaseController
 
         $data['title'] = "Chỉnh Sửa Category";
         $data['category'] = $category;
+        
         return view('Admin/Category/detail', $data);
     }
 
