@@ -189,6 +189,11 @@ function create_slug($string)
     return $string;
 }
 
+function public_url($url = null)
+{
+    return base_url() . 'public/' . $url;
+}
+
 /**
  * Used to remove file from server, if exists
  *
