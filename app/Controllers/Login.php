@@ -70,6 +70,7 @@ class Login extends BaseController
         return redirect()->to('');
     }
 
+
     // Register  
 
     public function register()
@@ -148,6 +149,7 @@ class Login extends BaseController
 
         return redirect()->to('dang-nhap');
     }
+
 
     /**
      * Used to logout the user.
