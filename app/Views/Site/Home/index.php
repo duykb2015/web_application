@@ -135,14 +135,13 @@
 
 
 <!-- Products Start -->
-<div class="container-fluid pt-6">
+<div class="container-fluid pt-5">
     <div class="text-center mb-4">
         <h2 class="section-title px-5"><span class="px-2">Sản Phẩm Nổi Bật</span></h2>
     </div>
-    <?php if (isset($product)) : ?>
-        <?php foreach ($product as $key => $row) : ?>
-
-            <div class="row px-xl-4 pb-1">
+    <div class="row px-xl-5 pb-3">
+        <?php if (isset($product)) : ?>
+            <?php foreach ($product as $key => $row) : ?>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="card product-item border-0 mb-2">
                         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
@@ -161,10 +160,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        <?php endforeach ?>
-    <?php endif ?>
-
+            <?php endforeach ?>
+        <?php endif ?>
+    </div>
 </div>
 <!-- Products End -->
 
