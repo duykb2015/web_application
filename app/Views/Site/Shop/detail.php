@@ -30,7 +30,7 @@
                         <?php foreach ($productImage as $key => $row) : ?>
                             <div class="carousel-item <?= $key == 0 ? 'active' : '' ?>">
 
-                                <img class="w-100 h-100" src="<?= base_url() ?>\uploads\product\<?= $row['image'] ?>" alt="Image">
+                                <img class="w-100 h-100"  src="<?= base_url() ?>\uploads\product\<?= $row['image'] ?>" alt="Image">
                             </div>
                         <?php endforeach ?>
                     <?php endif ?>
@@ -62,29 +62,24 @@
                 <p class="mb-4"><?= $row['information'] ?></p>
             <?php endforeach ?>
 
-            <div class="d-flex mb-3">
-                <p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
-                <form>
-                    <?php if (isset($productAttribute)) : ?>
-                        <?php foreach ($productAttribute as $key => $row) : ?>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="size-1" name="size">
-                                <label class="custom-control-label" for="size-1"><?= $row['value'] ?></label>
-                            </div>
-                        <?php endforeach ?>
-                    <?php endif ?>
-                </form>
-            </div>
-            <div class="d-flex mb-4">
-                <p class="text-dark font-weight-medium mb-0 mr-3">Colors:</p>
-                <form>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="color-1" name="color">
-                        <label class="custom-control-label" for="color-1">Black</label>
+            <?php if (isset($attributes)) : ?>
+                <?php foreach ($attributes as $key => $item) : ?>
+                    <div class="d-flex mb-3">
+                        <p class="text-dark font-weight-medium mb-0 mr-3"><?= $item['name'] ?></p>
+                        <form>
+                            <?php if (isset($productAttribute)) : ?>
+                                <?php foreach ($productAttribute as $key => $item) : ?>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" class="custom-control-input" id="size-1" name="size">
+                                        <label class="custom-control-label" for="size-1"><?= $item['value'] ?></label>
+                                    </div>
+                                <?php endforeach ?>
+                            <?php endif ?>
+                        </form>
                     </div>
 
-                </form>
-            </div>
+                <?php endforeach ?>
+            <?php endif ?>
             <div class="d-flex align-items-center mb-4 pt-2">
                 <div class="input-group quantity mr-3" style="width: 130px;">
                     <div class="input-group-btn">
@@ -137,9 +132,9 @@
 
                 </div>
                 <div class="tab-pane fade" id="tab-pane-2">
-                <?php foreach ($productDescription as $row) : ?>
-                <p class="mb-4"><?= $row['information'] ?></p>
-            <?php endforeach ?>
+                    <?php foreach ($productDescription as $row) : ?>
+                        <p class="mb-4"><?= $row['information'] ?></p>
+                    <?php endforeach ?>
 
                 </div>
                 <div class="tab-pane fade" id="tab-pane-3">

@@ -26,7 +26,7 @@ class Shop extends BaseController
         $productDescriptionModel = new ProductDescriptionModel();
         $productAttributeModel = new ProductAttributeModel();
         $categoryModel = new CategoryModel();
-        // $attributeModel = new AttributeModel();
+        $attributeModel = new AttributeModel();
 
         $product = $pruductModel->where('slug',$slug)->first();
         
@@ -40,6 +40,7 @@ class Shop extends BaseController
 
         $productAttribute=$productAttributeModel->where('product_id',$product['id'])->find();
 
+        $data['attributes'] = $attributeModel->findAll();
         $data['product'] = $product;
         $data['productImage']=$productImage;
         $data['productDescription']=$productDescription;
