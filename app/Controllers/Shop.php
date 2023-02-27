@@ -9,6 +9,6 @@ class Shop extends BaseController
     public function index()
     {
         $datas['category'] = $this->getSubCategory();
-        return view('site/shop/index', $datas);
+        return view('Site/Shop/index', $datas);
     }
 }
