@@ -41,8 +41,6 @@ $routes->get('dang-nhap', 'Login::login');
 $routes->get('dang-ky', 'Login::register');
 $routes->get('dang-xuat', 'Admin\Login::logout');
 
-
-
 $routes->post('dang-nhap', 'Login::authLogin');
 $routes->post('dang-ky', 'Login::authRegister');
 
@@ -50,10 +48,10 @@ $routes->get('shop', 'Shop::index');
 
 $routes->get('detail', 'Customer::index');
 $routes->group('ca-nhan', ["filter" => "auth-customer"], function ($routes) {
+
     $routes->get('chi-tiet', 'Customer::index');  
     $routes->post('chi-tiet', 'Customer::authUpdateInfo');
 });
-
 
 $routes->get('cart', 'Cart::index');
 $routes->get('checkout', 'Checkout::index');
@@ -105,6 +103,7 @@ $routes->group('dashboard', ["filter" => "auth-admin"], function ($routes) {
 
             $routes->post('save', 'Admin\Product::save');
             $routes->post('delete', 'Admin\Product::delete');
+            $routes->post('delete/image', 'Admin\Product::deleteImage');
             $routes->post('action-status', 'Admin\Product::changeStatus');
         });
 

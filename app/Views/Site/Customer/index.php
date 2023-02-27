@@ -24,7 +24,8 @@
                 <?php endif ?>
             </div>
             <?php if (isset($customer)) : ?>
-                <form action="<?= base_url('ca-nhan/chi-tiet') ?>" method="POST">
+
+                <form action="<?= base_url('ca-nhan/chi-tiet') ?>" method="POST">               
                     <input type="hidden" name="id" value="<?= $customer['id'] ?>">
                     <div class="form-group">
                         <label class="font-weight-bold">Email<span class="text-danger">*</span></label>
@@ -53,7 +54,8 @@
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold">Địa chỉ 1</label>
-                        <input type="text" class="form-control border border-primary py-4 rounded" name="address1" value="<?= $customer['address1'] ?>" placeholder="Trống." required />
+
+                        <input type="text" class="form-control border border-primary py-4 rounded" name="address1" value="<?= $customer['address1'] ?>" placeholder="Trống." required />                
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold">Địa chỉ 2</label>

@@ -17,6 +17,7 @@ class Customer extends BaseController
     }
 
 
+
     public function updateInfo()
     {
         //pre($this->request->getPost());
@@ -89,4 +90,5 @@ class Customer extends BaseController
 
         return redirect()->to('');
     }
+
 }

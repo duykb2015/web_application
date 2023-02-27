@@ -23,11 +23,11 @@ class ProductDescription extends Migration
             ],
             'information' => [
                 'type' => 'TEXT',
-                'null' => FALSE,
+                'null' => TRUE,
             ],
             'description' => [
                 'type' => 'TEXT',
-                'null' => FALSE,
+                'null' => TRUE,
             ],
             'status' => [
                 'type' => 'TINYINT',
