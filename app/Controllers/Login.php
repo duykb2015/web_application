@@ -149,6 +149,12 @@ class Login extends BaseController
         return redirect()->to('dang-nhap');
     }
 
+    //update information customer
+   
+
+    
+
+
     /**
      * Used to logout the user.
      * 

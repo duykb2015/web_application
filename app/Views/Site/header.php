@@ -121,7 +121,7 @@
                         <div class="navbar-nav ml-auto py-0">
                             <?php $user = session()->get() ?>
                             <?php if (isset($user['isLogin']) && $user['isLogin']) : ?>
-                                <a href="<?= base_url('ca-nhan') ?>" class="nav-item nav-link"><?= $user['name'] ?></a>
+                                <a href="<?= base_url('ca-nhan/chi-tiet') ?>" class="nav-item nav-link"><?= $user['name'] ?></a>
                                 <a href="<?= base_url('dang-xuat') ?>" onclick="return confirm('Bạn có thật sự muốn thoát?')" class="nav-item nav-link">Thoát</a>
                             <?php else : ?>
                                 <a href="<?= base_url('dang-nhap') ?>" class="nav-item nav-link">Đăng nhập</a>
