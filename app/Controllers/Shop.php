@@ -15,36 +15,47 @@ class Shop extends BaseController
     public function index()
     {
         $datas['category'] = $this->getSubCategory();
+        $datas['product'] = $this->product();
         return view('Site/Shop/index', $datas);
+    }
+    public function product()
+    {
+        $pruductModel = new ProductModel();
+        $product = $pruductModel->where('status = 1')->findAll();
+
+        return $product;
     }
     public function detail()
     {
         $slug = $this->request->getUri()->getSegment(3);
         //$datas['category'] = $this->getSubCategory();
-        $pruductModel = new ProductModel();
-        $pruducImagetModel = new ProductImageModel();
+        $productModel = new ProductModel();
+        $producImagetModel = new ProductImageModel();
         $productDescriptionModel = new ProductDescriptionModel();
         $productAttributeModel = new ProductAttributeModel();
         $categoryModel = new CategoryModel();
         $attributeModel = new AttributeModel();
 
-        $product = $pruductModel->where('slug',$slug)->first();
-        
+        $product = $productModel->where('slug', $slug)->first();
         if (!$product) {
             return redirect()->to('cua-hang');
         }
+
+        $products = $productModel->where(['id <>' => $product['id'], 'category' => $product['category']])->limit(4, 0)->findAll();
+
         // $attribute=$attributeModel->find();
-        $productImage=$pruducImagetModel->where('product_id',$product['id'])->find();
+        $productImage = $producImagetModel->where('product_id', $product['id'])->find();
+       
 
-        $productDescription=$productDescriptionModel->where('product_id',$product['id'])->find();
+        $productDescription = $productDescriptionModel->where('product_id', $product['id'])->find();
 
-        $productAttribute=$productAttributeModel->where('product_id',$product['id'])->find();
-
-        $data['attributes'] = $attributeModel->findAll();
+        $productAttribute = $productAttributeModel->where('product_id', $product['id'])->find();
+        
         $data['product'] = $product;
-        $data['productImage']=$productImage;
-        $data['productDescription']=$productDescription;
-        $data['productAttribute']=$productAttribute;
+        $data['products'] = $products;
+        $data['productImage'] = $productImage;
+        $data['productDescription'] = $productDescription;
+        $data['productAttribute'] = $productAttribute;
         // pre($data);
         return view('Site/Shop/detail', $data);
     }

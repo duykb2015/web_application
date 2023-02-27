@@ -108,7 +108,7 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="<?= base_url('') ?>" class="nav-item nav-link active">Trang chủ</a>
-                            <a href="<?= base_url('shop') ?>" class="nav-item nav-link">Cửa hàng</a>
+                            <a href="<?= base_url('cua-hang') ?>" class="nav-item nav-link">Cửa hàng</a>
                             <!-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">
