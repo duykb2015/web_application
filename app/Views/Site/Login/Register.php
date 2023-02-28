@@ -160,6 +160,10 @@
                         <input type="password" class="form-control border border-primary py-4 rounded" name="password" placeholder="Nhập mật khẩu" required />
                     </div>
                     <div class="form-group">
+                        <label class="font-weight-bold">Số điện thoại<span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control border border-primary py-4 rounded" name="telephone" placeholder="Số điện thoại, ít nhất 9 kí tự" required />
+                    </div>
+                    <div class="form-group">
                         <label class="font-weight-bold">Địa chỉ 1</label>
                         <input type="text" class="form-control border border-primary py-4 rounded" name="address1" placeholder="Nhập Đia chỉ 1" />
                     </div>
@@ -167,10 +171,7 @@
                         <label class="font-weight-bold">Địa chỉ 2</label>
                         <input type="text" class="form-control border border-primary py-4 rounded" name="address2" placeholder="Nhập Đia chỉ 2" />
                     </div>
-                    <div class="form-group">
-                        <label class="font-weight-bold">Số điện thoại<span class="text-danger">*</span></label>
-                        <input type="tel" class="form-control border border-primary py-4 rounded" name="telephone" placeholder="Số điện thoại, ít nhất 9 kí tự" required />
-                    </div>
+                   
                     <div class="p-2 ">
                         <button class="btn btn-primary btn-block border-0 py-3 rounded" type="submit" id="btnregister">Đăng Ký</button>
                     </div>
