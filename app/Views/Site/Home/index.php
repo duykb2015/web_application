@@ -141,13 +141,14 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="card product-item border-0 mb-2">
                         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <a href="<?= base_url('cua-hang/chi-tiet') . '/' . $row['slug'] ?>"><img class="img-thumbnail" src="<?= base_url() ?>\uploads\product\<?= $row['image'] ?>" alt=""></a>
+                            <a href="<?= base_url('cua-hang/chi-tiet') . '/' . $row['slug'] ?>">
+                                <img class="img-thumbnail" src="<?= base_url() ?>\uploads\product\<?= $row['image'] ?>" alt=""></a>
                         </div>
                         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                             <h6 class="text-truncate mb-3"><?= $row['name'] ?></h6>
                             <div class="d-flex justify-content-center">
-                                <h6><?= number_format($row['price'], 0, '', ','); ?> VNĐ</h6>
-                                <h6 class="text-muted ml-2"><del><?= $row['discount'] ?>%</del></h6>
+                                <h6><?= number_format($row['price'] - ($row['price'] * ($row['discount'] / 100))); ?> VNĐ</h6>
+                                <h6 class="text-muted ml-2"><del><?= number_format($row['price']); ?> VNĐ</del> <?= $row['discount'] ?>%</h6>
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-between bg-light border">
