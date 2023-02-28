@@ -4,13 +4,11 @@
 
 <?= $this->section('banner') ?>
 
+<?php if (isset($banner) && !empty($banner)) : ?>
+    <div id="header-carousel" class="carousel slide" data-ride="carousel">
 
-<div id="header-carousel" class="carousel slide" data-ride="carousel">
-
-    <div class="carousel-inner">
-        <?php if (isset($banner)) : ?>
+        <div class="carousel-inner">
             <?php foreach ($banner as $key => $row) : ?>
-
                 <div class="carousel-item <?= $key == 0 ? 'active' : '' ?>" style="height: 410px;">
                     <img class="img-fluid" src="<?= base_url() ?>\uploads\banner\<?= $row['image'] ?>" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
@@ -18,25 +16,23 @@
                             <h4 class="text-light text-uppercase font-weight-medium mb-3"><?= $row['name'] ?></h4>
                             <h3 class="display-4 text-white font-weight-semi-bold mb-4"><?= $row['description'] ?></h3>
                             <a href="" class="btn btn-light py-2 px-3">Cửa hàng</a>
-
                         </div>
                     </div>
                 </div>
             <?php endforeach ?>
-        <?php endif ?>
-
+        </div>
+        <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                <span class="carousel-control-prev-icon mb-n2"></span>
+            </div>
+        </a>
+        <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                <span class="carousel-control-next-icon mb-n2"></span>
+            </div>
+        </a>
     </div>
-    <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
-        <div class="btn btn-dark" style="width: 45px; height: 45px;">
-            <span class="carousel-control-prev-icon mb-n2"></span>
-        </div>
-    </a>
-    <a class="carousel-control-next" href="#header-carousel" data-slide="next">
-        <div class="btn btn-dark" style="width: 45px; height: 45px;">
-            <span class="carousel-control-next-icon mb-n2"></span>
-        </div>
-    </a>
-</div>
+<?php endif ?>
 
 <?= $this->endSection() ?>
 
@@ -145,13 +141,14 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="card product-item border-0 mb-2">
                         <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <a href="<?= base_url('cua-hang/chi-tiet') . '/' . $row['slug'] ?>"><img class="img-thumbnail" src="<?= base_url() ?>\uploads\product\<?= $row['image'] ?>" alt=""></a>
+                            <a href="<?= base_url('cua-hang/chi-tiet') . '/' . $row['slug'] ?>">
+                                <img class="img-thumbnail" src="<?= base_url() ?>\uploads\product\<?= $row['image'] ?>" alt=""></a>
                         </div>
                         <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                             <h6 class="text-truncate mb-3"><?= $row['name'] ?></h6>
                             <div class="d-flex justify-content-center">
-                                <h6><?= number_format($row['price'], 0, '', ','); ?> VNĐ</h6>
-                                <h6 class="text-muted ml-2"><del><?= $row['discount'] ?>%</del></h6>
+                                <h6><?= number_format($row['price'] - ($row['price'] * ($row['discount'] / 100))); ?> VNĐ</h6>
+                                <h6 class="text-muted ml-2"><del><?= number_format($row['price']); ?> VNĐ</del> <?= $row['discount'] ?>%</h6>
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-between bg-light border">

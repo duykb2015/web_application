@@ -9,13 +9,9 @@ use App\Models\CategoryModel;
 use App\Models\ProductAttributeModel;
 use App\Models\ProductModel;
 use CodeIgniter\API\ResponseTrait;
-use App\Models\ProductAttributesModel;
-use App\Models\ProductAttributeValuesModel;
-use App\Models\ProductCategoryModel;
 use App\Models\ProductDescriptionModel;
 use App\Models\ProductImageModel;
 use CodeIgniter\HTTP\Response;
-use Exception;
 
 class Product extends BaseController
 {
@@ -61,10 +57,11 @@ class Product extends BaseController
         $data['category'] = $this->getSubCategory();
 
         $attributeModel = new AttributeModel();
-        $data['attributes'] = $attributeModel->findAll();
+        $attributes = $attributeModel->orderBy('id', 'ASC')->findAll();
 
         if (!$productID) {
-            $data['title'] = 'Thêm mới sản phẩm';
+            $data['productAttribute'] = $attributes;
+            $data['title']            = 'Thêm mới sản phẩm';
             return view('Admin/Product/detail', $data);
         }
 
@@ -75,18 +72,35 @@ class Product extends BaseController
         }
 
         $productImageModel = new ProductImageModel();
-        $images = $productImageModel->where('product_id', $productID)->find();
+        $images = $productImageModel->where('product_id', $productID)->orderBy('id', 'ASC')->find();
 
         $productDescriptionModel = new ProductDescriptionModel();
         $productDescription = $productDescriptionModel->where('product_id', $productID)->first();
 
-        $productAttributeModel = new ProductAttributeModel();
-        $productAttribute = $productAttributeModel->where('product_id', $productID)->find();
 
+        $attributeModel = new AttributeModel();
+        $attributes = $attributeModel->orderBy('id', 'ASC')->findAll();
+        $productAttributeModel = new ProductAttributeModel();
+        $productAttributes = $productAttributeModel->where('product_id', $productID)->orderBy('attribute_id', 'ASC')->find();
+
+        foreach ($attributes as $key => $item) {
+            $attribute[$key]['id'] = $item['id'];
+            $attribute[$key]['name'] = $item['name'];
+            foreach ($productAttributes as $row) {
+                if ($row['attribute_id'] == $item['id']) {
+                    $value[$key][] = $row['value'];
+                }
+            }
+            $attribute[$key]['value'] = implode(',', $value[$key]);
+        }
+        foreach ($productAttributes as $row) {
+            $productAttributeID[] = $row['id'];
+        }
         $data['product']            = $product;
         $data['images']             = $images;
         $data['productDescription'] = $productDescription;
-        $data['productAttribute']   = $productAttribute;
+        $data['productAttribute']   = $attribute;
+        $data['productAttributeID'] = implode(',', $productAttributeID);
         $data['title']              = 'Chỉnh sửa dòng sản phẩm';
 
         return view('Admin/Product/detail', $data);
@@ -98,7 +112,6 @@ class Product extends BaseController
      */
     function save()
     {
-
         //get product data
         $productID   = $this->request->getPost('product_id');
         $category    = $this->request->getPost('category');
@@ -113,13 +126,17 @@ class Product extends BaseController
 
         $attributes      = $this->request->getPost('attributes');
         $attributeValues = $this->request->getPost('attribute_values');
+        $attributeValuesID = $this->request->getPost('product_attribute_id');
 
-        $upload = new Upload();
-        $images = $upload->multipleImages($this->request->getFiles(), PRODUCT_IMAGE_PATH);
-        if (!$images) {
-            return redirectWithMessage(base_url(), UNEXPECTED_ERROR_MESSAGE);
+
+        $fileError = $this->request->getFiles()['images'][0]->getError();
+        if ($fileError != 4) {
+            $upload = new Upload();
+            $images = $upload->multipleImages($this->request->getFiles(), PRODUCT_IMAGE_PATH);
+            if (!$images) {
+                return redirectWithMessage('dashboard/product/manage/detail/' . $productID, 'Hình ảnh lỗi');
+            }
         }
-
         //prepare data
         $data = [
             'name'     => $name,
@@ -130,7 +147,7 @@ class Product extends BaseController
             'quantity' => $quantity,
             'status'   => $status,
         ];
-        $data['image']  = $images[0];
+        $data['image']  = $images[0] ?? '';
 
 
         $productModel = new ProductModel();
@@ -143,17 +160,14 @@ class Product extends BaseController
 
         //check if product_id is not empty then update product else insert new product
         if ($productID) {
-            $isUpdate = $productModel->update($productID, $data);
-            if (!$isUpdate) {
-                return redirectWithMessage('dashboard/product/manage/detail/' . $productID, UNEXPECTED_ERROR_MESSAGE);
-            }
+            $data['id'] = $productID;
         }
 
         $productModel->db->transStart();
-        $isInsert = $productModel->insert($data);
+        $isInsert = $productModel->save($data);
         if (!$isInsert) {
             $productModel->db->transRollback();
-            $upload->cleanImage($images, PRODUCT_IMAGE_PATH);
+            $upload->cleanImages($images);
             return redirectWithMessage('dashboard/product/manage/detail/', UNEXPECTED_ERROR_MESSAGE);
         }
         $productModel->db->transComplete();
@@ -173,21 +187,28 @@ class Product extends BaseController
             'description' => $description
         ];
 
+        $productDescription = $productDescriptionModel->where('product_id', $insertID)->orderBy('id', 'DESC')->first();
+        if ($productDescription) {
+            $data['id'] = $productDescription['id'];
+        }
+
         $productDescriptionModel->db->transStart();
-        $isInsert = $productDescriptionModel->insert($data);
-        if (!$isInsert) {
+        $isSave = $productDescriptionModel->save($data);
+        if (!$isSave) {
             $productDescriptionModel->db->transRollback();
-            $upload->cleanImage($images, PRODUCT_IMAGE_PATH);
+            $upload->cleanImages($images);
             return redirectWithMessage('dashboard/product/manage/detail/', UNEXPECTED_ERROR_MESSAGE);
         }
         $productDescriptionModel->db->transComplete();
 
-        $isSaveImage = $this->saveImage($insertID, $images);
-        if (!$isSaveImage) {
-            //...
+        if (isset($images)) {
+            $isSaveImage = $this->saveImage($insertID, $images);
+            if (!$isSaveImage) {
+                redirectWithMessage('dashboard/product/manage/detail/', UNEXPECTED_ERROR_MESSAGE);
+            }
         }
 
-        $isSaveAttribute = $this->saveAttributeValue($insertID, $attributes, $attributeValues);
+        $isSaveAttribute = $this->saveAttributeValue($insertID, $attributes, $attributeValues, $attributeValuesID);
         if (!$isSaveAttribute) {
             redirectWithMessage('dashboard/product/manage/detail/', UNEXPECTED_ERROR_MESSAGE);
         }
@@ -205,7 +226,6 @@ class Product extends BaseController
             }
         }
         return true;
-        // return $productImageModel->insertBatch($data);
     }
 
     private function mergeImageWithProductID($productID, $images)
@@ -219,11 +239,13 @@ class Product extends BaseController
         return $data;
     }
 
-    private function saveAttributeValue($productID, $attributes, $attributeValues)
+    private function saveAttributeValue($productID, $attributes, $attributeValues, $attributeValuesID)
     {
+        $arrAttributeValuesID = explode(',',  $attributeValuesID);
+
         $productAttributeModel = new ProductAttributeModel();
-        $datas = $this->mergeAttributeWithValue($productID, $attributes, $attributeValues);
-        // return $productAttributeModel->insertBatch($data);
+        $productAttributeModel->delete($arrAttributeValuesID);
+        $datas = $this->mergeAttributeWithValue($productID, $attributes, $attributeValues, $attributeValuesID);
         foreach ($datas as $data) {
             $isInsert = $productAttributeModel->insert($data);
             if (!$isInsert) {
@@ -236,11 +258,14 @@ class Product extends BaseController
     private function mergeAttributeWithValue($productID, $attributes, $attributeValues)
     {
         foreach ($attributes as $key => $attribute) {
-            $data[] = [
-                'product_id' => $productID,
-                'attribute_id' => $attribute,
-                'value' => $attributeValues[$key]
-            ];
+            $values = explode(',', $attributeValues[$key]);
+            foreach ($values as $value) {
+                $data[] = [
+                    'product_id' => $productID,
+                    'attribute_id' => $attribute,
+                    'value' => $value
+                ];
+            }
         }
         return $data;
     }
@@ -277,7 +302,7 @@ class Product extends BaseController
         $productImageModel = new ProductImageModel();
         $images = $productImageModel->select('image')->where('product_id', $productID)->find();
         $upload = new Upload();
-        $upload->cleanImage($images, PRODUCT_IMAGE_PATH);
+        $upload->cleanImages($images);
         $isDelete = $productImageModel->where('product_id', $productID)->delete();
         if (!$isDelete) {
             return $this->respond(responseFailed('Không xoá được hình ảnh'),  Response::HTTP_OK);
@@ -292,17 +317,27 @@ class Product extends BaseController
         return $this->respond(responseSuccessed(),  Response::HTTP_OK);
     }
 
-    public function deleteImage()
+    public function deleteImage($id = null)
     {
-        $id = $this->request->getPost('id');
+        if ($this->request->getPost('id')) {
+            $id = $this->request->getPost('id');
+        }
         if (!$id) {
-            return $this->respond(responseFailed('Hình ảnh không tồn tại'),  Response::HTTP_OK);
+            return $this->respond(responseFailed(UNEXPECTED_ERROR_MESSAGE),  Response::HTTP_OK);
         }
         //Delete image
         $productImageModel = new ProductImageModel();
-        $images = $productImageModel->select('image')->find($id);
-        $upload = new Upload();
-        $upload->cleanImage($images, PRODUCT_IMAGE_PATH);
+        $image = $productImageModel->select('image')->first($id);
+        if (!$image) {
+            return $this->respond(responseFailed('Không có hình ảnh này'),  Response::HTTP_OK);
+        }
+        $file = PRODUCT_IMAGE_PATH . $image['image'];
+        if (!file_exists($file)) {
+            return $this->respond(responseFailed('Hình ảnh không tồn tại'),  Response::HTTP_OK);
+        }
+
+        @unlink($file);
+
         $isDelete = $productImageModel->delete($id);
         if (!$isDelete) {
             return $this->respond(responseFailed('Không xoá được sản phẩm'),  Response::HTTP_OK);

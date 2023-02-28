@@ -208,11 +208,11 @@
     <div class="row px-xl-5">
         <div class="col">
             <div class="owl-carousel related-carousel">
-                <?php if (isset($products)) : ?>
-                    <?php foreach ($products as $item) : ?>
+                <?php if (isset($relatedProduct)) : ?>
+                    <?php foreach ($relatedProduct as $item) : ?>
                         <div class="card product-item border-0">
                             <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                            <a href="<?= base_url('cua-hang/chi-tiet') . '/' . $item['slug'] ?>"><img class="img-thumbnail" src="<?= base_url() ?>\uploads\product\<?= $item['image'] ?>" alt=""></a>
+                                <a href="<?= base_url('cua-hang/chi-tiet') . '/' . $item['slug'] ?>"><img class="img-thumbnail" src="<?= base_url() ?>\uploads\product\<?= $item['image'] ?>" alt=""></a>
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                                 <h6 class="text-truncate mb-3"><?= $item['name'] ?></h6>

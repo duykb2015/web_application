@@ -1,4 +1,4 @@
-<?= $this->extend('admin/layout') ?>
+<?= $this->extend('Admin/layout') ?>
 <?= $this->section('css') ?>
 <!-- Select 2 css -->
 <link rel="stylesheet" href="<?= base_url() ?>\templates\libraries\bower_components\select2\css\select2.min.css">
@@ -181,11 +181,13 @@
                                                 <div class="row">
                                                     <div class="col-sm-12 mb-3">
                                                         <h5>Thuộc tính sản phẩm</h5>
+                                                        <small>Nhiều giá trị có thể cách nhau bằng dấu phẩy, ví dụ: 34,35,36... <b>Chú ý, không dùng khoảng trắng giữa các giá trị, viết liền sau giấu phẩy</b></small>
                                                     </div>
                                                 </div>
                                                 <div id="attributes" class="row">
-                                                    <?php if (isset($attributes)) : ?>
-                                                        <?php foreach ($attributes as $key => $item) : ?>
+                                                    <?php if (isset($productAttribute)) : ?>
+                                                        <input type="hidden" name="product_attribute_id" value="<?= isset($productAttributeID) ? $productAttributeID : '' ?>">
+                                                        <?php foreach ($productAttribute as $item) : ?>
                                                             <div class="col-sm-2 pb-2">
                                                                 <input type="hidden" name="attributes[]" value="<?= $item['id'] ?>">
                                                                 <div class="input-group">
@@ -194,7 +196,7 @@
                                                             </div>
                                                             <div class="col-sm-10 pb-2">
                                                                 <div class="input-group">
-                                                                    <input type="text" class="form-control" name="attribute_values[]" placeholder="<?= $item['name'] ?>, nhiều giá trị có thể cách nhau bằng dấu phẩy, ví dụ: 34, 35, 36..." value="<?= !empty($productAttribute) ? $productAttribute[$key]['value'] : set_value('value') ?>" required>
+                                                                    <input type="text" class="form-control" name="attribute_values[]" placeholder="<?= $item['name'] ?>" value="<?= $item['value'] ?? '' ?>" required>
                                                                 </div>
                                                             </div>
                                                         <?php endforeach ?>

@@ -1,4 +1,4 @@
-<?= $this->extend('admin/layout') ?>
+<?= $this->extend('Admin/layout') ?>
 <?= $this->section('css') ?>
 <link rel="stylesheet" type="text/css" href="<?= base_url() ?>\templates\libraries\bower_components\datatables.net-bs4\css\dataTables.bootstrap4.min.css">
 <link rel="stylesheet" type="text/css" href="<?= base_url() ?>\templates\libraries\assets\pages\data-table\css\buttons.dataTables.min.css">
