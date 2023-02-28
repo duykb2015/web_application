@@ -109,13 +109,6 @@
                         <div class="navbar-nav mr-auto py-0">
                             <a href="<?= base_url('') ?>" class="nav-item nav-link active">Trang chủ</a>
                             <a href="<?= base_url('cua-hang') ?>" class="nav-item nav-link">Cửa hàng</a>
-                            <!-- <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="<?= base_url('cart') ?>" class="dropdown-item">Shopping Cart</a>
-                                    <a href="<?= base_url('checkout') ?>" class="dropdown-item">Checkout</a>
-                                </div>
-                            </div> -->
                             <a href="<?= base_url('contact') ?>" class="nav-item nav-link">Liên hệ</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
