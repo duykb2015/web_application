@@ -202,6 +202,7 @@ function public_url($url = null)
  */
 function remove($fileName, $path = null)
 {
+    return $fileName;
     $file = $path . is_array($fileName) ? $fileName['image'] : $fileName;
     if (!file_exists($file)) {
         return false;
