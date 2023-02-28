@@ -36,7 +36,6 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/', 'Home::index');
 $routes->get('dang-nhap', 'Login::login');
 $routes->get('dang-ky', 'Login::register');
 $routes->get('dang-xuat', 'Admin\Login::logout');
@@ -44,22 +43,27 @@ $routes->get('dang-xuat', 'Admin\Login::logout');
 $routes->post('dang-nhap', 'Login::authLogin');
 $routes->post('dang-ky', 'Login::authRegister');
 
+$routes->group('/',  function ($routes) {
 
-$routes->group('cua-hang', function ($routes) {
-    $routes->get('/', 'Shop::index');
-    $routes->get('chi-tiet/:any','Shop::detail');
-    
+    $routes->get('', 'Home::index');
+
+    $routes->group('cua-hang', function ($routes) {
+        $routes->get('', 'Shop::index');
+        $routes->get('chi-tiet/:any', 'Shop::detail');
+    });
+
+    $routes->group('ca-nhan', ["filter" => "auth-customer"], function ($routes) {
+        $routes->get('chi-tiet', 'Customer::index');
+        $routes->post('chi-tiet', 'Customer::authUpdateInfo');
+    });
+
+    $routes->group('gio-hang', ["filter" => "auth-customer"], function ($routes) {
+        $routes->get('', 'Cart::index');
+        $routes->get('them/:any', 'Cart::add');
+        $routes->post('them', 'Cart::add');
+        $routes->post('xoa', 'cart::delete');
+    });
 });
-
-$routes->group('ca-nhan', ["filter" => "auth-customer"], function ($routes) {
-
-    $routes->get('chi-tiet', 'Customer::index');  
-    $routes->post('chi-tiet', 'Customer::authUpdateInfo');
-});
-
-$routes->get('cart', 'Cart::index');
-$routes->get('checkout', 'Checkout::index');
-$routes->get('contact', 'Contact::index');
 
 
 $routes->get('admin-login', 'Admin\Login::index');

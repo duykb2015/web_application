@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\CartModel;
 use App\Models\CategoryModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
@@ -49,6 +50,13 @@ abstract class BaseController extends Controller
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+    }
+
+    public $cartTotal = 0;
+    public function __construct()
+    {
+        $cartModel = new CartModel();
+        $this->cartTotal = count($cartModel->where('customer_id', session()->get('id'))->findAll());
     }
     public function getSubCategory()
     {

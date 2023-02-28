@@ -32,127 +32,52 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
-                    <tr>
-                        <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Áo sơ mi sành điệu đầy màu sắc</td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle"><img src="img/product-2.jpg" alt="" style="width: 50px;"> Áo sơ mi sành điệu đầy màu sắc</td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle"><img src="img/product-3.jpg" alt="" style="width: 50px;"> Áo sơ mi sành điệu đầy màu sắc</td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle"><img src="img/product-4.jpg" alt="" style="width: 50px;"> Áo sơ mi sành điệu đầy màu sắc</td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle"><img src="img/product-5.jpg" alt="" style="width: 50px;"> Áo sơ mi sành điệu đầy màu sắc</td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
-
-                    </tr>
-
+                    <?php if (isset($cart) && !empty($cart)) : ?>
+                        <?php foreach ($cart as $item) : ?>
+                            <tr>
+                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">
+                                    <span class="font-weight-bold"><?= $item['name'] ?></span><br>
+                                    <small><?= $item['option'] ?></small>
+                                </td>
+                                <td class="align-middle">
+                                    <?php $price = $item['price'] ?>
+                                    <?php $discount = $item['price'] - ($item['price'] * ($item['discount'] / 100)) ?>
+                                    <?= number_format($discount) ?>Đ <span style="text-decoration-line: line-through"><?= number_format($price) ?>Đ</span>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="input-group quantity mx-auto" style="width: 100px;">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-minus">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control form-control-sm bg-secondary text-center" value="<?= $item['quantity'] ?>">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-sm btn-primary btn-plus">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><?= number_format($discount * $item['quantity']) ?>Đ</td>
+                                <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                            </tr>
+                        <?php endforeach ?>
+                    <?php endif ?>
                 </tbody>
 
             </table>
         </div>
 
         <div class="col-lg-4">
-            <form class="mb-5" action="">
+            <!-- <form class="mb-5" action="">
                 <div class="input-group">
                     <input type="text" class="form-control p-4" placeholder="Mã giảm giá">
                     <div class="input-group-append">
                         <button class="btn btn-primary">Áp dụng</button>
                     </div>
                 </div>
-            </form>
+            </form> -->
             <div class="card border-secondary mb-5">
                 <div class="card-header bg-secondary border-0">
                     <h4 class="font-weight-semi-bold m-0">Giỏ hàng</h4>
@@ -172,10 +97,10 @@
                         <h5 class="font-weight-bold">Tổng tiền</h5>
                         <h5 class="font-weight-bold">$160</h5>
                     </div>
-                    <a href="<?= base_url('checkout') ?>"><button class="btn btn-block btn-primary my-3 py-3">Thanh toán </button></a>
+                    <a href="<?= base_url('thanh-toan') ?>"><button class="btn btn-block btn-primary my-3 py-3">Thanh toán </button></a>
                 </div>
             </div>
-            <a href="<?= base_url('shop') ?>"><button class="btn btn-block btn-success my-3 py-3">Tiếp tục mua hàng</button></a>
+            <a href="<?= base_url('cua-hang') ?>"><button class="btn btn-block btn-success my-3 py-3">Tiếp tục mua hàng</button></a>
         </div>
 
     </div>

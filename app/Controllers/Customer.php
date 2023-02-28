@@ -13,6 +13,7 @@ class Customer extends BaseController
         $customerID = session()->get('id');
         $customer = $customerModel->find($customerID);
         $data['customer'] = $customer;
+        $data['cartTotal'] = $this->cartTotal;
         return view('Site/Customer/index', $data);
     }
 

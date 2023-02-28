@@ -77,9 +77,6 @@ class Product extends BaseController
         $productDescriptionModel = new ProductDescriptionModel();
         $productDescription = $productDescriptionModel->where('product_id', $productID)->first();
 
-
-        $attributeModel = new AttributeModel();
-        $attributes = $attributeModel->orderBy('id', 'ASC')->findAll();
         $productAttributeModel = new ProductAttributeModel();
         $productAttributes = $productAttributeModel->where('product_id', $productID)->orderBy('attribute_id', 'ASC')->find();
 
@@ -147,8 +144,9 @@ class Product extends BaseController
             'quantity' => $quantity,
             'status'   => $status,
         ];
-        $data['image']  = $images[0] ?? '';
-
+        if (isset($images)) {
+            $data['image']  = $images[0];
+        }
 
         $productModel = new ProductModel();
         $product = $productModel->where('name', $name)->first();

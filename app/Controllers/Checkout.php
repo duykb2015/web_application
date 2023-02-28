@@ -8,6 +8,7 @@ class Checkout extends BaseController
 {
     public function index()
     {
-        return view('site/checkout/index');
+        $data['cartTotal'] = $this->cartTotal;
+        return view('site/checkout/index', $data);
     }
 }

@@ -27,7 +27,7 @@ class Customer implements FilterInterface
     {
         //
         if (!session()->get('isLogin')) {
-            return redirect()->to('');
+            return redirect()->to('dang-nhap');
         }
     }
 
