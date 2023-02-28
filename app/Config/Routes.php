@@ -44,12 +44,17 @@ $routes->get('dang-xuat', 'Admin\Login::logout');
 $routes->post('dang-nhap', 'Login::authLogin');
 $routes->post('dang-ky', 'Login::authRegister');
 
-$routes->get('shop', 'Shop::index');
 
-$routes->get('detail', 'Customer::index');
+$routes->group('cua-hang', function ($routes) {
+    $routes->get('/', 'Shop::index');
+    $routes->get('chi-tiet/:any','Shop::detail');
+    
+});
+
 $routes->group('ca-nhan', ["filter" => "auth-customer"], function ($routes) {
-    $routes->get('/', 'Customer::index');
-    $routes->post('/', 'Customer::index');
+
+    $routes->get('chi-tiet', 'Customer::index');  
+    $routes->post('chi-tiet', 'Customer::authUpdateInfo');
 });
 
 $routes->get('cart', 'Cart::index');

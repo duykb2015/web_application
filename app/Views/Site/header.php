@@ -108,7 +108,7 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="<?= base_url('') ?>" class="nav-item nav-link active">Trang chủ</a>
-                            <a href="<?= base_url('shop') ?>" class="nav-item nav-link">Cửa hàng</a>
+                            <a href="<?= base_url('cua-hang') ?>" class="nav-item nav-link">Cửa hàng</a>
                             <!-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">
@@ -121,7 +121,7 @@
                         <div class="navbar-nav ml-auto py-0">
                             <?php $user = session()->get() ?>
                             <?php if (isset($user['isLogin']) && $user['isLogin']) : ?>
-                                <a href="<?= base_url('ca-nhan') ?>" class="nav-item nav-link"><?= $user['name'] ?></a>
+                                <a href="<?= base_url('ca-nhan/chi-tiet') ?>" class="nav-item nav-link"><?= $user['name'] ?></a>
                                 <a href="<?= base_url('dang-xuat') ?>" onclick="return confirm('Bạn có thật sự muốn thoát?')" class="nav-item nav-link">Thoát</a>
                             <?php else : ?>
                                 <a href="<?= base_url('dang-nhap') ?>" class="nav-item nav-link">Đăng nhập</a>
