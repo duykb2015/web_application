@@ -16,7 +16,7 @@ class Cart extends BaseController
 
     public function index()
     {
-        $customerID = session()->get('id');
+        $customerID = session()->get('user_id');
         $cartModel = new CartModel();
         $cartItems = $cartModel->where('customer_id', $customerID)->findAll();
 
@@ -45,9 +45,9 @@ class Cart extends BaseController
         return view('Site/Cart/index', $data);
     }
 
-    public function add()
+    public function addProductToCart()
     {
-        $customerID = session()->get('id');
+        $customerID = session()->get('user_id');
 
         $productID = $this->request->getPost('product_id');
         $attributes = $this->request->getPost('attributes');
@@ -84,9 +84,47 @@ class Cart extends BaseController
         return redirect()->to('gio-hang');
     }
 
+    public function updateProductCart()
+    {
+        $cartID = $this->request->getPost('id');
+        if (!$cartID) {
+            return $this->respond(responseFailed('Không có sản phẩm này trong giỏ hàng'),  Response::HTTP_OK);
+        }
+        $quantity = $this->request->getPost('quantity' . $cartID);
+
+        if ($quantity <= 0) {
+            $quantity = 1;
+        }
+
+        if ($quantity > 100) {
+            $quantity = 100;
+        }
+        $cartModel = new CartModel();
+        $isUpdated = $cartModel->update($cartID, ['quantity' => $quantity]);
+        if (!$isUpdated) {
+            return $this->respond(responseFailed(UNEXPECTED_ERROR_MESSAGE),  Response::HTTP_OK);
+        }
+
+        return $this->respond(responseSuccessed(),  Response::HTTP_OK);
+    }
+
     public function delete()
     {
-        $id = $this->request->getPost('id');
-        return $this->respond(responseSuccessed($id),  Response::HTTP_OK);
+        $cartID = $this->request->getPost('id');
+        if (!$cartID) {
+            return $this->respond(responseFailed('Không có sản phẩm này trong giỏ hàng'),  Response::HTTP_OK);
+        }
+        $productCartOptionModel = new ProductCartOptionModel();
+        $isDeleted = $productCartOptionModel->where('cart_id', $cartID)->delete();
+        if (!$isDeleted) {
+            return $this->respond(responseFailed(UNEXPECTED_ERROR_MESSAGE),  Response::HTTP_OK);
+        }
+
+        $cartModel = new CartModel();
+        $isDeleted = $cartModel->delete($cartID);
+        if (!$isDeleted) {
+            return $this->respond(responseFailed(UNEXPECTED_ERROR_MESSAGE),  Response::HTTP_OK);
+        }
+        return $this->respond(responseSuccessed(),  Response::HTTP_OK);
     }
 }

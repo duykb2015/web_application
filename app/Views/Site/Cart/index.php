@@ -1,6 +1,8 @@
 <?= $this->extend('Site/layout') ?>
 
-
+<?= $this->section('content') ?>
+<link rel="stylesheet" type="text/css" href="<?= base_url() ?>\templates\libraries\assets\pages\notification\notification.css">
+<?= $this->endSection() ?>
 <?= $this->section('content') ?>
 
 <!-- Page Header Start -->
@@ -32,6 +34,9 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
+                    <?php $cartTotal = 0; ?>
+                    <?php $cartDiscount = 0; ?>
+                    <?php $quantity = 0; ?>
                     <?php if (isset($cart) && !empty($cart)) : ?>
                         <?php foreach ($cart as $item) : ?>
                             <tr id="cart-<?= $item['id'] ?>">
@@ -41,22 +46,25 @@
                                 </td>
                                 <td class="align-middle">
                                     <?php $price = $item['price'] ?>
+                                    <?php $cartTotal += $price; ?>
                                     <?php $discount = $item['price'] - ($item['price'] * ($item['discount'] / 100)) ?>
+                                    <?php $cartDiscount += $discount; ?>
                                     <?= number_format($discount) ?>Đ <span style="text-decoration-line: line-through"><?= number_format($price) ?>Đ</span>
                                 </td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
-                                        <div class="input-group-btn">
+                                        <!-- <div class="input-group-btn">
                                             <button class="btn btn-sm btn-primary btn-minus">
                                                 <i class="fa fa-minus"></i>
                                             </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm bg-secondary text-center" value="<?= $item['quantity'] ?>">
-                                        <div class="input-group-btn">
+                                        </div> -->
+                                        <?php $quantity += $item['quantity'] ?>
+                                        <input type="text" id="quantity<?= $item['id'] ?>" oninput="update_product(<?= $item['id'] ?>)" min="1" max="100" class="form-control form-control-sm bg-secondary text-center" value="<?= $item['quantity'] ?>">
+                                        <!-- <div class="input-group-btn">
                                             <button class="btn btn-sm btn-primary btn-plus">
                                                 <i class="fa fa-plus"></i>
                                             </button>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </td>
                                 <td class="align-middle"><?= number_format($discount * $item['quantity']) ?>Đ</td>
@@ -87,19 +95,23 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3 pt-1">
                         <h6 class="font-weight-medium">Tiền hàng</h6>
-                        <h6 class="font-weight-medium">$150</h6>
+                        <h6 class="font-weight-medium"><?= number_format($cartTotal * $quantity) ?>Đ</h6>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3 pt-1">
+                        <h6 class="font-weight-medium">Giảm giá</h6>
+                        <h6 class="font-weight-medium"><?= number_format($cartDiscount * $quantity) ?>Đ</h6>
                     </div>
                     <div class="d-flex justify-content-between">
                         <h6 class="font-weight-medium">Vận chuyển</h6>
-                        <h6 class="font-weight-medium">$10</h6>
+                        <h6 class="font-weight-medium">10,000Đ</h6>
                     </div>
                 </div>
                 <div class="card-footer border-secondary bg-transparent">
                     <div class="d-flex justify-content-between mt-2">
                         <h5 class="font-weight-bold">Tổng tiền</h5>
-                        <h5 class="font-weight-bold">$160</h5>
+                        <h5 class="font-weight-bold"><?= number_format(($cartTotal - $cartDiscount) * $quantity + 10000) ?>Đ</h5>
                     </div>
-                    <a href="<?= base_url('thanh-toan') ?>"><button class="btn btn-block btn-primary my-3 py-3">Thanh toán </button></a>
+                    <a href="<?= base_url('giao-dich/thanh-toan') ?>"><button class="btn btn-block btn-primary my-3 py-3">Thanh toán </button></a>
                 </div>
             </div>
             <a href="<?= base_url('cua-hang') ?>"><button class="btn btn-block btn-success my-3 py-3">Tiếp tục mua hàng</button></a>
@@ -110,7 +122,44 @@
 <!-- Cart End -->
 <?= $this->endSection() ?>
 <?= $this->section('js') ?>
+<!-- notification js -->
+<script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\js\bootstrap-growl.min.js"></script>
+<script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\pages\notification\notification.js"></script>
+
 <script>
+    function update_product(id) {
+        const quantity = document.getElementById(`quantity${id}`).value;
+        const data = new FormData();
+        data.append('id', id);
+        data.append(`quantity${id}`, quantity)
+        var requestOptions = {
+            method: 'POST',
+            body: data,
+            redirect: 'follow'
+        };
+
+        fetch('<?= base_url('gio-hang/sua') ?>', requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    setTimeout(function() {
+                        location.reload();
+                    }, 1500);
+
+                    return true
+                }
+                console.log(result)
+
+                const error = result.result.error;
+                if (error) {
+                    msgbox_error(error)
+                    return false
+                }
+
+            })
+            .catch(error => msgbox_error(error));
+    }
+
     function delete_product(id, name) {
         const is_confirm = confirm(`Bạn muốn xóa sản phẩm "${name}" ?`);
         if (!is_confirm) {

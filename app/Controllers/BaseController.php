@@ -56,7 +56,7 @@ abstract class BaseController extends Controller
     public function __construct()
     {
         $cartModel = new CartModel();
-        $this->cartTotal = count($cartModel->where('customer_id', session()->get('id'))->findAll());
+        $this->cartTotal = count($cartModel->where('customer_id', session()->get('user_id'))->findAll());
     }
     public function getSubCategory()
     {

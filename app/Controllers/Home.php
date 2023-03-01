@@ -46,7 +46,12 @@ class Home extends BaseController
     public function product()
     {
         $pruductModel = new ProductModel();
-        $product = $pruductModel->where('status = 1')->findAll();
+        $product = $pruductModel->where('status >= 1')->findAll();
         return $product;
+    }
+
+    public function about()
+    {
+        return view('Site/About/index');
     }
 }

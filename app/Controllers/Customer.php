@@ -10,7 +10,7 @@ class Customer extends BaseController
     public function index()
     {
         $customerModel = new CustomerModel();
-        $customerID = session()->get('id');
+        $customerID = session()->get('user_id');
         $customer = $customerModel->find($customerID);
         $data['customer'] = $customer;
         $data['cartTotal'] = $this->cartTotal;

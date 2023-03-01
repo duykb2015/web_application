@@ -43,6 +43,8 @@ $routes->get('dang-xuat', 'Admin\Login::logout');
 $routes->post('dang-nhap', 'Login::authLogin');
 $routes->post('dang-ky', 'Login::authRegister');
 
+$routes->get('ve-chung-toi', 'Home::about');
+
 $routes->group('/',  function ($routes) {
 
     $routes->get('', 'Home::index');
@@ -59,9 +61,16 @@ $routes->group('/',  function ($routes) {
 
     $routes->group('gio-hang', ["filter" => "auth-customer"], function ($routes) {
         $routes->get('', 'Cart::index');
-        $routes->get('them/:any', 'Cart::add');
-        $routes->post('them', 'Cart::add');
+        $routes->post('them', 'Cart::addProductToCart');
+        $routes->post('sua', 'Cart::updateProductCart');
         $routes->post('xoa', 'Cart::delete');
+    });
+
+    $routes->group('giao-dich', ["filter" => "auth-customer"], function ($routes) {
+        $routes->get('lich-su-mua', 'Order::index');
+        $routes->get('lich-su-mua/chi-tiet/:any', 'Order::detail');
+        $routes->get('thanh-toan', 'Order::checkout');
+        $routes->post('thanh-toan', 'Order::processCheckout');
     });
 });
 

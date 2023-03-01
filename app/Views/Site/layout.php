@@ -21,8 +21,8 @@
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>\eshopper\css\style.min.css">
     <!-- Libraries Stylesheet -->
     <link href="<?= base_url() ?>/eshopper/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <?= $this->renderSection('css') ?>
     <!-- Notification.css -->
-    <link rel="stylesheet" type="text/css" href="<?= base_url() ?>\templates\libraries\assets\pages\notification\notification.css">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="<?= base_url() ?>/eshopper/css/style.css" rel="stylesheet">
@@ -50,9 +50,6 @@
     <script src="<?= base_url() ?>\eshopper\mail\jqBootstrapValidation.min.js"></script>
     <script src="<?= base_url() ?>\eshopper\mail\contact.js"></script>
 
-    <!-- notification js -->
-    <script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\js\bootstrap-growl.min.js"></script>
-    <script type="text/javascript" src="<?= base_url() ?>\templates\libraries\assets\pages\notification\notification.js"></script>
 
     <script type="text/javascript" src="<?= base_url() ?>\templates\js\app.js"></script>
     <!-- Template Javascript -->

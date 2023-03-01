@@ -27,6 +27,7 @@ class Customer implements FilterInterface
     {
         //
         if (!session()->get('isLogin')) {
+            session()->setFlashdata('error_msg', 'Bạn cần đăng nhập để sử dụng chức năng ngày.');
             return redirect()->to('dang-nhap');
         }
     }

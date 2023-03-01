@@ -84,7 +84,7 @@ function responseFailed($error = null)
  * 
  * @return array an array of data for successed response
  */
-function responseSuccessed($msg = '')
+function responseSuccessed($msg = null)
 {
     return [
         'success' => true,

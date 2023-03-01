@@ -78,7 +78,7 @@
 <!-- Categories Start -->
 <div class="container-fluid pt-5">
     <div class="row px-xl-5 pb-3">
-        <div class="col-lg-4 col-md-6 pb-1">
+        <!-- <div class="col-lg-4 col-md-6 pb-1">
             <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                 <p class="text-right">15 Sản Phẩm</p>
                 <a href="" class="cat-img position-relative overflow-hidden mb-3">
@@ -86,17 +86,7 @@
                 </a>
                 <h5 class="font-weight-semi-bold m-0">Trang phục nam</h5>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-6 pb-1">
-            <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                <p class="text-right">15 Sản Phẩm</p>
-                <a href="" class="cat-img position-relative overflow-hidden mb-3">
-                    <img class="img-fluid" src="<?= base_url() ?>\eshopper\img\cat-2.jpg" alt="">
-                </a>
-                <h5 class="font-weight-semi-bold m-0">Trang phục nam</h5>
-            </div>
-        </div>
-
+        </div> -->
     </div>
 </div>
 <!-- Categories End -->
@@ -111,7 +101,7 @@
                 <div class="position-relative" style="z-index: 1;">
                     <h5 class="text-uppercase text-primary mb-3">GIẢM GIÁ 20% TẤT CẢ ĐƠN HÀNG</h5>
                     <h1 class="mb-4 font-weight-semi-bold">Bộ sưu tập mùa xuân</h1>
-                    <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Mua ngay</a>
+                    <a href="<?= base_url('cua-hang') ?>" class="btn btn-outline-primary py-md-2 px-md-3">Mua ngay</a>
                 </div>
             </div>
         </div>
@@ -121,7 +111,7 @@
                 <div class="position-relative" style="z-index: 1;">
                     <h5 class="text-uppercase text-primary mb-3">GIẢM GIÁ 20% TẤT CẢ ĐƠN HÀNG</h5>
                     <h1 class="mb-4 font-weight-semi-bold">Bộ sưu tập mùa đông</h1>
-                    <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Mua ngay</a>
+                    <a href="<?= base_url('cua-hang') ?>" class="btn btn-outline-primary py-md-2 px-md-3">Mua ngay</a>
                 </div>
             </div>
         </div>
@@ -165,7 +155,7 @@
 
 
 <!-- Products Start -->
-<div class="container-fluid pt-5">
+<!-- <div class="container-fluid pt-5">
     <div class="text-center mb-4">
 
         <h2 class="section-title px-5"><span class="px-2">Sản Phẩm Mới</span></h2>
@@ -191,7 +181,7 @@
         </div>
 
     </div>
-</div>
+</div> -->
 <!-- Products End -->
 
 
