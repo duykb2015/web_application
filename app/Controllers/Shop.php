@@ -40,6 +40,7 @@ class Shop extends BaseController
         }
 
         $relatedProduct = $productModel->where(['id <>' => $product['id'], 'category' => $product['category']])->limit(4, 0)->findAll();
+
         $productImage = $producImagetModel->where('product_id', $product['id'])->find();
         $productDescription = $productDescriptionModel->where('product_id', $product['id'])->first();
 
@@ -56,12 +57,14 @@ class Shop extends BaseController
             }
             $attribute[$key]['value'] =  $value[$key];
         }
+
         $data['product'] = $product;
         $data['relatedProduct'] = $relatedProduct;
         $data['productImage'] = $productImage;
         $data['productDescription'] = $productDescription;
         $data['productAttribute'] = $attribute;
         $data['cartTotal'] = $this->cartTotal;
+
         return view('Site/Shop/detail', $data);
     }
 

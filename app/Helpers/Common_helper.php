@@ -191,7 +191,9 @@ function create_slug($string)
 
 function public_url($url = null)
 {
+
     return base_url() . '/public/' . $url;
+
 }
 
 /**

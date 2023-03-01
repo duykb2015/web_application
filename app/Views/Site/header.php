@@ -109,6 +109,7 @@
                             <a href="<?= base_url('') ?>" class="nav-item nav-link <?= url_is('') ? 'active' : '' ?>">Trang chủ</a>
                             <a href="<?= base_url('cua-hang') ?>" class="nav-item nav-link <?= url_is('cua-hang*') ? 'active' : '' ?>">Cửa hàng</a>
                             <a href="<?= base_url('ve-chung-toi') ?>" class="nav-item nav-link <?= url_is('ve-chung-toi*') ? 'active' : '' ?>">Về chúng tôi</a>
+
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                             <?php $user = session()->get() ?>
