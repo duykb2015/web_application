@@ -62,9 +62,7 @@
                     Distributed By <a href="#" target="_blank">ThemeWagon</a> -->
                 </p>
             </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
-                <img class="img-fluid" src="img/payments.png" alt="">
-            </div>
+
         </div>
     </div>
     <!-- Footer End -->

@@ -48,6 +48,9 @@
                 </form>
             </div>
             <div class="col-lg-3 col-6 text-right">
+                <a href="<?= base_url('giao-dich') ?>" class="btn border">
+                    <i class="text-primary fa fa-truck" aria-hidden="true"></i>
+                </a>
                 <a href="<?= base_url('gio-hang') ?>" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span class="badge"><?= $cartTotal ?? 0 ?></span>

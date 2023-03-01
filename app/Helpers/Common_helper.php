@@ -84,11 +84,11 @@ function responseFailed($error = null)
  * 
  * @return array an array of data for successed response
  */
-function responseSuccessed()
+function responseSuccessed($msg = '')
 {
     return [
         'success' => true,
-        'message' => 'Thành công'
+        'message' => $msg ?? 'Thành công'
     ];
 }
 

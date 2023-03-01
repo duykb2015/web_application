@@ -34,7 +34,7 @@
                 <tbody class="align-middle">
                     <?php if (isset($cart) && !empty($cart)) : ?>
                         <?php foreach ($cart as $item) : ?>
-                            <tr>
+                            <tr id="cart-<?= $item['id'] ?>">
                                 <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">
                                     <span class="font-weight-bold"><?= $item['name'] ?></span><br>
                                     <small><?= $item['option'] ?></small>
@@ -60,9 +60,11 @@
                                     </div>
                                 </td>
                                 <td class="align-middle"><?= number_format($discount * $item['quantity']) ?>Đ</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-primary"><i class="fa fa-times"></i></button></td>
+                                <td class="align-middle"><button class="btn btn-sm btn-primary" onclick="delete_product(<?= $item['id'] ?>, '<?= $item['name'] ?>')"><i class="fa fa-times"></i></button></td>
                             </tr>
                         <?php endforeach ?>
+                    <?php else : ?>
+                        <td colspan="5">Không có sản phẩm nào trong giỏ hàng.</td>
                     <?php endif ?>
                 </tbody>
 
@@ -106,4 +108,44 @@
     </div>
 </div>
 <!-- Cart End -->
+<?= $this->endSection() ?>
+<?= $this->section('js') ?>
+<script>
+    function delete_product(id, name) {
+        const is_confirm = confirm(`Bạn muốn xóa sản phẩm "${name}" ?`);
+        if (!is_confirm) {
+            return
+        }
+
+        const data = new FormData();
+        data.append('id', id);
+        var requestOptions = {
+            method: 'POST',
+            body: data,
+            redirect: 'follow'
+        };
+
+        fetch('<?= base_url('gio-hang/xoa') ?>', requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    msgbox_success(result.message)
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000);
+
+                    return true
+                }
+                console.log(result)
+
+                const error = result.result.error;
+                if (error) {
+                    msgbox_error(error)
+                    return false
+                }
+
+            })
+            .catch(error => msgbox_error(error));
+    }
+</script>
 <?= $this->endSection() ?>

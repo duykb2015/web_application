@@ -61,7 +61,7 @@ $routes->group('/',  function ($routes) {
         $routes->get('', 'Cart::index');
         $routes->get('them/:any', 'Cart::add');
         $routes->post('them', 'Cart::add');
-        $routes->post('xoa', 'cart::delete');
+        $routes->post('xoa', 'Cart::delete');
     });
 });
 

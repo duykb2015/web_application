@@ -11,6 +11,7 @@ use App\Models\ProductModel;
 use CodeIgniter\API\ResponseTrait;
 use App\Models\ProductDescriptionModel;
 use App\Models\ProductImageModel;
+use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\HTTP\Response;
 
 class Product extends BaseController
@@ -83,12 +84,13 @@ class Product extends BaseController
         foreach ($attributes as $key => $item) {
             $attribute[$key]['id'] = $item['id'];
             $attribute[$key]['name'] = $item['name'];
+            $value = [];
             foreach ($productAttributes as $row) {
                 if ($row['attribute_id'] == $item['id']) {
                     $value[$key][] = $row['value'];
                 }
             }
-            $attribute[$key]['value'] = implode(',', $value[$key]);
+            $attribute[$key]['value'] = implode(',', $value[$key] ?? []);
         }
         foreach ($productAttributes as $row) {
             $productAttributeID[] = $row['id'];
@@ -97,7 +99,7 @@ class Product extends BaseController
         $data['images']             = $images;
         $data['productDescription'] = $productDescription;
         $data['productAttribute']   = $attribute;
-        $data['productAttributeID'] = implode(',', $productAttributeID);
+        $data['productAttributeID'] = implode(',', $productAttributeID ?? []);
         $data['title']              = 'Chỉnh sửa dòng sản phẩm';
 
         return view('Admin/Product/detail', $data);
@@ -308,7 +310,11 @@ class Product extends BaseController
 
         //Delete product
         $product_m = new ProductModel();
-        $isDelete = $product_m->delete($productID);
+        try {
+            $isDelete = $product_m->delete($productID);
+        } catch (DatabaseException $e) {
+            return $this->respond(responseFailed('Không xoá được sản phẩm'),  Response::HTTP_OK);
+        }
         if (!$isDelete) {
             return $this->respond(responseFailed('Không xoá được sản phẩm'),  Response::HTTP_OK);
         }
