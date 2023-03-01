@@ -164,8 +164,8 @@
                         <input type="tel" class="form-control border border-primary py-4 rounded" name="telephone" placeholder="Số điện thoại, ít nhất 9 kí tự" required />
                     </div>
                     <div class="form-group">
-                        <label class="font-weight-bold">Địa chỉ 1</label>
-                        <input type="text" class="form-control border border-primary py-4 rounded" name="address1" placeholder="Nhập Đia chỉ 1" />
+                        <label class="font-weight-bold">Địa chỉ 1<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control border border-primary py-4 rounded" name="address1" placeholder="Nhập Đia chỉ 1" required/>
                     </div>
                     <div class="form-group">
                         <label class="font-weight-bold">Địa chỉ 2</label>

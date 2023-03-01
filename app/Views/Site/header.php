@@ -48,13 +48,12 @@
                 </form>
             </div>
             <div class="col-lg-3 col-6 text-right">
-                <a href="" class="btn border">
-                    <i class="fas fa-heart text-primary"></i>
-                    <span class="badge">0</span>
+                <a href="<?= base_url('giao-dich/lich-su-mua') ?>" class="btn border">
+                    <i class="text-primary fa fa-truck" aria-hidden="true"></i>
                 </a>
-                <a href="<?= base_url('cart') ?>" class="btn border">
+                <a href="<?= base_url('gio-hang') ?>" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
+                    <span class="badge"><?= $cartTotal ?? 0 ?></span>
                 </a>
             </div>
         </div>
@@ -107,9 +106,10 @@
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="<?= base_url('') ?>" class="nav-item nav-link active">Trang chủ</a>
-                            <a href="<?= base_url('cua-hang') ?>" class="nav-item nav-link">Cửa hàng</a>
-                            <a href="<?= base_url('contact') ?>" class="nav-item nav-link">Liên hệ</a>
+                            <a href="<?= base_url('') ?>" class="nav-item nav-link <?= url_is('') ? 'active' : '' ?>">Trang chủ</a>
+                            <a href="<?= base_url('cua-hang') ?>" class="nav-item nav-link <?= url_is('cua-hang*') ? 'active' : '' ?>">Cửa hàng</a>
+                            <a href="<?= base_url('ve-chung-toi') ?>" class="nav-item nav-link <?= url_is('ve-chung-toi*') ? 'active' : '' ?>">Về chúng tôi</a>
+
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                             <?php $user = session()->get() ?>

@@ -145,7 +145,7 @@
                                                                                 <div class="jFiler-item-icon pull-left"><i class="icon-jfi-file-o jfi-file-type-image jfi-file-ext-png"></i></div>
                                                                                 <div class="jFiler-item-info pull-left">
                                                                                     <div class="jFiler-item-title" title="<?= $image['image'] ?>"><a href="<?= base_url('uploads/product/' . $image['image']) ?>" target="_blank" rel="noopener noreferrer"><?= $image['image'] ?></a></div>
-                                                                                    <div class="jFiler-item-others"><span><?= get_file_size(PRODUCT_IMAGE_PATH . $image['image'], 2) ?> MB</span><span>type: <?= getimagesize(PRODUCT_IMAGE_PATH . $image['image'])['mime'] ?></span><span class="jFiler-item-status"></span></div>
+                                                                                    <div class="jFiler-item-others"><span><?= @get_file_size(PRODUCT_IMAGE_PATH . $image['image'], 2) ?? 0 ?> MB</span><span>type: <?= @getimagesize(PRODUCT_IMAGE_PATH . $image['image'])['mime'] ?? 'unknow' ?></span><span class="jFiler-item-status"></span></div>
                                                                                     <div class="jFiler-item-assets">
                                                                                         <ul class="list-inline">
                                                                                             <li><a onclick="delete_image(<?= $image['id'] ?>, '<?= $image['image'] ?>')" class="icon-jfi-trash jFiler-item-trash-action"></a></li>
@@ -270,9 +270,13 @@
         return str
     }
 
-    $('#name').on('input', function() {
-        $('#slug').val(slug($(this).val()))
-    })
+    // $('#name').on('input', function() {
+    //     $('#slug').val(slug($(this).val()))
+    // })
+
+    document.getElementById('name').oninput = function() {
+        document.getElementById('slug').value = (slug(document.getElementById('name').value))
+    }
 
     $('#remove-alert').on('click', function() {
         $('.alert').remove();

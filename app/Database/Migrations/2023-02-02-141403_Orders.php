@@ -33,8 +33,7 @@ class Orders extends Migration
                 'default' => '1'
             ],
             'shipping_to' => [
-                'type' => 'VARCHAR',
-                'constraint' => 255,
+                'type' => 'TEXT',
                 'null' => FALSE,
             ],
             'total' => [

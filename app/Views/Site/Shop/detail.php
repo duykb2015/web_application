@@ -9,7 +9,7 @@
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
         <h1 class="font-weight-semi-bold text-uppercase mb-3">Chi Tiết Sản Phẩm</h1>
         <div class="d-inline-flex">
-            <p class="m-0"><a href="">Trang Chủ</a></p>
+            <p class="m-0"><a href="<?= base_url('cua-hang') ?>">Cửa hàng</a></p>
             <p class="m-0 px-2">-</p>
             <p class="m-0">Chi Tiết Sản Phẩm</p>
         </div>
@@ -29,8 +29,7 @@
                     <?php if (isset($productImage)) : ?>
                         <?php foreach ($productImage as $key => $row) : ?>
                             <div class="carousel-item <?= $key == 0 ? 'active' : '' ?>">
-
-                                <img class="w-100 h-100" src="<?= base_url() ?>\uploads\product\<?= $row['image'] ?>" alt="Image">
+                                <img class="w-75 h-75" src="<?= base_url() ?>\uploads\product\<?= $row['image'] ?>" alt="Image">
                             </div>
                         <?php endforeach ?>
                     <?php endif ?>
@@ -54,93 +53,68 @@
                     <small class="fas fa-star-half-alt"></small>
                     <small class="far fa-star"></small>
                 </div>
-                <small class="pt-1">(50 Reviews)</small>
+                <!-- <small class="pt-1">(50 Reviews)</small> -->
             </div>
             <div class="d-flex">
-                <h3 class="font-weight-semi-bold mb-4"><?= number_format($product['price'], 0, '', ','); ?> VNĐ</h3>
-                <h3 class="text-muted ml-2"><del><?= $product['discount'] ?>%</del></h3>
+                <h3 class="font-weight-semi-bold mb-4"><?= number_format($product['price'] - ($product['price'] * ($product['discount'] / 100))); ?> VNĐ</h3>
+                <h3 class="text-muted ml-2"><del><?= number_format($product['price']); ?> VNĐ</del> <?= $product['discount'] ?>%</h3>
             </div>
-
-            <?php foreach ($productDescription as $row) : ?>
-                <p class="mb-4"><?= $row['information'] ?></p>
-            <?php endforeach ?>
-
-            <?php if (isset($attributes)) : ?>
-                <?php foreach ($attributes as $key => $item) : ?>
-                    <div class="d-flex mb-3">
-                        <p class="text-dark font-weight-medium mb-0 mr-3"><?= $item['name'] ?></p>
-                        <form>
-                            <?php if (isset($productAttribute)) : ?>
-                                <?php foreach ($productAttribute as $key => $item) : ?>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" class="custom-control-input" id="size-1" name="size">
-                                        <label class="custom-control-label" for="size-1"><?= $item['value'] ?></label>
-                                    </div>
-                                <?php endforeach ?>
-                            <?php endif ?>
-                        </form>
+            <p class="mb-4"><?= $productDescription['information'] ?? '' ?></p>
+            <form method="POST" action="<?= base_url('gio-hang/them') ?>">
+                <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+                <?php if (isset($productAttribute)) : ?>
+                    <?php foreach ($productAttribute as $row) : ?>
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <p class="text-dark font-weight-medium mb-0 mr-3"><?= $row['name'] ?></p>
+                            </div>
+                            <div class="col-md-9">
+                                <select name="attributes[] ?>" class="custom-select">
+                                    <?php if (isset($row['value'])) : ?>
+                                        <?php foreach ($row['value'] as $key => $item) : ?>
+                                            <option value="<?= $key ?>"><?= $item ?></option>
+                                        <?php endforeach ?>
+                                    <?php endif ?>
+                                </select>
+                            </div>
+                        </div>
+                    <?php endforeach ?>
+                <?php endif ?>
+                <div class="d-flex align-items-center mb-4 pt-2">
+                    <div class="input-group quantity mr-3" style="width: 130px;">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-plus">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                        <input type="text" class="form-control bg-secondary text-center" name="quantity" min=1 value="1">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-minus">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
                     </div>
-
-                <?php endforeach ?>
-            <?php endif ?>
-            <div class="d-flex align-items-center mb-4 pt-2">
-                <div class="input-group quantity mr-3" style="width: 130px;">
-                    <div class="input-group-btn">
-                        <button class="btn btn-primary btn-minus">
-                            <i class="fa fa-minus"></i>
-                        </button>
-                    </div>
-                    <input type="text" class="form-control bg-secondary text-center" value="1">
-                    <div class="input-group-btn">
-                        <button class="btn btn-primary btn-plus">
-                            <i class="fa fa-plus"></i>
-                        </button>
-                    </div>
+                    <button type="submit" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào giỏ hàng</button>
                 </div>
-                <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
-            </div>
-            <div class="d-flex pt-2">
-                <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
-                <div class="d-inline-flex">
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a class="text-dark px-2" href="">
-                        <i class="fab fa-pinterest"></i>
-                    </a>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
-    <div class="row px-xl-5">
-        <div class="col">
-            <div class="nav nav-tabs justify-content-center border-secondary mb-4">
-                <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Mô tả</a>
-                <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Thông tin</a>
-                <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+</div>
+<div class="row px-xl-5">
+    <div class="col">
+        <div class="nav nav-tabs justify-content-center border-secondary mb-4">
+            <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Mô tả</a>
+            <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Thông tin</a>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="tab-pane-1">
+                <h4 class="mb-3">Mô tả thông tin sản phẩm</h4>
+                <p class="mb-4"><?= $productDescription['description'] ?? '' ?></p>
             </div>
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="tab-pane-1">
-                    <h4 class="mb-3">Mô tả thông tin sản phẩm</h4>
-                    <?php foreach ($productDescription as $row) : ?>
-                        <p class="mb-4"><?= $row['description'] ?></p>
-                    <?php endforeach ?>
-
-
-                </div>
-                <div class="tab-pane fade" id="tab-pane-2">
-                    <?php foreach ($productDescription as $row) : ?>
-                        <p class="mb-4"><?= $row['information'] ?></p>
-                    <?php endforeach ?>
-
-                </div>
-                <div class="tab-pane fade" id="tab-pane-3">
+            <div class="tab-pane fade" id="tab-pane-2">
+                <p class="mb-4"><?= $productDescription['information'] ?? '' ?></p>
+            </div>
+            <!-- <div class="tab-pane fade" id="tab-pane-3">
                     <div class="row">
                         <div class="col-md-6">
                             <h4 class="mb-4">1 review for "Colorful Stylish Shirt"</h4>
@@ -191,10 +165,10 @@
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div> -->
         </div>
     </div>
+</div>
 </div>
 
 <!-- Shop Detail End -->
@@ -212,13 +186,19 @@
                     <?php foreach ($relatedProduct as $item) : ?>
                         <div class="card product-item border-0">
                             <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                                <a href="<?= base_url('cua-hang/chi-tiet') . '/' . $item['slug'] ?>"><img class="img-thumbnail" src="<?= base_url() ?>\uploads\product\<?= $item['image'] ?>" alt=""></a>
+
+                                <a href="<?= base_url('cua-hang/chi-tiet') . '/' . $item['slug'] ?>">
+                                    <img class="img-thumbnail" src="<?= base_url() ?>\uploads\product\<?= $item['image'] ?>" alt="">
+                                </a>
+
                             </div>
                             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
                                 <h6 class="text-truncate mb-3"><?= $item['name'] ?></h6>
                                 <div class="d-flex justify-content-center">
-                                    <h6><?= number_format($item['price'], 0, '', ','); ?> VNĐ</h6>
-                                    <h6 class="text-muted ml-2"><del><?= $item['discount'] ?>%</del></h6>
+                                    <?php $price = $item['price'] ?>
+                                    <?php $discount = $item['price'] - ($item['price'] * ($item['discount'] / 100)) ?>
+                                    <h6><?= number_format($discount); ?> VNĐ</h6>
+                                    <h6 class="text-muted ml-2"><del><?= number_format($price); ?> VNĐ</del> <?= $item['discount'] ?>%</h6>
                                 </div>
                             </div>
                             <div class="card-footer d-flex justify-content-between bg-light border">

@@ -60,7 +60,7 @@ class Login extends BaseController
         }
 
         $sessionData = [
-            'id'      => $customer['id'],
+            'user_id' => $customer['id'],
             'name'    => $customer['firstname'] . ' ' . $customer['lastname'],
             'isLogin' => true
         ];

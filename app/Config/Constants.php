@@ -168,3 +168,25 @@ define('PRODUCT_STATUS', [
     STOPSELL => 'Ngưng bán',
     SOLDOUT => 'Hết hàng'
 ]);
+
+define('WAIT', 0);
+define('CONFIRMED', 1);
+define('DELIVERY', 2);
+define('DELIVERED', 3);
+define('CANCELED', 4);
+define('CHECKOUT_STATUS', [
+    WAIT => 'Chờ xác nhận',
+    CONFIRMED => 'Đã xác nhận',
+    DELIVERY => 'Đang giao',
+    DELIVERED => 'Đã giao',
+    CANCELED => 'Đã huỷ',
+]);
+
+define('PAYPAL', 0);
+define('DIRECTCHECK', 1);
+define('MOMO', 2);
+define('PAYMENT_METHOD', [
+    PAYPAL => 'Paypal',
+    DIRECTCHECK => 'Thanh toán khi nhận',
+    MOMO => 'Ví momo',
+]);

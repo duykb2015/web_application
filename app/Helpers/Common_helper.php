@@ -84,11 +84,11 @@ function responseFailed($error = null)
  * 
  * @return array an array of data for successed response
  */
-function responseSuccessed()
+function responseSuccessed($msg = null)
 {
     return [
         'success' => true,
-        'message' => 'Thành công'
+        'message' => $msg ?? 'Thành công'
     ];
 }
 
@@ -191,7 +191,9 @@ function create_slug($string)
 
 function public_url($url = null)
 {
-    return base_url() . 'public/' . $url;
+
+    return base_url() . '/public/' . $url;
+
 }
 
 /**
