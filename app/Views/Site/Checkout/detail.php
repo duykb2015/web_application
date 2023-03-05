@@ -43,6 +43,7 @@
                                 <td class="align-middle">
                                     <?php $price = $item['price'] - ($item['price'] * ($item['discount'] / 100)) ?>
                                     <?= number_format($price) ?>Đ
+                                    <span style="text-decoration: line-through;"><?= number_format($item['price']) ?>Đ</span>
                                 </td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">

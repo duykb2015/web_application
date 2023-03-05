@@ -19,16 +19,18 @@ class Order extends BaseController
         $ordersModel = new OrdersModel();
         $orders = $ordersModel->where('customer_id', $customerID)->findAll();
         $data['orders'] = $orders;
+        $data['cartTotal'] = $this->cartTotal;
         return view('Site/Checkout/index', $data);
     }
+
     public function detail()
     {
         $orderID = $this->request->getUri()->getSegment(4);
         $ordersModel = new OrdersModel();
         $order = $ordersModel->getOrderDetail($orderID);
 
-        // pre($order);
         $data['order'] = $order;
+        $data['cartTotal'] = $this->cartTotal;
         return  view('Site/Checkout/detail', $data);
     }
     public function checkout()
@@ -56,7 +58,7 @@ class Order extends BaseController
             //Get product
             $product = $productModel->where('id', $item['product_id'])->first();
             $price = $product['price'];
-            $discount = $product['price'] - ($product['price'] * ($product['discount'] / 100));
+            $discount =  $product['price'] * ($product['discount'] / 100);
             //Transform data
             $cartProducts[$key] = $item;
             $cartProducts[$key]['productName'] = $product['name'];
