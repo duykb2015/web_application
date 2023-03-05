@@ -99,7 +99,7 @@
                     </div>
                     <div class="d-flex justify-content-between mb-3 pt-1">
                         <h6 class="font-weight-medium">Giảm giá</h6>
-                        <h6 class="font-weight-medium"><?= number_format($price-$discount) ?>Đ</h6>
+                        <h6 class="font-weight-medium"><?= number_format(($cartTotal-$cartDiscount) * $quantity) ?>Đ</h6>
                     </div>
                     <div class="d-flex justify-content-between">
                         <h6 class="font-weight-medium">Vận chuyển</h6>
@@ -109,7 +109,11 @@
                 <div class="card-footer border-secondary bg-transparent">
                     <div class="d-flex justify-content-between mt-2">
                         <h5 class="font-weight-bold">Tổng tiền</h5>
-                        <h5 class="font-weight-bold"><?= number_format($cartDiscount * $quantity +10000) ?>Đ</h5>
+                        <?php if (isset($cart)) : ?>
+                        <h5 class="font-weight-bold"><?= number_format(( $cartDiscount) * $quantity + 10000) ?>Đ</h5>
+                        <?php else : ?>
+                            <h5 class="font-weight-bold">0 Đ</h5>
+                        <?php endif ?>
                     </div>
                     <a href="<?= base_url('giao-dich/thanh-toan') ?>"><button class="btn btn-block btn-primary my-3 py-3">Thanh toán </button></a>
                 </div>
