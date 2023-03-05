@@ -49,7 +49,7 @@
                                         <?= $item['quantity'] ?>
                                     </div>
                                 </td>
-                                <td class="align-middle"><?= number_format($item['quantity'] * $price) ?></td>
+                                <td class="align-middle">   </td>
                             </tr>
                         <?php endforeach ?>
                     <?php else : ?>
