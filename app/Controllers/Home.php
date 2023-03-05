@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\CategoryModel;
 use App\Models\BannerModel;
+use App\Models\ProductModel;
 
 class Home extends BaseController
 {
@@ -11,8 +12,10 @@ class Home extends BaseController
     {
         $datas['title'] = 'Home';
         $datas['category'] = $this->getSubCategory();
-        $datas['banner']=$this->banner();
-        return view('site/home/index', $datas);
+        $datas['banner'] = $this->banner();
+        $datas['product'] = $this->product();
+        $datas['cartTotal'] = $this->cartTotal;
+        return view('Site/Home/index', $datas);
     }
 
     public function getSubCategory()
@@ -28,13 +31,27 @@ class Home extends BaseController
             }
             $category[$key] = $item;
         }
+
         return $category;
     }
-    public function banner(){
+
+    public function banner()
+    {
         $bannerModel = new BannerModel();
-        //The method is not deprecated, the optional [$upper] parameter is deprecated.
-        $banner=$bannerModel->findAll();
-        
+        $banner = $bannerModel->findAll();
+
         return $banner;
+    }
+
+    public function product()
+    {
+        $pruductModel = new ProductModel();
+        $product = $pruductModel->where('status >= 1')->findAll();
+        return $product;
+    }
+
+    public function about()
+    {
+        return view('Site/About/index');
     }
 }

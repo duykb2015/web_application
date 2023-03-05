@@ -80,13 +80,15 @@ class Upload
         return $fileNames;
     }
 
-    function cleanImage($images, $path = null)
+    function cleanImages($images)
     {
-        if (!is_array($images)) {
-            return remove($images, $path);
-        }
         foreach ($images as $image) {
-            remove($image, $path);
+            $file = PRODUCT_IMAGE_PATH . $image['image'];
+            if (!file_exists($file)) {
+                return false;
+            }
+            unlink($file);;
         }
+        return true;
     }
 }

@@ -26,11 +26,6 @@ class OrdersProduct extends Migration
                 'constraint' => 11,
                 'null' => FALSE,
             ],
-            'discount' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'null' => FALSE,
-            ],
             'quantity' => [
                 'type' => 'INT',
                 'constraint' => 11,

@@ -1,4 +1,4 @@
-<?= $this->extend('admin/layout') ?>
+<?= $this->extend('Admin/layout') ?>
 <?= $this->section('content') ?>
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
@@ -121,9 +121,12 @@
         return str
     }
 
-    $('#name').on('input', function() {
-        $('#slug').val(slug($(this).val()))
-    })
+    // $('#name').on('input', function() {
+    //     $('#slug').val(slug($(this).val()))
+    // })
+    document.getElementById('name').oninput = function() {
+        document.getElementById('slug').value = (slug(document.getElementById('name').value))
+    }
 </script>
 
 

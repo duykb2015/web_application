@@ -1,4 +1,4 @@
-<?= $this->extend('admin/layout') ?>
+<?= $this->extend('Admin/layout') ?>
 <?= $this->section('content') ?>
 
 <div class="pcoded-content">
@@ -131,46 +131,46 @@
             </div>
         </div>
     </div>
+</div>
 
+<?= $this->endSection() ?>
 
-    <?= $this->endSection() ?>
+<?= $this->section('js') ?>
 
-    <?= $this->section('js') ?>
-
-    <script>
-        function delete_product(id, name) {
-            const is_confirm = confirm(`Bạn muốn xóa sản phẩm "${name}" ?`);
-            if (!is_confirm) {
-                return
-            }
-
-            const data = new FormData();
-            data.append('id', id);
-            var requestOptions = {
-                method: 'POST',
-                body: data,
-                redirect: 'follow'
-            };
-
-            fetch('<?= base_url('dashboard/product/manage/delete') ?>', requestOptions)
-                .then(response => response.json())
-                .then(result => {
-                    if (result.success) {
-                        msgbox_success(result.message)
-                        document.getElementById(`product-${id}`).remove()
-                        return true
-                    }
-                    console.log(result)
-
-                    const error = result.result.error;
-                    if (error) {
-                        msgbox_error(error)
-                        return false
-                    }
-
-                })
-                .catch(error => msgbox_error(error));
+<script>
+    function delete_product(id, name) {
+        const is_confirm = confirm(`Bạn muốn xóa sản phẩm "${name}" ?`);
+        if (!is_confirm) {
+            return
         }
-    </script>
 
-    <?= $this->endSection() ?>
+        const data = new FormData();
+        data.append('id', id);
+        var requestOptions = {
+            method: 'POST',
+            body: data,
+            redirect: 'follow'
+        };
+
+        fetch('<?= base_url('dashboard/product/manage/delete') ?>', requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    msgbox_success(result.message)
+                    document.getElementById(`product-${id}`).remove()
+                    return true
+                }
+                console.log(result)
+
+                const error = result.result.error;
+                if (error) {
+                    msgbox_error(error)
+                    return false
+                }
+
+            })
+            .catch(error => msgbox_error(error));
+    }
+</script>
+
+<?= $this->endSection() ?>

@@ -105,7 +105,7 @@ _modules/*
 nbproject/
 build/
 nbbuild/
-dist/
+# dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
@@ -128,3 +128,5 @@ nb-configuration.xml
 /.phpunit.*.cache
 
 /.php-cs-fixer.php
+
+public/uploads/*
