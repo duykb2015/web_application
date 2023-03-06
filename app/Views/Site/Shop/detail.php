@@ -90,6 +90,7 @@
                         <input type="text" class="form-control bg-secondary text-center" name="quantity" min=1 value="1">
                         <div class="input-group-btn">
                             <button class="btn btn-primary btn-minus" onclick="event.preventDefault()">
+
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
