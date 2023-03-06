@@ -146,6 +146,7 @@ class Product extends BaseController
             'quantity' => $quantity,
             'status'   => $status,
         ];
+
         if (isset($images)) {
             $data['image']  = $images[0];
         }
