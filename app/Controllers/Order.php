@@ -59,6 +59,7 @@ class Order extends BaseController
             $product = $productModel->where('id', $item['product_id'])->first();
             $price = $product['price'];
             $discount =  $product['price'] * ($product['discount'] / 100);
+            
             //Transform data
             $cartProducts[$key] = $item;
             $cartProducts[$key]['productName'] = $product['name'];

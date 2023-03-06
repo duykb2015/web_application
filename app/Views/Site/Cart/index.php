@@ -49,6 +49,7 @@
 
                             <tr id="cart-<?= $item['id'] ?>">
                                 <td class="align-middle">
+
                                     <span class="font-weight-bold"><?= $item['name'] ?></span><br>
                                     <small><?= $item['option'] ?></small>
                                 </td>
