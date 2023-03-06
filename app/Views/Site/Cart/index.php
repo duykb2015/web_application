@@ -37,19 +37,24 @@
                     <?php $cartTotal = 0; ?>
                     <?php $cartDiscount = 0; ?>
                     <?php $quantity = 0; ?>
+                    <?php $cartFinal = 0; ?>
                     <?php if (isset($cart) && !empty($cart)) : ?>
                         <?php foreach ($cart as $item) : ?>
+                            <?php $price = $item['price'] ?>
+                            <?php $quantity += $item['quantity'] ?>
+                            <?php $cartTotal += ($price * $item['quantity']); ?>
+                            <?php $discount = $item['price'] * ($item['discount'] / 100) ?>
+                            <?php $cartDiscount += $discount * $quantity; ?>
+                            <?php $cartFinal += (($price - $discount) * $item['quantity']); ?>
+
                             <tr id="cart-<?= $item['id'] ?>">
-                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">
+                                <td class="align-middle">
+
                                     <span class="font-weight-bold"><?= $item['name'] ?></span><br>
                                     <small><?= $item['option'] ?></small>
                                 </td>
                                 <td class="align-middle">
-                                    <?php $price = $item['price'] ?>
-                                    <?php $cartTotal += $price; ?>
-                                    <?php $discount = $item['price'] - ($item['price'] * ($item['discount'] / 100)) ?>
-                                    <?php $cartDiscount += $discount; ?>
-                                    <?= number_format($discount) ?>Đ <span style="text-decoration-line: line-through"><?= number_format($price) ?>Đ</span>
+                                    <?= number_format($price - $discount) ?>Đ <span style="text-decoration-line: line-through"><?= number_format($price) ?>Đ</span>
                                 </td>
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -58,7 +63,6 @@
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div> -->
-                                        <?php $quantity += $item['quantity'] ?>
                                         <input type="text" id="quantity<?= $item['id'] ?>" oninput="update_product(<?= $item['id'] ?>)" min="1" max="100" class="form-control form-control-sm bg-secondary text-center" value="<?= $item['quantity'] ?>">
                                         <!-- <div class="input-group-btn">
                                             <button class="btn btn-sm btn-primary btn-plus">
@@ -67,7 +71,7 @@
                                         </div> -->
                                     </div>
                                 </td>
-                                <td class="align-middle"><?= number_format($discount * $item['quantity']) ?>Đ</td>
+                                <td class="align-middle"><?= number_format(($price - $discount) * $item['quantity']) ?>Đ</td>
                                 <td class="align-middle"><button class="btn btn-sm btn-primary" onclick="delete_product(<?= $item['id'] ?>, '<?= $item['name'] ?>')"><i class="fa fa-times"></i></button></td>
                             </tr>
                         <?php endforeach ?>
@@ -95,11 +99,11 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-3 pt-1">
                         <h6 class="font-weight-medium">Tiền hàng</h6>
-                        <h6 class="font-weight-medium"><?= number_format($cartTotal * $quantity) ?>Đ</h6>
+                        <h6 class="font-weight-medium"><?= number_format($cartTotal) ?>Đ</h6>
                     </div>
                     <div class="d-flex justify-content-between mb-3 pt-1">
                         <h6 class="font-weight-medium">Giảm giá</h6>
-                        <h6 class="font-weight-medium"><?= number_format($cartDiscount * $quantity) ?>Đ</h6>
+                        <h6 class="font-weight-medium"><?= number_format($cartDiscount) ?>Đ</h6>
                     </div>
                     <div class="d-flex justify-content-between">
                         <h6 class="font-weight-medium">Vận chuyển</h6>
@@ -109,7 +113,7 @@
                 <div class="card-footer border-secondary bg-transparent">
                     <div class="d-flex justify-content-between mt-2">
                         <h5 class="font-weight-bold">Tổng tiền</h5>
-                        <h5 class="font-weight-bold"><?= number_format(($cartTotal - $cartDiscount) * $quantity + 10000) ?>Đ</h5>
+                        <h5 class="font-weight-bold"><?= number_format($cartFinal + 10000) ?>Đ</h5>
                     </div>
                     <a href="<?= base_url('giao-dich/thanh-toan') ?>"><button class="btn btn-block btn-primary my-3 py-3">Thanh toán </button></a>
                 </div>

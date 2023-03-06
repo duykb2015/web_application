@@ -57,7 +57,6 @@ class Shop extends BaseController
             }
             $attribute[$key]['value'] =  $value[$key];
         }
-
         $data['product'] = $product;
         $data['relatedProduct'] = $relatedProduct;
         $data['productImage'] = $productImage;

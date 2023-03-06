@@ -60,7 +60,7 @@ class Cart extends BaseController
         ];
 
         $cartModel = new CartModel();
-        $isExist = $cartModel->orWhere('product_id', $productID)->first();
+        $isExist = $cartModel->where(['product_id' => $productID, 'customer_id' => $customerID])->first();
         if ($isExist) {
             //
             return redirect()->to('gio-hang');

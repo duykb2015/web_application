@@ -84,17 +84,13 @@ class Product extends BaseController
         foreach ($attributes as $key => $item) {
             $attribute[$key]['id'] = $item['id'];
             $attribute[$key]['name'] = $item['name'];
-
             $value = [];
-
             foreach ($productAttributes as $row) {
                 if ($row['attribute_id'] == $item['id']) {
                     $value[$key][] = $row['value'];
                 }
             }
-
             $attribute[$key]['value'] = implode(',', $value[$key] ?? []);
-
         }
         foreach ($productAttributes as $row) {
             $productAttributeID[] = $row['id'];
@@ -103,9 +99,7 @@ class Product extends BaseController
         $data['images']             = $images;
         $data['productDescription'] = $productDescription;
         $data['productAttribute']   = $attribute;
-
         $data['productAttributeID'] = implode(',', $productAttributeID ?? []);
-
         $data['title']              = 'Chỉnh sửa dòng sản phẩm';
 
         return view('Admin/Product/detail', $data);
@@ -152,11 +146,10 @@ class Product extends BaseController
             'quantity' => $quantity,
             'status'   => $status,
         ];
-
+        
         if (isset($images)) {
             $data['image']  = $images[0];
         }
-
 
         $productModel = new ProductModel();
         $product = $productModel->where('name', $name)->first();
