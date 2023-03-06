@@ -63,7 +63,6 @@ class Shop extends BaseController
         $data['productDescription'] = $productDescription;
         $data['productAttribute'] = $attribute;
         $data['cartTotal'] = $this->cartTotal;
-
         return view('Site/Shop/detail', $data);
     }
 
